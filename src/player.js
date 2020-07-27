@@ -22,11 +22,14 @@ function updatePlayer() {
 
 function tileBlocked(location) {
     console.log(location, "blocked")
-    return tileMap.forEach(tile => {
+    var output
+    tileMap.forEach(function(tile) {
         if (tile.xPos === location.x && tile.yPos === location.y) {
-            return tile.blocksPlayer
+            console.log(tile, "selected")
+            output = tile.blocksPlayer
         }
     });
+    return output
 }
 
 function drawPlayer(gameBox) {
