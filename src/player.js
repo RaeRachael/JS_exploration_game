@@ -5,14 +5,11 @@ function updatePlayer() {
     const playerDirection = getPlayerDirection()
 
     if (pressed === true) {
-        console.log(pressed)
         const possibleNewlocation = {
             x: playerLocation.x + playerDirection.x,
             y: playerLocation.y + playerDirection.y
         }
-        console.log( tileBlocked(possibleNewlocation), "print" )
         if ( tileBlocked(possibleNewlocation) === false ) {
-            console.log( tileBlocked(possibleNewlocation), "print" )
             playerLocation.x = possibleNewlocation.x
             playerLocation.y = possibleNewlocation.y
             console.log(playerLocation)
@@ -21,11 +18,9 @@ function updatePlayer() {
 }
 
 function tileBlocked(location) {
-    console.log(location, "blocked")
     var output
     tileMap.forEach(function(tile) {
         if (tile.xPos === location.x && tile.yPos === location.y) {
-            console.log(tile, "selected")
             output = tile.blocksPlayer
         }
     });

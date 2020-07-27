@@ -9,7 +9,7 @@ function KeyPress() {
     window.addEventListener('keydown', printKey)
 
     function printKey(e) {
-        console.log(e.key)
+        // console.log(e.key)
         if (e.key === "w") {
             playerDirection = { x: 0, y: -1 }
             pressed = true
