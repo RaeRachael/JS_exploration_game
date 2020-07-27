@@ -22,3 +22,7 @@ body {
 .player {
     background-color: blue;
 }
+
+.tile {
+    background-color: lightblue;
+}

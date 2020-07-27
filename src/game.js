@@ -17,16 +17,16 @@ function mainLoop(currentTime) {
 }
 
 function update() {
-    console.log("update")
+    // console.log("update")
     updatePlayer()
     pressed = false
 }
 
 function draw() {
     gameBox.innerHTML = ""
-    console.log("draw")
+    // console.log("draw")
+    drawLevel(gameBox, tileMap)
     drawPlayer(gameBox)
-    drawLevel(gameBox)
 }
 
 window.requestAnimationFrame(mainLoop)

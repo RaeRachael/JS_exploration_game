@@ -1,4 +1,4 @@
-const PLAYER_MOVEMENT_SPEED = 5
+const PLAYER_MOVEMENT_SPEED = 0.2
 const playerLocation = { x: 3, y: 3 }
 
 function updatePlayer() {
