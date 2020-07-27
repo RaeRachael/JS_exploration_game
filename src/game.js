@@ -25,7 +25,7 @@ function update() {
 function draw() {
     gameBox.innerHTML = ""
     // console.log("draw")
-    drawLevel(gameBox, tileMap)
+    drawLevel(gameBox, tileMap, playerLocation)
     drawPlayer(gameBox)
 }
 
