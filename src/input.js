@@ -28,3 +28,6 @@ function KeyPress() {
         }
     }
 }
+
+
+exports.KeyPress = KeyPress;

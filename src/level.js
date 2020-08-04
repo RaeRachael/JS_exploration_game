@@ -1,3 +1,5 @@
+const { turnIntoTiles, singleTile } = require('./tile');
+
 const level = ["-----------",
 "- -       -",
 "- - ----- -",
@@ -21,3 +23,5 @@ function drawLevel(gameBox, tileMap, player) {
         }
     });
 }
+
+exports.drawLevel = drawLevel;

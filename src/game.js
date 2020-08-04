@@ -1,6 +1,10 @@
+const { updatePlayer } = require("./player")
+
 let lastRenderTime = 0
 const gameBox = document.getElementById('game-box')
-
+import { updatePlayer, drawPlayer, tileBlocked} from './player.js';
+import { drawLevel } from './level';
+import { KeyPress } from './input';
 
 function mainLoop(currentTime) {
     const timePassedSinceRender = (currentTime - lastRenderTime)/1000

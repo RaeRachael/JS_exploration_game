@@ -34,3 +34,8 @@ function drawPlayer(gameBox) {
     playerSpace.classList.add('player')
     gameBox.appendChild(playerSpace)
 }
+
+
+exports.drawPlayer = drawPlayer;
+exports.tileBlocked = tileBlocked;
+exports.updatePlayer = updatePlayer;
