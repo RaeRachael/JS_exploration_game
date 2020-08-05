@@ -1,12 +1,12 @@
 const { turnIntoTiles, singleTile } = require('./tile');
+const { describe } = require('yargs');
 // const { TestResult } = require('@jest/types');
 // const { exportAllDeclaration } = require('@babel/types');
 
-console.log( singleTile )
 
-describe( 'function turnIntoTiles', function() {
+// describe( 'function singleTile()', function() {
 
-  describe( ' tile types ', function() {
+  // describe( 'tile types', function() {
 
     test( "creates a wall when '-' entered", function() {
       expect( singleTile("-", 1, 1) ).toEqual({
@@ -34,6 +34,17 @@ describe( 'function turnIntoTiles', function() {
         display: "yellow"
       })
     })
-  })
+  // })
 
-})
+  // context( 'tiles made at correct location' , function() {
+    test( 'create a tile at 2,2', function() {
+      expect( singleTile("-", 2, 2) ).toEqual({
+        xPos: 2,
+        yPos: 2,
+        blocksPlayer: true,
+        display: "black"
+      })
+    })
+  // })
+
+// })
