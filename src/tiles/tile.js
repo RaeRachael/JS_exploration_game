@@ -38,5 +38,4 @@ function singleTile(string, x, y) {
     }
 }
 
-exports.singleTile = singleTile;
-exports.turnIntoTiles = turnIntoTiles;
+export { singleTile, turnIntoTiles, tileMap }

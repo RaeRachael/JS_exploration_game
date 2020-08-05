@@ -1,4 +1,4 @@
-const { turnIntoTiles, singleTile } = require('./tile');
+import { turnIntoTiles, singleTile } from './tiles/tile.js';
 
 const level = ["-----------",
 "- -       -",
@@ -24,4 +24,4 @@ function drawLevel(gameBox, tileMap, player) {
     });
 }
 
-exports.drawLevel = drawLevel;
+export { drawLevel }

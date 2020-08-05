@@ -1,3 +1,6 @@
+import { getPlayerDirection, pressed } from '../input.js';
+import { tileMap } from '../tiles/tile.js';
+
 const PLAYER_MOVEMENT_SPEED = 10
 const playerLocation = { x: 1, y: 1 }
 
@@ -9,7 +12,7 @@ function updatePlayer() {
             x: playerLocation.x + playerDirection.x,
             y: playerLocation.y + playerDirection.y
         }
-        if ( tileBlocked(possibleNewlocation) === false ) {
+        if ( tileBlocked(possibleNewlocation, tileMap) === false ) {
             playerLocation.x = possibleNewlocation.x
             playerLocation.y = possibleNewlocation.y
             console.log(playerLocation)
@@ -17,7 +20,7 @@ function updatePlayer() {
     }
 }
 
-function tileBlocked(location) {
+function tileBlocked(location, tileMap) {
     var output
     tileMap.forEach(function(tile) {
         if (tile.xPos === location.x && tile.yPos === location.y) {
@@ -36,6 +39,4 @@ function drawPlayer(gameBox) {
 }
 
 
-exports.drawPlayer = drawPlayer;
-exports.tileBlocked = tileBlocked;
-exports.updatePlayer = updatePlayer;
+export{ drawPlayer, tileBlocked, updatePlayer, playerLocation, PLAYER_MOVEMENT_SPEED }

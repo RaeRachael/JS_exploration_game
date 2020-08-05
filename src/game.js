@@ -1,8 +1,10 @@
 let lastRenderTime = 0
 const gameBox = document.getElementById('game-box')
-import { updatePlayer, drawPlayer, tileBlocked} from './player.js';
+import { updatePlayer, drawPlayer, tileBlocked, playerLocation, PLAYER_MOVEMENT_SPEED } from './player/player.js';
 import { drawLevel } from './level.js';
-import { getPlayerDirection, keyPress } from './input.js';
+import { getPlayerDirection, keyPress, unpressed} from './input.js';
+import { tileMap } from './tiles/tile.js';
+
 
 function mainLoop(currentTime) {
     const timePassedSinceRender = (currentTime - lastRenderTime)/1000
@@ -21,7 +23,7 @@ function mainLoop(currentTime) {
 function update() {
     // console.log("update")
     updatePlayer()
-    pressed = false
+    unpressed()
 }
 
 function draw() {
