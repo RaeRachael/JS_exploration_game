@@ -39,4 +39,4 @@ function drawPlayer(gameBox) {
 }
 
 
-export{ drawPlayer, tileBlocked, updatePlayer, playerLocation, PLAYER_MOVEMENT_SPEED }
+export { drawPlayer, tileBlocked, updatePlayer, playerLocation, PLAYER_MOVEMENT_SPEED }

@@ -1,4 +1,4 @@
-const { updatePlayer, drawPlayer, tileBlocked } = require('./player');
+import { updatePlayer, drawPlayer, tileBlocked } from './player';
 
 describe( "function tileBlocked()", function() {
 

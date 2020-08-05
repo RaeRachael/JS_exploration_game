@@ -1,4 +1,4 @@
-const { turnIntoTiles, singleTile } = require('./tile');
+import { turnIntoTiles, singleTile } from './tile';
 
 describe( 'function singleTile()', function() {
 
@@ -42,7 +42,7 @@ describe( 'function singleTile()', function() {
         display: "black"
       })
     })
-    
+
   })
 
 })
