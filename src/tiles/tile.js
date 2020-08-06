@@ -2,40 +2,56 @@
 var tileMap = []
 
 function turnIntoTiles(levelData) {
-    for (var y = 0; y < levelData.length; y ++) {
-        for ( var x = 0; x <levelData[0].length; x ++) {
-            tileMap.push(singleTile(levelData[y][x], x, y))
-        }
+  for (var y = 0; y < levelData.length; y ++) {
+    for ( var x = 0; x <levelData[0].length; x ++) {
+      tileMap.push(singleTile(levelData[y][x], x, y))
     }
-    return tileMap
+  }
+  return tileMap
 }
 
 function singleTile(string, x, y) {
-    switch(string) {
-        case "-":
-            return {
-                xPos: x,
-                yPos: y,
-                blocksPlayer: true,
-                display: "black"
-            }
-        case " ":
-            return {
-                xPos: x,
-                yPos: y,
-                blocksPlayer: false,
-                display: "white"
-            }
-        case "S":
-            return {
-                xPos: x,
-                yPos: y,
-                blocksPlayer: false,
-                display: "yellow"
-            }
-        default:
-            // code block
-    }
+  switch(string) {
+    case "-":
+      return new Wall(x, y)
+    case " ":
+      return new Floor(x, y)
+    case "S":
+      return new StairUp(x, y)
+    default:
+        // code block
+  }
+}
+
+class Tile {
+  constructor(x, y) {
+    this.xPos = x
+    this.yPos = y
+  }
+}
+
+class Floor extends Tile {
+  constructor(x, y) {
+    super(x, y)
+    this.blocksPlayer = false
+    this.display = "white"
+  }
+}
+
+class Wall extends Tile {
+  constructor(x, y) {
+    super(x, y)
+    this.blocksPlayer = true
+    this.display = "black"
+  }
+}
+
+class StairUp extends Tile {
+  constructor(x, y) {
+    super(x, y)
+    this.blocksPlayer = false
+    this.display = "yellow"
+  }
 }
 
 export { singleTile, turnIntoTiles, tileMap }
