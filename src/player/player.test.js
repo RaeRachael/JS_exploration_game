@@ -93,4 +93,21 @@ describe( "function updatePlayer()", function() {
     })
   })
 
+  describe( "player can't move onto a blocked tile", function() {
+
+    it ("location doesn't change", function() {
+      setPlayerLocation({ x: 1, y: 1 })
+      var tileMap = [{
+        xPos: 2,
+        yPos: 1,
+        blocksPlayer: true,
+        display: "black"
+      }]
+      var direction = {x:1, y:0}
+      updatePlayer(direction, true, tileMap)
+      expect(playerLocation).toEqual({ x: 1, y: 1 })
+    })
+
+  })
+
 })
