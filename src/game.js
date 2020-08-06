@@ -2,7 +2,7 @@ let lastRenderTime = 0
 const gameBox = document.getElementById('game-box')
 import { updatePlayer, drawPlayer, tileBlocked, playerLocation, PLAYER_MOVEMENT_SPEED } from './player/player.js';
 import { drawLevel } from './level.js';
-import { getPlayerDirection, keyPress, unpressed} from './input.js';
+import { getPlayerDirection, keyPress, unpressed, pressed} from './input.js';
 import { tileMap } from './tiles/tile.js';
 
 
@@ -22,7 +22,7 @@ function mainLoop(currentTime) {
 
 function update() {
     // console.log("update")
-    updatePlayer()
+    updatePlayer(getPlayerDirection(), pressed, tileMap)
     unpressed()
 }
 

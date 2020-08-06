@@ -16,6 +16,7 @@
   "type": "module",
   "jest": {
     "transform": {},
-    "testEnvironment": "jest-environment-jsdom-sixteen"
+    "testEnvironment": "jest-environment-jsdom-sixteen",
+    "verbose": false
   }
 }
