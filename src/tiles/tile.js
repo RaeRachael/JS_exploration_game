@@ -4,13 +4,13 @@ var tileMap = []
 function turnIntoTiles(levelData) {
   for (var y = 0; y < levelData.length; y ++) {
     for ( var x = 0; x <levelData[0].length; x ++) {
-      tileMap.push(singleTile(levelData[y][x], x, y))
+      tileMap.push(createTile(levelData[y][x], x, y))
     }
   }
   return tileMap
 }
 
-function singleTile(string, x, y) {
+function createTile(string, x, y) {
   switch(string) {
     case "-":
       return new Wall(x, y)
@@ -54,4 +54,4 @@ class StairUp extends Tile {
   }
 }
 
-export { singleTile, turnIntoTiles, tileMap }
+export { createTile, turnIntoTiles, tileMap }
