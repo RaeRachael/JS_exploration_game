@@ -110,4 +110,21 @@ describe( "function updatePlayer()", function() {
 
   })
 
+  describe( "player doesn't move if key is not pressed", function() {
+
+    it ("location doesn't change", function() {
+      setPlayerLocation({ x: 1, y: 1 })
+      var tileMap = [{
+        xPos: 2,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "white"
+      }]
+      var direction = {x:1, y:0}
+      updatePlayer(direction, false, tileMap)
+      expect(playerLocation).toEqual({ x: 1, y: 1 })
+    })
+
+  })
+
 })

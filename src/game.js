@@ -1,8 +1,8 @@
 let lastRenderTime = 0
 const gameBox = document.getElementById('game-box')
 import { updatePlayer, drawPlayer, tileBlocked, playerLocation, PLAYER_MOVEMENT_SPEED } from './player/player.js';
-import { drawLevel } from './level.js';
-import { getPlayerDirection, keyPress, unpressed, pressed} from './input.js';
+import { drawLevel } from './level/level.js';
+import { getPlayerDirection, keyPress, unpressed, pressed} from './input/input.js';
 import { tileMap } from './tiles/tile.js';
 
 
