@@ -7,7 +7,7 @@ function turnIntoTiles(levelData) {
             tileMap.push(singleTile(levelData[y][x], x, y))
         }
     }
-    console.log(tileMap)
+    return tileMap
 }
 
 function singleTile(string, x, y) {

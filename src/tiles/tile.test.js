@@ -47,3 +47,33 @@ describe( 'function singleTile()', function() {
 
 })
 
+describe( 'function turnIntoTiles()', function() {
+
+  var levelData = [" -"," S"]
+  var expectedOutput = [{
+    xPos: 0,
+    yPos: 0,
+    blocksPlayer: false,
+    display: "white"
+  },{
+    xPos: 1,
+    yPos: 0,
+    blocksPlayer: true,
+    display: "black"
+  },{
+    xPos: 0,
+    yPos: 1,
+    blocksPlayer: false,
+    display: "white"
+  },{
+    xPos: 1,
+    yPos: 1,
+    blocksPlayer: false,
+    display: "yellow"
+  }]
+
+  it( 'returns an array of tile on the level', function() {
+    expect( turnIntoTiles(levelData)).toEqual(expectedOutput)
+  })
+})
+
