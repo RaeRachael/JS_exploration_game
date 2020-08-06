@@ -1,4 +1,4 @@
-import { turnIntoTiles, singleTile } from './tiles/tile.js';
+import { turnIntoTiles } from './tiles/tile.js';
 
 const level = ["-----------",
 "- -       -",

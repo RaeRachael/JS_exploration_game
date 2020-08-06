@@ -10,25 +10,20 @@ function mainLoop(currentTime) {
     const timePassedSinceRender = (currentTime - lastRenderTime)/1000
     keyPress()
     window.requestAnimationFrame(mainLoop)
-
     if (timePassedSinceRender < 1 / PLAYER_MOVEMENT_SPEED) return
 
     lastRenderTime = currentTime
-
-
     update()
     draw()
 }
 
 function update() {
-    // console.log("update")
     updatePlayer(getPlayerDirection(), pressed, tileMap)
     unpressed()
 }
 
 function draw() {
     gameBox.innerHTML = ""
-    // console.log("draw")
     drawLevel(gameBox, tileMap, playerLocation)
     drawPlayer(gameBox)
 }
