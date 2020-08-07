@@ -1,4 +1,4 @@
-const PLAYER_MOVEMENT_SPEED = 1
+const PLAYER_MOVEMENT_SPEED = 10
 var playerLocation = { x: 1, y: 1 }
 
 function setPlayerLocation(location) {
@@ -29,20 +29,18 @@ function tileBlocked(location, tileMap) {
 }
 
 function drawPlayer(playerDirection, step) {
-  console.log(document.getElementsByClassName('player')[0], "pre")
-  const playerSpace = document.getElementsByClassName('player')[0]
-  console.log([playerDirection.x, playerDirection.y] == [-1, 0])
+  const playerSpace = document.getElementById('player')
   if (playerDirection.x === -1 && playerDirection.y === 0) {
-    playerSpace.id = `left-${step}`
+    playerSpace.className = `left step-${step}`
   }
   if  (playerDirection.x === 0 && playerDirection.y === -1) {
-    playerSpace.id = `up-${step}`
+    playerSpace.className = `up step-${step}`
   }
   if (playerDirection.x === 1 && playerDirection.y === 0) {
-    playerSpace.id = `right-${step}`
+    playerSpace.className = `right step-${step}`
   }
   if  (playerDirection.x === 0 && playerDirection.y === 1) {
-    playerSpace.id = `down-${step}`
+    playerSpace.className = `down step-${step}`
   }
 }
 

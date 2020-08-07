@@ -10,8 +10,8 @@ body {
 
 #game-box {
   background-color: black;
-  height: 200px;
-  width: 200px;
+  height: 160px;
+  width: 160px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
@@ -19,7 +19,7 @@ body {
   grid-row-gap: 0px;
 }
 
-.player {
+#player {
   background-image: url(./character_sprite.png);
   grid-row-start: 3;
   grid-column-start: 3;
@@ -27,17 +27,21 @@ body {
   width: 32px;
 }
 
-#left-1 {
-  background-position: 0px 96px;
+.left {
+  background-position-y: 96px;
 }
-#up-1 {
-  background-position: 0px 32px;
+.up {
+  background-position-y: 32px;
 }
-#down-1 {
-  background-position: 0px 0px;
+.down {
+  background-position-y: 0px;
 }
-#right-1 {
-  background-position: 0px 64px;
+.right {
+  background-position-y: 64px;
+}
+
+.step-1  {
+  background-position-x: 32px;
 }
 
 .tile {

@@ -21,7 +21,7 @@ function addPlayer() {
   const playerSpace = document.createElement('div')
   playerSpace.style.gridRowStart = 3
   playerSpace.style.gridColumnStart = 3
-  playerSpace.classList.add('player')
+  playerSpace.id = 'player'
   gameBox.appendChild(playerSpace)
 }
 
