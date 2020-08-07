@@ -36,7 +36,8 @@ body {
   height: 100%;
   background-image: radial-gradient(circle closest-side at center,
     rgba(255, 255, 255, 0) 0,
-    rgba(255, 255, 255, 0.2) 10%, 
+    rgba(255, 255, 255, 0) 10%,
+    rgba(0, 0, 0, 0.5) 14%,
     rgba(0, 0, 0, 1) 20%
   );
 }
