@@ -1,4 +1,4 @@
-const PLAYER_MOVEMENT_SPEED = 10
+const PLAYER_MOVEMENT_SPEED = 1
 var playerLocation = { x: 1, y: 1 }
 
 function setPlayerLocation(location) {
@@ -29,11 +29,9 @@ function tileBlocked(location, tileMap) {
 }
 
 function drawPlayer(gameBox) {
-  const playerSpace = document.createElement('div')
-  playerSpace.style.gridRowStart = 3
-  playerSpace.style.gridColumnStart = 3
-  playerSpace.classList.add('player')
-  gameBox.appendChild(playerSpace)
+  console.log(document.getElementsByClassName('player')[0], "pre")
+  const playerSpace = document.getElementsByClassName('player')[0]
+  playerSpace.id = 'left-1'
 }
 
 

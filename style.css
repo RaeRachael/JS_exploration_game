@@ -5,24 +5,32 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    background-color: black;
+    background-color: darkgrey;
 }
 
 #game-box {
-    background-color: darkgray;
-    height: 200px;
-    width: 200px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+  background-color: black;
+  height: 200px;
+  width: 200px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
 .player {
-    background-color: blue;
+  background-image: url(./character_sprite.png);
+  grid-row-start: 3;
+  grid-column-start: 3;
+  height: 32px;
+  width: 32px;
+}
+
+#left-1 {
+  background-position: 32px 32px;
 }
 
 .tile {
-    background-color: lightblue;
+  background-color: lightblue;
 }
