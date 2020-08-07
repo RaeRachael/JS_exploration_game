@@ -28,7 +28,16 @@ body {
 }
 
 #left-1 {
-  background-position: 32px 32px;
+  background-position: 0px 96px;
+}
+#up-1 {
+  background-position: 0px 32px;
+}
+#down-1 {
+  background-position: 0px 0px;
+}
+#right-1 {
+  background-position: 0px 64px;
 }
 
 .tile {

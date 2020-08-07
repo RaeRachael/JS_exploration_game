@@ -28,10 +28,22 @@ function tileBlocked(location, tileMap) {
   return output
 }
 
-function drawPlayer(gameBox) {
+function drawPlayer(playerDirection, step) {
   console.log(document.getElementsByClassName('player')[0], "pre")
   const playerSpace = document.getElementsByClassName('player')[0]
-  playerSpace.id = 'left-1'
+  console.log([playerDirection.x, playerDirection.y] == [-1, 0])
+  if (playerDirection.x === -1 && playerDirection.y === 0) {
+    playerSpace.id = `left-${step}`
+  }
+  if  (playerDirection.x === 0 && playerDirection.y === -1) {
+    playerSpace.id = `up-${step}`
+  }
+  if (playerDirection.x === 1 && playerDirection.y === 0) {
+    playerSpace.id = `right-${step}`
+  }
+  if  (playerDirection.x === 0 && playerDirection.y === 1) {
+    playerSpace.id = `down-${step}`
+  }
 }
 
 

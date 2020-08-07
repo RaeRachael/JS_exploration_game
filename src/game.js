@@ -34,7 +34,7 @@ function draw() {
   gameBox.innerHTML = ""
   drawLevel(gameBox, tileMap, playerLocation)
   addPlayer()
-  drawPlayer(gameBox)
+  drawPlayer(getPlayerDirection(), 1)
 }
 
 window.requestAnimationFrame(mainLoop)
