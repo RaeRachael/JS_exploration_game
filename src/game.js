@@ -33,7 +33,7 @@ function update() {
 function draw() {
   gameBox.innerHTML = ""
   drawLevel(gameBox, tileMap, playerLocation)
-  addPlayer()
+  // addPlayer()
   drawPlayer(getPlayerDirection(), 1)
 }
 
