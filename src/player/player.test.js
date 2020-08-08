@@ -138,9 +138,9 @@ describe( "function drawPlayer()", function() {
   describe( "playerSpace has the correct class codes for css display", function() {
 
     document.body.innerHTML = '<div id="player" />';
+    let playerSpace = document.getElementById("player")
 
     describe( "should look in the direction of most recent key press", function() {
-      let playerSpace = document.getElementById("player")
 
       it( "faces up", function() {
         drawPlayer({ x: 0, y: -1 }, 1)
@@ -160,6 +160,25 @@ describe( "function drawPlayer()", function() {
       it( "faces right", function() {
         drawPlayer({ x: 1, y: 0 }, 1)
         expect(playerSpace.classList[0]).toEqual("right")
+      })
+
+    })
+
+    describe( "should be on the correct step", function() {
+
+      it( "on step 1", function() {
+        drawPlayer({ x: 0, y: -1 }, 1)
+        expect(playerSpace.classList[1]).toEqual("step-1")
+      })
+
+      it( "on step 2", function() {
+        drawPlayer({ x: 0, y: -1 }, 2)
+        expect(playerSpace.classList[1]).toEqual("step-2")
+      })
+
+      it( "on step 3", function() {
+        drawPlayer({ x: 0, y: -1 }, 3)
+        expect(playerSpace.classList[1]).toEqual("step-3")
       })
 
     })
