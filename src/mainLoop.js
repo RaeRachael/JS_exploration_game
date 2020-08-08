@@ -17,3 +17,5 @@ function mainLoop(currentTime) {
 }
 
 window.requestAnimationFrame(mainLoop)
+
+export { mainLoop }

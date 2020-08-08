@@ -15,7 +15,7 @@ jest.mock('./player/player.js', () => ({
 jest.mock('./input/input.js', () => ({ 
   resetInput: jest.fn(),
   getPlayerDirection: jest.fn()
- }) )
+}) )
 
 
 describe( "function draw()", function() {
@@ -25,8 +25,8 @@ describe( "function draw()", function() {
 
   it( "calls drawPlayer and drawLevel", function() {
     draw(gameBox)
-    expect(drawLevel.mock.calls.length).toBe(1);
-    expect(drawPlayer.mock.calls.length).toBe(1);
+    expect(drawLevel.mock.calls.length).toBe(1)
+    expect(drawPlayer.mock.calls.length).toBe(1)
   })
 
 })
@@ -35,8 +35,8 @@ describe( "function update()", function() {
 
   it( "calls drawPlayer and drawLevel", function() {
     update()
-    expect(updatePlayer.mock.calls.length).toBe(1);
-    expect(resetInput.mock.calls.length).toBe(1);
+    expect(updatePlayer.mock.calls.length).toBe(1)
+    expect(resetInput.mock.calls.length).toBe(1)
   })
 
 })
