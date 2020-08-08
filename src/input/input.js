@@ -30,8 +30,8 @@ function useKeyPress(e) {
 }
 
 
-function unpressed() {
+function resetInput() {
   pressed = false
 }
 
-export { getPlayerDirection, keyPress, unpressed, useKeyPress, pressed}
+export { getPlayerDirection, keyPress, resetInput, useKeyPress, pressed}

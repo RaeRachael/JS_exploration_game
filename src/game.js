@@ -1,40 +1,18 @@
-import { updatePlayer, drawPlayer, tileBlocked, playerLocation, PLAYER_MOVEMENT_SPEED } from './player/player.js';
+import { updatePlayer, drawPlayer, tileBlocked, playerLocation } from './player/player.js';
 import { drawLevel } from './level/level.js';
-import { getPlayerDirection, keyPress, unpressed, pressed} from './input/input.js';
+import { getPlayerDirection, resetInput, pressed} from './input/input.js';
 import { tileMap } from './tiles/tile.js';
-
-let lastRenderTime = 0
-const gameBox = document.getElementById('game-box')
-
-function mainLoop(currentTime) {
-  const timePassedSinceRender = (currentTime - lastRenderTime)/1000
-  keyPress()
-  window.requestAnimationFrame(mainLoop)
-  if (timePassedSinceRender < 1 / PLAYER_MOVEMENT_SPEED) return
-
-  lastRenderTime = currentTime
-  update()
-  draw()
-}
-
-function addPlayer() {
-  const playerSpace = document.createElement('div')
-  playerSpace.style.gridRowStart = 3
-  playerSpace.style.gridColumnStart = 3
-  playerSpace.id = 'player'
-  gameBox.appendChild(playerSpace)
-}
 
 function update() {
   updatePlayer(getPlayerDirection(), pressed, tileMap)
-  unpressed()
+  resetInput()
 }
 
-function draw() {
+function draw(gameBox) {
   gameBox.innerHTML = ""
+  console.log(drawPlayer)
   drawLevel(gameBox, tileMap, playerLocation)
-  // addPlayer()
   drawPlayer(getPlayerDirection(), 1)
 }
 
-window.requestAnimationFrame(mainLoop)
+export { draw, update }
