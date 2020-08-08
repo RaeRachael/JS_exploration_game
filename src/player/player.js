@@ -5,8 +5,8 @@ function setPlayerLocation(location) {
     playerLocation = location
 }
 
-function updatePlayer(playerDirection, pressed, tileMap) {
-  if (pressed === true) {
+function updatePlayer(playerDirection, pressed, walk, tileMap) {
+  if (pressed === true && walk === true) {
     const possibleNewlocation = {
       x: playerLocation.x + playerDirection.x,
       y: playerLocation.y + playerDirection.y

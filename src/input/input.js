@@ -1,5 +1,6 @@
-let playerDirection = { x: 0, y: 0}
+let playerDirection = { x: 0, y: 1}
 let pressed = false
+let walk = false
 
 function getPlayerDirection() {
   return playerDirection
@@ -10,28 +11,32 @@ function keyPress() {
 }
 
 function useKeyPress(e) {
-// console.log(e.key)
   if (e.key === "w") {
-    playerDirection = { x: 0, y: -1 }
-    pressed = true
+    processKeyPress(0, -1, getPlayerDirection())
   }
   if (e.key === "a") {
-    playerDirection = { x: -1, y: 0 }
-    pressed = true
+    processKeyPress(-1, 0, getPlayerDirection())
   }
   if (e.key === "s") {
-    playerDirection = { x: 0, y: 1 }
-    pressed = true
+    processKeyPress(0, 1, getPlayerDirection()) 
   }
   if (e.key === "d") {
-    playerDirection = { x: 1, y: 0 }
-    pressed = true
+    processKeyPress(1, 0, getPlayerDirection()) 
+  }
+}
+
+function processKeyPress(x, y, oldDirection) {
+  playerDirection = { x: x, y: y }
+  pressed = true
+  if (playerDirection.x === oldDirection.x && playerDirection.y === oldDirection.y) { 
+    walk = true 
   }
 }
 
 
 function resetInput() {
   pressed = false
+  walk = false
 }
 
-export { getPlayerDirection, keyPress, resetInput, useKeyPress, pressed}
+export { getPlayerDirection, keyPress, resetInput, useKeyPress, pressed, walk}

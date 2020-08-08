@@ -1,4 +1,4 @@
-import { getPlayerDirection, keyPress, useKeyPress, unpressed } from './input';
+import { getPlayerDirection, keyPress, useKeyPress, resetInput, pressed, walk } from './input';
 
 describe( 'function useKeyPress()', function() {
 
@@ -24,6 +24,32 @@ describe( 'function useKeyPress()', function() {
       expect(getPlayerDirection()).toEqual({ x: 1, y: 0 })
     })
 
+  })
+
+  describe( 'walk property', function() {
+    it( "walk is true if current direction is called", function() {
+      useKeyPress({ key: "a" })
+      useKeyPress({ key: "a" })
+      expect(walk).toEqual(true)
+    })
+
+  })
+
+})
+
+describe( "function resetInput", function() {
+
+  it( "makes pressed false", function() {
+    useKeyPress({ key: "a" })
+    resetInput()
+    expect(pressed).toEqual(false)
+  })
+
+  it( "makes walk false", function() {
+    useKeyPress({ key: "a" })
+    useKeyPress({ key: "a" })
+    resetInput()
+    expect(walk).toEqual(false)
   })
 
 })

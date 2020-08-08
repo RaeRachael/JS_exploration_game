@@ -17,4 +17,7 @@ describe( "function mainLoop()", function() {
     expect(draw.mock.calls.length).toBe(1)
   })
 
+  it( "doesn't call update and draw unless enough time has passed", function() {
+  })
+
 })

@@ -53,7 +53,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       }]
       var direction = {x:0, y:-1}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true, true, tileMap)
       expect(playerLocation).toEqual({ x: 1, y: 0 })
     })
 
@@ -66,7 +66,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       }]
       var direction = {x:-1, y:0}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true, true, tileMap)
       expect(playerLocation).toEqual({ x: 0, y: 1 })
     })
 
@@ -79,7 +79,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       }]
       var direction = {x:0, y:1}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true, true, tileMap)
       expect(playerLocation).toEqual({ x: 1, y: 2 })
     })
     
@@ -92,7 +92,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       }]
       var direction = {x:1, y:0}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true, true, tileMap)
       expect(playerLocation).toEqual({ x: 2, y: 1 })
     })
   })
@@ -108,7 +108,7 @@ describe( "function updatePlayer()", function() {
         display: "black"
       }]
       var direction = {x:1, y:0}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true, true, tileMap)
       expect(playerLocation).toEqual({ x: 1, y: 1 })
     })
 
@@ -125,7 +125,24 @@ describe( "function updatePlayer()", function() {
         display: "white"
       }]
       var direction = {x:1, y:0}
-      updatePlayer(direction, false, tileMap)
+      updatePlayer(direction, false, true, tileMap)
+      expect(playerLocation).toEqual({ x: 1, y: 1 })
+    })
+
+  })
+  
+  describe( "player doesn't move if player direction changed", function() {
+
+    it ("location doesn't change", function() {
+      setPlayerLocation({ x: 1, y: 1 })
+      var tileMap = [{
+        xPos: 2,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "white"
+      }]
+      var direction = {x:1, y:0}
+      updatePlayer(direction, false, false, tileMap)
       expect(playerLocation).toEqual({ x: 1, y: 1 })
     })
 

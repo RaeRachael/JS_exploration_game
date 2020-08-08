@@ -1,10 +1,10 @@
-import { getPlayerDirection, resetInput, pressed} from './input/input.js';
-import { updatePlayer, drawPlayer, tileBlocked, playerLocation } from './player/player.js';
+import { getPlayerDirection, resetInput, pressed, walk} from './input/input.js';
+import { updatePlayer, drawPlayer, playerLocation } from './player/player.js';
 import { drawLevel } from './level/level.js';
 import { tileMap } from './tiles/tile.js';
 
 function update() {
-  updatePlayer(getPlayerDirection(), pressed, tileMap)
+  updatePlayer(getPlayerDirection(), pressed, walk, tileMap)
   resetInput()
 }
 
