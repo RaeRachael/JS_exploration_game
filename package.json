@@ -6,7 +6,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.2",
     "jest": "^26.1.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "jest-environment-node": "^26.1.0"
