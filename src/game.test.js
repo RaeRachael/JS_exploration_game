@@ -3,14 +3,17 @@
  */
 
 import { update, draw } from './game.js'
-import { drawLevel } from './level/level.js'
-import { drawPlayer, updatePlayer } from './player/player.js'
+import { drawLevel, drawGridOffset } from './level/level.js'
+import { drawPlayer, updatePlayer, checkBlocked } from './player/player.js'
 import { resetInput, getPlayerDirection } from './input/input.js'
 
-jest.mock('./level/level.js', () => ({ drawLevel: jest.fn() }) )
+jest.mock('./level/level.js', () => ({ 
+  drawLevel: jest.fn(),
+  drawGridOffset: jest.fn() }) )
 jest.mock('./player/player.js', () => ({ 
   drawPlayer: jest.fn(), 
-  updatePlayer: jest.fn()
+  updatePlayer: jest.fn(),
+  checkBlocked: jest.fn()
 }) )
 jest.mock('./input/input.js', () => ({ 
   resetInput: jest.fn(),

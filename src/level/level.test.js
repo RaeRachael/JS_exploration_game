@@ -19,16 +19,16 @@ describe( "function drawLevel()", function() {
 
     expect(gameBox.children[0].style._values).toEqual(
       expect.objectContaining({
-        'grid-row-start': 2,
-        'grid-column-start': 2,
+        'grid-row-start': 3,
+        'grid-column-start': 3,
         'background-color': 'black'
       })
     )
 
     expect(gameBox.children[1].style._values).toEqual(
       expect.objectContaining({
-        'grid-row-start': 2,
-        'grid-column-start': 3,
+        'grid-row-start': 3,
+        'grid-column-start': 4,
         'background-color': 'white'
       })
     )
