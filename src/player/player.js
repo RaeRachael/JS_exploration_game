@@ -1,4 +1,4 @@
-const PLAYER_MOVEMENT_SPEED = 10
+const PLAYER_MOVEMENT_SPEED = 5
 var playerLocation = { x: 1, y: 1 }
 
 function setPlayerLocation(location) {
@@ -16,6 +16,14 @@ function updatePlayer(playerDirection, pressed, walk, tileMap) {
       playerLocation.y = possibleNewlocation.y
     }
   }
+}
+
+function checkBlocked(playerDirection, tileMap){
+  const possibleNewlocation = {
+    x: playerLocation.x + playerDirection.x,
+    y: playerLocation.y + playerDirection.y
+  }
+  return tileBlocked(possibleNewlocation, tileMap)
 }
 
 function tileBlocked(location, tileMap) {
@@ -48,6 +56,7 @@ function drawPlayer(playerDirection, step) {
 export { drawPlayer, 
     tileBlocked, 
     updatePlayer, 
-    setPlayerLocation, 
+    setPlayerLocation,
+    checkBlocked, 
     playerLocation, 
     PLAYER_MOVEMENT_SPEED }

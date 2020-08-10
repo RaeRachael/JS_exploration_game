@@ -1,4 +1,5 @@
 import { turnIntoTiles } from '../tiles/tile.js';
+import { tileBlocked } from '../player/player.js';
 
 const level = ["-----------",
 "- -       -",
@@ -14,14 +15,31 @@ function drawLevel(gameBox, tileMap, playerLocation) {
     tileMap.forEach(tile => {
         const offsetTileY = tile.yPos - playerLocation.y
         const offsetTileX = tile.xPos - playerLocation.x
-        if (offsetTileY > -3 && offsetTileY < 3 && offsetTileX > -3 && offsetTileX < 3) {
+        if (offsetTileY > -4 && offsetTileY < 4 && offsetTileX > -4 && offsetTileX < 4) {
             const tileDisplay = document.createElement('div')
-            tileDisplay.style.gridRowStart = tile.yPos - playerLocation.y + 3
-            tileDisplay.style.gridColumnStart = tile.xPos - playerLocation.x + 3
+            tileDisplay.style.gridRowStart = tile.yPos - playerLocation.y + 4
+            tileDisplay.style.gridColumnStart = tile.xPos - playerLocation.x + 4
             tileDisplay.style.backgroundColor = tile.display
             gameBox.appendChild(tileDisplay)
         }
     });
 }
 
-export { drawLevel }
+function drawGridOffset(direction, step) {
+  let levelShift = document.getElementById('gamebox-offset')
+  if (direction.x === -1 && direction.y === 0) {
+    console.log(step, "animate")
+    levelShift.className = `left-${step}`
+  }
+  if (direction.x === 0 && direction.y === -1) {
+    levelShift.className = `up-${step}`
+  }
+  if (direction.x === 1 && direction.y === 0) {
+    levelShift.className = `right-${step}`
+  }
+  if (direction.x === 0 && direction.y === 1) {
+    levelShift.className = `down-${step}`
+  }
+}
+
+export { drawLevel, drawGridOffset }

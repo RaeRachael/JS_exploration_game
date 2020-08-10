@@ -26,7 +26,7 @@ function useKeyPress(e) {
 }
 
 function processKeyPress(x, y, oldDirection) {
-  playerDirection = { x: x, y: y }
+  if ( pressed === false ) { playerDirection = { x: x, y: y } }
   pressed = true
   if (playerDirection.x === oldDirection.x && playerDirection.y === oldDirection.y) { 
     walk = true 
