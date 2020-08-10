@@ -4,7 +4,8 @@
 
 import { updatePlayer, 
   drawPlayer, 
-  tileBlocked, 
+  tileBlocked,
+  checkBlocked, 
   playerLocation, 
   setPlayerLocation } from './player';
 
@@ -36,6 +37,34 @@ describe( "function tileBlocked()", function() {
       y: 1
     }
     expect(tileBlocked(location, tileMap)).toEqual(false)
+  })
+
+})
+
+describe( "function checkBlocked()", function() {
+
+  it ("returns true when looking at a blocking tile", function() {
+    setPlayerLocation({ x: 1, y: 1 })
+    var tileMap = [{
+      xPos: 1,
+      yPos: 0,
+      blocksPlayer: true,
+      display: "white"
+    }]
+    var direction = { x:0, y:-1 }
+    expect(checkBlocked(direction, tileMap)).toEqual(true)
+  })
+
+  it ("returns false when looking at a non-blocking tile", function() {
+    setPlayerLocation({ x: 1, y: 1 })
+    var tileMap = [{
+      xPos: 1,
+      yPos: 0,
+      blocksPlayer: false,
+      display: "white"
+    }]
+    var direction = { x:0, y:-1 }
+    expect(checkBlocked(direction, tileMap)).toEqual(false)
   })
 
 })
