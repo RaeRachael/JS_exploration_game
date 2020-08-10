@@ -29,9 +29,9 @@ function checkBlocked(playerDirection, tileMap){
 function tileBlocked(location, tileMap) {
   var output
   tileMap.forEach(function(tile) {
-  if (tile.xPos === location.x && tile.yPos === location.y) {
-    output = tile.blocksPlayer
-  }
+    if (tile.xPos === location.x && tile.yPos === location.y) {
+      output = tile.blocksPlayer
+    }
   });
   return output
 }

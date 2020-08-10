@@ -10,7 +10,8 @@ describe( "function drawLevel()", function() {
   let gameBox = document.getElementById("game-box")
 
   var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0 }, 
-  { blocksPlayer: false, display: "white", xPos: 1, yPos: 0 }]
+  { blocksPlayer: false, display: "white", xPos: 1, yPos: 0 }, 
+  { blocksPlayer: true, display: "black", xPos: 50, yPos: 0 }]
   var playerLocation = { x: 1, y: 1}
 
   it( "adds a child with correct style, based on playerLocation", function() {
@@ -32,6 +33,8 @@ describe( "function drawLevel()", function() {
         'background-color': 'white'
       })
     )
+
+    expect(gameBox.children.length).toEqual(2)
 
   })
   
