@@ -25,7 +25,6 @@ describe( "function setUp()", function() {
   it( "calls draw", function() {
     setUp()
     expect(draw.mock.calls.length).toBe(1)
-
   })
 
 })
