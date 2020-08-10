@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel } from './level';
+import { drawLevel, drawGridOffset } from './level';
 
 describe( "function drawLevel()", function() {
 
@@ -35,4 +35,43 @@ describe( "function drawLevel()", function() {
 
   })
   
+})
+
+describe( "function drawGridOffset()", function() {
+  document.body.innerHTML = '<div id="gamebox-offset" />';
+  let gameBoxOffset = document.getElementById("gamebox-offset")
+
+
+  describe( "adds the correct class based on step and direction", function() {
+
+    it( "class is 'up-1'", function() {
+      var direction = { x: 0, y: -1 }
+      var step = 1
+      drawGridOffset(direction, step)
+
+      expect(gameBoxOffset.classList[0]).toEqual( "up-1")
+    })
+    it( "class is 'down-2'", function() {
+      var direction = { x: 0, y: 1 }
+      var step = 2
+      drawGridOffset(direction, step)
+
+      expect(gameBoxOffset.classList[0]).toEqual( "down-2")
+    })
+    it( "class is 'left-1'", function() {
+      var direction = { x: -1, y: 0 }
+      var step = 1
+      drawGridOffset(direction, step)
+
+      expect(gameBoxOffset.classList[0]).toEqual( "left-1")
+    })
+    it( "class is 'right-2'", function() {
+      var direction = { x: 1, y: 0 }
+      var step = 2
+      drawGridOffset(direction, step)
+
+      expect(gameBoxOffset.classList[0]).toEqual( "right-2")
+    })
+
+  })
 })

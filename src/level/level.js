@@ -1,5 +1,4 @@
 import { turnIntoTiles } from '../tiles/tile.js';
-import { tileBlocked } from '../player/player.js';
 
 const level = ["-----------",
 "- -       -",
@@ -28,7 +27,6 @@ function drawLevel(gameBox, tileMap, playerLocation) {
 function drawGridOffset(direction, step) {
   let levelShift = document.getElementById('gamebox-offset')
   if (direction.x === -1 && direction.y === 0) {
-    console.log(step, "animate")
     levelShift.className = `left-${step}`
   }
   if (direction.x === 0 && direction.y === -1) {

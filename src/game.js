@@ -17,7 +17,6 @@ function draw(gameBox) {
 function stepAnimation(step) {
   let direction = getPlayerDirection()
   if ( walk === false && step > 0) return {}
-  console.log(checkBlocked(direction, tileMap))
   if ( checkBlocked(direction, tileMap) === false || step === 0 ) { drawGridOffset(direction, step) }
   drawPlayer(direction, step)
 }
