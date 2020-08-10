@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { update, draw } from './game.js'
+import { update, draw, stepAnimation } from './game.js'
 import { drawLevel, drawGridOffset } from './level/level.js'
 import { drawPlayer, updatePlayer, checkBlocked } from './player/player.js'
 import { resetInput, getPlayerDirection } from './input/input.js'
@@ -20,6 +20,9 @@ jest.mock('./input/input.js', () => ({
   getPlayerDirection: jest.fn()
 }) )
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 describe( "function draw()", function() {
 
@@ -40,6 +43,29 @@ describe( "function update()", function() {
     update()
     expect(updatePlayer.mock.calls.length).toBe(1)
     expect(resetInput.mock.calls.length).toBe(1)
+  })
+
+})
+
+describe( "function stepAnimation(step)", function() {
+  it( "calls drawPlayer and drawGridOffset, on step 0", function() {
+    stepAnimation(0)
+    expect(drawPlayer.mock.calls.length).toBe(1)
+    expect(drawGridOffset.mock.calls.length).toBe(1)
+  })
+
+  it( "calls drawPlayer and drawGridOffset, if unblocked", function() {
+    checkBlocked.mockReturnValueOnce(false)
+    stepAnimation(1)
+    expect(drawPlayer.mock.calls.length).toBe(1)
+    expect(drawGridOffset.mock.calls.length).toBe(1)
+  })
+
+  it( "calls drawPlayer and not drawGridOffset, if blocked", function() {
+    checkBlocked.mockReturnValueOnce(true)
+    stepAnimation(1)
+    expect(drawPlayer.mock.calls.length).toBe(1)
+    expect(drawGridOffset.mock.calls.length).toBe(0)
   })
 
 })

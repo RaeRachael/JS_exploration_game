@@ -1,10 +1,10 @@
-import { getPlayerDirection, resetInput, pressed, walk} from './input/input.js';
+import { getPlayerDirection, resetInput, pressed } from './input/input.js';
 import { updatePlayer, drawPlayer, playerLocation, checkBlocked } from './player/player.js';
 import { drawLevel, drawGridOffset } from './level/level.js';
 import { tileMap } from './tiles/tile.js';
 
 function update() {
-  updatePlayer(getPlayerDirection(), pressed, walk, tileMap)
+  updatePlayer(getPlayerDirection(), pressed, tileMap)
   resetInput()
 }
 
@@ -16,7 +16,6 @@ function draw(gameBox) {
 
 function stepAnimation(step) {
   let direction = getPlayerDirection()
-  if ( walk === false && step > 0) return {}
   if ( checkBlocked(direction, tileMap) === false || step === 0 ) { drawGridOffset(direction, step) }
   drawPlayer(direction, step)
 }

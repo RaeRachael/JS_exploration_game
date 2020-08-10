@@ -30,15 +30,6 @@ describe( 'function useKeyPress()', function() {
 
   })
 
-  describe( 'walk property', function() {
-    it( "walk is true if current direction is called", function() {
-      useKeyPress({ key: "a" })
-      useKeyPress({ key: "a" })
-      expect(walk).toEqual(true)
-    })
-
-  })
-
 })
 
 describe( "function resetInput", function() {
@@ -47,13 +38,6 @@ describe( "function resetInput", function() {
     useKeyPress({ key: "a" })
     resetInput()
     expect(pressed).toEqual(false)
-  })
-
-  it( "makes walk false", function() {
-    useKeyPress({ key: "a" })
-    useKeyPress({ key: "a" })
-    resetInput()
-    expect(walk).toEqual(false)
   })
 
 })

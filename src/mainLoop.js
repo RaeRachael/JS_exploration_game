@@ -2,7 +2,7 @@ import { draw, update, stepAnimation } from './game.js'
 import { keyPress, pressed } from './input/input.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
 
-let lastRenderTime = 0
+// let lastRenderTime = 0
 let lastStepTime = 0
 let step = 0
 const gameBox = document.getElementById('game-box')

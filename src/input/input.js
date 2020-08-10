@@ -1,6 +1,5 @@
 let playerDirection = { x: 0, y: 1}
 let pressed = false
-let walk = false
 
 function getPlayerDirection() {
   return playerDirection
@@ -25,18 +24,14 @@ function useKeyPress(e) {
   }
 }
 
-function processKeyPress(x, y, oldDirection) {
+function processKeyPress(x, y) {
   if ( pressed === false ) { playerDirection = { x: x, y: y } }
   pressed = true
-  if (playerDirection.x === oldDirection.x && playerDirection.y === oldDirection.y) { 
-    walk = true 
-  }
 }
 
 
 function resetInput() {
   pressed = false
-  walk = false
 }
 
-export { getPlayerDirection, keyPress, resetInput, useKeyPress, pressed, walk}
+export { getPlayerDirection, keyPress, resetInput, useKeyPress, pressed}
