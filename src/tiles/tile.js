@@ -18,8 +18,6 @@ function createTile(string, x, y) {
       return new Floor(x, y)
     case "S":
       return new StairUp(x, y)
-    default:
-        // code block
   }
 }
 
