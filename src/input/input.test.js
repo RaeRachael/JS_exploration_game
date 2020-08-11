@@ -1,4 +1,4 @@
-import { getPlayerDirection, keyPress, useKeyPress, resetInput, pressed, walk } from './input';
+import { getPlayerDirection, keyPress, useKeyPress, resetInput, isKeyPressed} from './input';
 
 describe( 'function useKeyPress()', function() {
 
@@ -37,7 +37,7 @@ describe( "function resetInput", function() {
   it( "makes pressed false", function() {
     useKeyPress({ key: "a" })
     resetInput()
-    expect(pressed).toEqual(false)
+    expect(isKeyPressed()).toEqual(false)
   })
 
 })

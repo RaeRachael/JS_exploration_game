@@ -1,10 +1,10 @@
-import { getPlayerDirection, resetInput, pressed } from './input/input.js';
+import { getPlayerDirection, resetInput, isKeyPressed } from './input/input.js';
 import { updatePlayer, drawPlayer, playerLocation, checkBlocked } from './player/player.js';
 import { drawLevel, drawGridOffset } from './level/level.js';
 import { tileMap } from './tiles/tile.js';
 
 function update() {
-  updatePlayer(getPlayerDirection(), pressed, tileMap)
+  updatePlayer(getPlayerDirection(), isKeyPressed(), tileMap)
   resetInput()
 }
 

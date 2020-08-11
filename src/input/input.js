@@ -5,6 +5,10 @@ function getPlayerDirection() {
   return playerDirection
 }
 
+function isKeyPressed() {
+  return pressed
+}
+
 function keyPress() {
   window.addEventListener('keydown', useKeyPress)
 }
@@ -34,4 +38,4 @@ function resetInput() {
   pressed = false
 }
 
-export { getPlayerDirection, keyPress, resetInput, useKeyPress, pressed}
+export { getPlayerDirection, keyPress, resetInput, useKeyPress, isKeyPressed}
