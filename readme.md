@@ -10,6 +10,10 @@ Move yourself with WASD keys, currently there is only one level and no indicatio
 
 ### To Play
 
+#### Website
+[Deployed via Surge](http://eploration_game.surge.sh/)
+
+#### Locally
 ```shell
 npm install
 http-server
