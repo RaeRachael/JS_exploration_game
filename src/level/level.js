@@ -1,14 +1,33 @@
 import { turnIntoTiles } from '../tiles/tile.js';
 
-const level = ["-----------",
+var levelNumber = 0
+
+const level = [
+["-----------",
 "- -       -",
 "- - ----- -",
 "- - -     -",
 "- - - -----",
 "-   -    S-",
-"-----------"]
+"-----------"],
+["-----------",
+"-         -",
+"-   X     -",
+"-         -",
+"- --- -----",
+"-  S-    D-",
+"-----------"]]
 
-turnIntoTiles(level)
+function setLevelNumber(newNumber) {
+  levelNumber = newNumber
+  turnIntoTiles(level[levelNumber])
+}
+
+function getLevelNumber() {
+  return levelNumber
+}
+
+turnIntoTiles(level[levelNumber])
 
 function drawLevel(gameBox, tileMap, playerLocation) {
     tileMap.forEach(tile => {
@@ -40,4 +59,4 @@ function drawGridOffset(direction, step) {
   }
 }
 
-export { drawLevel, drawGridOffset }
+export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber }

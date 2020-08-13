@@ -8,6 +8,7 @@ import { updatePlayer,
   checkBlocked, 
   playerLocation, 
   setPlayerLocation } from './player';
+import { setLevelNumber, getLevelNumber } from '../level/level.js'
 
 describe( "function tileBlocked()", function() {
 
@@ -212,6 +213,25 @@ describe( "function drawPlayer()", function() {
 
     })
 
+  })
+
+})
+
+describe( "function interactionWithTile()", function() {
+
+  it ("stepping onto stairs make up incease levelNumber", function() {
+    setLevelNumber(0)
+    setPlayerLocation({ x: 1, y: 1 })
+    var tileMap = [{
+      xPos: 2,
+      yPos: 1,
+      blocksPlayer: false,
+      display: "yellow",
+      levelChange: 1
+    }]
+    var direction = {x:1, y:0}
+    updatePlayer(direction, true, tileMap)
+    expect(getLevelNumber()).toEqual(1)
   })
 
 })

@@ -18,6 +18,10 @@ function createTile(string, x, y) {
       return new Floor(x, y)
     case "S":
       return new StairUp(x, y)
+    case "D":
+      return new StairDown(x, y)
+    default:
+      return new Tile(x, y)
   }
 }
 
@@ -49,6 +53,16 @@ class StairUp extends Tile {
     super(x, y)
     this.blocksPlayer = false
     this.display = "yellow"
+    this.levelChange = 1
+  }
+}
+
+class StairDown extends Tile {
+  constructor(x, y) {
+    super(x, y)
+    this.blocksPlayer = false
+    this.display = "dark yellow"
+    this.levelChange = -1
   }
 }
 

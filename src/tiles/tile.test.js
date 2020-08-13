@@ -1,4 +1,4 @@
-import { turnIntoTiles, createTile } from './tile';
+import { turnIntoTiles, createTile } from './tile.js';
 
 describe( 'function createTile()', function() {
 
@@ -27,7 +27,8 @@ describe( 'function createTile()', function() {
         xPos: 1,
         yPos: 1,
         blocksPlayer: false,
-        display: "yellow"
+        display: "yellow",
+        levelChange: 1
       })
     })
   })
@@ -69,7 +70,8 @@ describe( 'function turnIntoTiles()', function() {
     xPos: 1,
     yPos: 1,
     blocksPlayer: false,
-    display: "yellow"
+    display: "yellow",
+    levelChange: 1
   }]
 
   it( 'returns an array of tile on the level', function() {
