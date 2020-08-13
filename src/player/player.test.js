@@ -10,6 +10,11 @@ import { updatePlayer,
   setPlayerLocation } from './player';
 import { setLevelNumber, getLevelNumber } from '../level/level.js'
 
+jest.mock('../level/level.js', () => ({ 
+  setLevelNumber: jest.fn(),
+  getLevelNumber: jest.fn()
+ }) )
+
 describe( "function tileBlocked()", function() {
 
   it ("returns true when looking at a blocking tile", function() {
@@ -220,7 +225,6 @@ describe( "function drawPlayer()", function() {
 describe( "function interactionWithTile()", function() {
 
   it ("stepping onto stairs make up incease levelNumber", function() {
-    setLevelNumber(0)
     setPlayerLocation({ x: 1, y: 1 })
     var tileMap = [{
       xPos: 2,
@@ -230,8 +234,9 @@ describe( "function interactionWithTile()", function() {
       levelChange: 1
     }]
     var direction = {x:1, y:0}
+    getLevelNumber.mockReturnValueOnce(0)
     updatePlayer(direction, true, tileMap)
-    expect(getLevelNumber()).toEqual(1)
+    expect(setLevelNumber.mock.calls[0]).toEqual([1])
   })
 
 })

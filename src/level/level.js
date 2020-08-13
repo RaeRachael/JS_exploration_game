@@ -1,4 +1,6 @@
-import { turnIntoTiles } from '../tiles/tile.js';
+import { turnIntoTiles, clearTileMap } from '../tiles/tile.js'
+import { setUpLevel } from "../mainLoop.js"
+import { playerLocation } from '../player/player.js'
 
 var levelNumber = 0
 
@@ -20,14 +22,17 @@ const level = [
 
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
-  turnIntoTiles(level[levelNumber])
+  setUpLevel(levelNumber)
 }
 
 function getLevelNumber() {
   return levelNumber
 }
 
-turnIntoTiles(level[levelNumber])
+function levelLoad(number) {
+  clearTileMap()
+  turnIntoTiles(level[levelNumber])
+}
 
 function drawLevel(gameBox, tileMap, playerLocation) {
     tileMap.forEach(tile => {
@@ -59,4 +64,4 @@ function drawGridOffset(direction, step) {
   }
 }
 
-export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber }
+export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad }

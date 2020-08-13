@@ -1,6 +1,6 @@
 import { update, draw, stepAnimation } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, setUp } from './mainLoop.js'
+import { mainLoop, setUpLevel } from './mainLoop.js'
 import { keyPress, isKeyPressed } from './input/input.js'
 
 jest.mock('./game.js', () => ({ 
@@ -48,10 +48,10 @@ describe( "function mainLoop()", function() {
 
 })
 
-describe( "function setUp()", function() {
+describe( "function setUpLevel(levelNumber)", function() {
 
   it( "calls draw", function() {
-    setUp()
+    setUpLevel(0)
     expect(draw.mock.calls.length).toBe(1)
   })
 
