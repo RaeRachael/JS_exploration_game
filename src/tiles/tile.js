@@ -6,13 +6,11 @@ function clearTileMap() {
 }
 
 function turnIntoTiles(levelData) {
-  console.log("called")
   for (var y = 0; y < levelData.length; y ++) {
     for ( var x = 0; x <levelData[0].length; x ++) {
       tileMap.push(createTile(levelData[y][x], x, y))
     }
   }
-  console.log(tileMap)
   return tileMap
 }
 
