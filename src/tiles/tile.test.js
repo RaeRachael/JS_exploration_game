@@ -31,6 +31,26 @@ describe( 'function createTile()', function() {
         levelChange: 1
       })
     })
+
+    it( "creates a stair up when 'D' entered", function() {
+      expect( createTile("D", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "green",
+        levelChange: -1
+      })
+    })
+
+    it( "creates a Floor by defualt", function() {
+      expect( createTile("wrefegrgsre", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "white"
+      })
+    })
+
   })
 
   describe( 'tiles made at correct location' , function() {
@@ -50,7 +70,7 @@ describe( 'function createTile()', function() {
 
 describe( 'function turnIntoTiles()', function() {
 
-  var levelData = [" -"," S"]
+  var levelData = [" -","DS"]
   var expectedOutput = [{
     xPos: 0,
     yPos: 0,
@@ -65,7 +85,8 @@ describe( 'function turnIntoTiles()', function() {
     xPos: 0,
     yPos: 1,
     blocksPlayer: false,
-    display: "white"
+    display: "green",
+    levelChange: -1
   },{
     xPos: 1,
     yPos: 1,

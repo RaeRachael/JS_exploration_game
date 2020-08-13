@@ -31,7 +31,7 @@ function createTile(string, x, y) {
     case "D":
       return new StairDown(x, y)
     default:
-      return new Tile(x, y)
+      return new Floor(x, y)
   }
 }
 
