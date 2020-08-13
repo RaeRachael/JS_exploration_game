@@ -2,7 +2,10 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel, drawGridOffset } from './level';
+import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber } from './level';
+import { setUpLevel } from "../mainLoop.js"
+
+jest.mock( "../mainLoop.js", () => ({ setUpLevel: jest.fn() }) )
 
 describe( "function drawLevel()", function() {
 
@@ -77,4 +80,18 @@ describe( "function drawGridOffset()", function() {
     })
 
   })
+})
+
+describe("function setLevelNumber(newNumber)", function() {
+
+  it("calls setUpLevel()", function() {
+    setLevelNumber(1)
+    expect(setUpLevel.mock.calls.length).toEqual(1)
+  })
+
+  it("sets changes current level toargument", function() {
+    setLevelNumber(10)
+    expect(getLevelNumber()).toEqual(10)
+  })
+
 })

@@ -1,12 +1,14 @@
 import { draw, update, stepAnimation } from './game.js'
 import { keyPress, isKeyPressed } from './input/input.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
+import { levelLoad } from './level/level.js'
 
 let lastStepTime = 0
 let step = 0
 const gameBox = document.getElementById('game-box')
 
-function setUp() {
+function setUpLevel(levelNumber) {
+  levelLoad(0)
   draw(gameBox)
 }
 
@@ -28,7 +30,7 @@ function mainLoop(currentTime) {
    }
 }
 
-window.requestAnimationFrame(setUp)
+window.requestAnimationFrame(setUpLevel)
 window.requestAnimationFrame(mainLoop)
 
-export { mainLoop, setUp }
+export { mainLoop, setUpLevel }

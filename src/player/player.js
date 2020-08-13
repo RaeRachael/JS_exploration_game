@@ -1,3 +1,5 @@
+import { getLevelNumber, setLevelNumber } from "../level/level.js"
+
 const PLAYER_MOVEMENT_SPEED = 5
 var playerLocation = { x: 1, y: 1 }
 
@@ -14,8 +16,21 @@ function updatePlayer(playerDirection, pressed, tileMap) {
     if ( tileBlocked(possibleNewlocation, tileMap) === false ) {
       playerLocation.x = possibleNewlocation.x
       playerLocation.y = possibleNewlocation.y
+      checkForStairs(playerLocation, tileMap)
     }
   }
+}
+
+function checkForStairs(location, tileMap) {
+  var levelNumber = getLevelNumber()
+  tileMap.forEach(function(tile) {
+    if (tile.xPos === location.x && tile.yPos === location.y) {
+      if( tile.levelChange ) {
+        levelNumber += tile.levelChange
+        setLevelNumber(levelNumber)
+      }
+    }
+  });
 }
 
 function checkBlocked(playerDirection, tileMap){

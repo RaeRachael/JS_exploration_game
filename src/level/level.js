@@ -1,14 +1,38 @@
-import { turnIntoTiles } from '../tiles/tile.js';
+import { turnIntoTiles, clearTileMap } from '../tiles/tile.js'
+import { setUpLevel } from "../mainLoop.js"
+import { playerLocation } from '../player/player.js'
 
-const level = ["-----------",
+var levelNumber = 0
+
+const level = [
+["-----------",
 "- -       -",
 "- - ----- -",
 "- - -     -",
 "- - - -----",
 "-   -    S-",
-"-----------"]
+"-----------"],
+["-----------",
+"-         -",
+"-   X     -",
+"-         -",
+"- --- -----",
+"-  S-    D-",
+"-----------"]]
 
-turnIntoTiles(level)
+function setLevelNumber(newNumber) {
+  levelNumber = newNumber
+  setUpLevel(levelNumber)
+}
+
+function getLevelNumber() {
+  return levelNumber
+}
+
+function levelLoad(number) {
+  clearTileMap()
+  turnIntoTiles(level[levelNumber])
+}
 
 function drawLevel(gameBox, tileMap, playerLocation) {
     tileMap.forEach(tile => {
@@ -40,4 +64,4 @@ function drawGridOffset(direction, step) {
   }
 }
 
-export { drawLevel, drawGridOffset }
+export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad }
