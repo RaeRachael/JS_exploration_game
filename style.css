@@ -6,6 +6,7 @@ body {
     align-items: center;
     margin: 0;
     background-color: black;
+    font-size: 12px;
 }
 
 #game-box {

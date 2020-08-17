@@ -37,6 +37,7 @@ class Tile {
   constructor(x, y) {
     this.xPos = x
     this.yPos = y
+    this.text = ""
   }
 }
 
@@ -62,6 +63,7 @@ class StairUp extends Tile {
     this.blocksPlayer = false
     this.display = "yellow"
     this.levelChange = 1
+    this.text = "up"
   }
 }
 
@@ -69,8 +71,9 @@ class StairDown extends Tile {
   constructor(x, y) {
     super(x, y)
     this.blocksPlayer = false
-    this.display = "green"
+    this.display = "yellow"
     this.levelChange = -1
+    this.text = "down"
   }
 }
 
