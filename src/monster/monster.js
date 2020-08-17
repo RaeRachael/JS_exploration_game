@@ -4,4 +4,12 @@ function getMonsters() {
   return monsterList
 }
 
-export { getMonsters }
+function addMonster(location) {
+  monsterList.push({location: location})
+}
+
+function clearMonsterList() {
+  monsterList = []
+}
+
+export { getMonsters, addMonster, clearMonsterList}
