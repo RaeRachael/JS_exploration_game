@@ -27,6 +27,22 @@ To come once the graphics are more complete
 
 ## Comments About the Code Plan, Struggles and Aims
 
+### Monday 17th August
+
+#### Coding Aims Completed
+* Added in level changes due to stepping on stairs
+* Code coverage is now 99%, the test for display are based on giving the correct class assignment not the style (which is generated in the style.css file)
+* Code is now deployed via Surge
+* Travis is in use, but needs to be manual checked before pushing code up to deployment
+
+#### Challenges
+Getting the level to propperly reload after stepping on a tile was interesting, with code sometimes adding the new level data to the ennd of the current level data or the game box not using the new level data for display.
+
+#### Future Aims
+* Update the graphics of the Tiles, using a similiar approach to the player sprite.
+* Add in the monster that should be present on level 2
+* Look into the best way to test an event listener (the only part of the code base that is not being tested yet)
+
 ### Tuesday 11th August
 
 #### Coding Aims Completed
