@@ -14,7 +14,7 @@ describe("mosters are saved in an array", function() {
   })
 
   describe("clearMonsterList removes all monsters from the monsterList", function() {
-    it("removes monsers from the list", function() {
+    it("removes monsters from the list", function() {
       var location = { x: 1, y: 1 }
       addMonster(location)
       clearMonsterList()
