@@ -9,7 +9,8 @@ describe( 'function createTile()', function() {
         xPos: 1,
         yPos: 1,
         blocksPlayer: true,
-        display: "black"
+        display: "black",
+        text: ""
       })
     })
 
@@ -18,7 +19,8 @@ describe( 'function createTile()', function() {
           xPos: 1,
           yPos: 1,
           blocksPlayer: false,
-          display: "white"
+          display: "white",
+          text: ""
       })
     })
 
@@ -28,7 +30,8 @@ describe( 'function createTile()', function() {
         yPos: 1,
         blocksPlayer: false,
         display: "yellow",
-        levelChange: 1
+        levelChange: 1,
+        text: "up"
       })
     })
 
@@ -37,8 +40,9 @@ describe( 'function createTile()', function() {
         xPos: 1,
         yPos: 1,
         blocksPlayer: false,
-        display: "green",
-        levelChange: -1
+        display: "yellow",
+        levelChange: -1,
+        text: "down"
       })
     })
 
@@ -47,7 +51,8 @@ describe( 'function createTile()', function() {
         xPos: 1,
         yPos: 1,
         blocksPlayer: false,
-        display: "white"
+        display: "white",
+        text: ""
       })
     })
 
@@ -60,7 +65,8 @@ describe( 'function createTile()', function() {
         xPos: 2,
         yPos: 2,
         blocksPlayer: true,
-        display: "black"
+        display: "black",
+        text: ""
       })
     })
 
@@ -75,24 +81,28 @@ describe( 'function turnIntoTiles()', function() {
     xPos: 0,
     yPos: 0,
     blocksPlayer: false,
-    display: "white"
+    display: "white",
+    text: ""
   },{
     xPos: 1,
     yPos: 0,
     blocksPlayer: true,
-    display: "black"
+    display: "black",
+    text: ""
   },{
     xPos: 0,
     yPos: 1,
     blocksPlayer: false,
-    display: "green",
-    levelChange: -1
+    display: "yellow",
+    levelChange: -1,
+    text: "down"
   },{
     xPos: 1,
     yPos: 1,
     blocksPlayer: false,
     display: "yellow",
-    levelChange: 1
+    levelChange: 1,
+    text: "up"
   }]
 
   it( 'returns an array of tile on the level', function() {

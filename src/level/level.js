@@ -43,6 +43,7 @@ function drawLevel(gameBox, tileMap, playerLocation) {
             tileDisplay.style.gridRowStart = tile.yPos - playerLocation.y + 4
             tileDisplay.style.gridColumnStart = tile.xPos - playerLocation.x + 4
             tileDisplay.style.backgroundColor = tile.display
+            tileDisplay.innerHTML = tile.text
             gameBox.appendChild(tileDisplay)
         }
     });
