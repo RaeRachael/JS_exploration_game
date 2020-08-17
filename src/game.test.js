@@ -6,10 +6,12 @@ import { update, draw, stepAnimation } from './game.js'
 import { drawLevel, drawGridOffset } from './level/level.js'
 import { drawPlayer, updatePlayer, checkBlocked } from './player/player.js'
 import { resetInput, getPlayerDirection, isKeyPressed } from './input/input.js'
+import { drawMonsters } from './monster/monster.js'
 
 jest.mock('./level/level.js', () => ({ 
   drawLevel: jest.fn(),
   drawGridOffset: jest.fn() }) )
+jest.mock('./monster/monster.js', () => ({ drawMonsters: jest.fn() }) )
 jest.mock('./player/player.js', () => ({ 
   drawPlayer: jest.fn(), 
   updatePlayer: jest.fn(),
@@ -30,9 +32,10 @@ describe( "function draw()", function() {
   document.body.innerHTML = '<div id="game-box" />';
   var gameBox = document.getElementById("game-box")
 
-  it( "calls drawPlayer and drawLevel", function() {
+  it( "calls drawPlayer, drawMonsters and drawLevel", function() {
     draw(gameBox)
     expect(drawLevel.mock.calls.length).toBe(1)
+    expect(drawMonsters.mock.calls.length).toBe(1)
     expect(drawPlayer.mock.calls.length).toBe(1)
   })
 

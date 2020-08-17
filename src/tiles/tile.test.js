@@ -1,4 +1,7 @@
 import { turnIntoTiles, createTile } from './tile.js';
+import { addMonster } from '../monster/monster.js';
+
+jest.mock('../monster/monster.js', () => ({ addMonster: jest.fn() }) )
 
 describe( 'function createTile()', function() {
 
@@ -15,10 +18,10 @@ describe( 'function createTile()', function() {
 
     it( "creates a floor when ' ' entered", function() {
       expect( createTile(" ", 1, 1) ).toEqual({
-          xPos: 1,
-          yPos: 1,
-          blocksPlayer: false,
-          display: "white"
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "white"
       })
     })
 
@@ -49,6 +52,16 @@ describe( 'function createTile()', function() {
         blocksPlayer: false,
         display: "white"
       })
+    })
+
+    it( "calls addMonster for a monster tile, and returns a Floor", function() {
+      expect( createTile("X", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "white"
+      })
+      expect(addMonster.mock.calls.length).toBe(1)
     })
 
   })
