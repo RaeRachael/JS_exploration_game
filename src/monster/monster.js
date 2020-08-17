@@ -12,4 +12,4 @@ function clearMonsterList() {
   monsterList = []
 }
 
-export { getMonsters, addMonster, clearMonsterList}
+export { getMonsters, addMonster, clearMonsterList }
