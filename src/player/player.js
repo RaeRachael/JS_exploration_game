@@ -1,4 +1,5 @@
 import { getLevelNumber, setLevelNumber } from "../level/level.js"
+import { isMonsterThere } from "../monster/monster.js"
 
 const PLAYER_MOVEMENT_SPEED = 5
 var playerLocation = { x: 1, y: 1 }
@@ -34,11 +35,18 @@ function checkForStairs(location, tileMap) {
 }
 
 function checkBlocked(playerDirection, tileMap){
-  const possibleNewlocation = {
+  return tileBlocked(getPossibleLocation(playerDirection), tileMap)
+}
+
+function checkMonster(playerDirection) {
+  return isMonsterThere(getPossibleLocation(playerDirection))
+}
+
+function getPossibleLocation(playerDirection) {
+  return  {
     x: playerLocation.x + playerDirection.x,
     y: playerLocation.y + playerDirection.y
   }
-  return tileBlocked(possibleNewlocation, tileMap)
 }
 
 function tileBlocked(location, tileMap) {
@@ -72,6 +80,7 @@ export { drawPlayer,
     tileBlocked, 
     updatePlayer, 
     setPlayerLocation,
-    checkBlocked, 
+    checkBlocked,
+    checkMonster,
     playerLocation, 
     PLAYER_MOVEMENT_SPEED }
