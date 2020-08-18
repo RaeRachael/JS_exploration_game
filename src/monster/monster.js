@@ -5,7 +5,6 @@ function getMonsters() {
 }
 
 function addMonster(location) {
-  console.log("monster addded", location)
   monsterList.push({location: location})
 }
 
@@ -14,7 +13,6 @@ function clearMonsterList() {
 }
 
 function drawMonsters(gameBox, playerLocation) {
-  console.log("monsters appear", monsterList)
   monsterList.forEach(monster => {
     const offsetTileY = monster.location.y - playerLocation.y
     const offsetTileX = monster.location.x - playerLocation.x
@@ -29,4 +27,14 @@ function drawMonsters(gameBox, playerLocation) {
   });
 }
 
-export { getMonsters, addMonster, clearMonsterList, drawMonsters }
+function isMonsterThere(location) {
+  var output = false
+  monsterList.forEach(monster => { 
+    if ( monster.location.x === location.x && monster.location.y === location.y ) {
+      output = true
+    }
+  })
+  return output
+}
+
+export { getMonsters, addMonster, clearMonsterList, drawMonsters, isMonsterThere }

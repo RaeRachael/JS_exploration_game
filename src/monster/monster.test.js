@@ -1,4 +1,4 @@
-import { clearMonsterList, addMonster, getMonsters, drawMonsters } from './monster.js';
+import { clearMonsterList, addMonster, getMonsters, drawMonsters, isMonsterThere } from './monster.js';
 
 describe("mosters are saved in an array", function() {
   it("getMosters returns the array", function() {
@@ -56,6 +56,25 @@ describe( "function drawMonsters()", function() {
 
     expect(gameBox.children.length).toEqual(2)
 
+  })
+  
+})
+
+describe("isMonsterThere", function() {
+
+  it("returns true if location matches a monsters one", function() {
+    clearMonsterList()
+    var location = { x: 1, y: 1 }
+    addMonster(location)
+    expect(isMonsterThere(location)).toEqual(true)
+  })
+
+  it("returns false if location does not match a monsters one", function() {
+    clearMonsterList()
+    var location = { x: 1, y: 1 }
+    var diffLocation = { x: 1, y: 2 }
+    addMonster(location)
+    expect(isMonsterThere(diffLocation)).toEqual(false)
   })
   
 })
