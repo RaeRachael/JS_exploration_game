@@ -64,7 +64,8 @@ describe( 'function createTile()', function() {
         xPos: 1,
         yPos: 1,
         blocksPlayer: false,
-        display: "white"
+        display: "white",
+        text: ""
       })
       expect(addMonster.mock.calls.length).toBe(1)
     })
