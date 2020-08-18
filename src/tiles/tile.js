@@ -1,3 +1,4 @@
+import { addMonster } from "../monster/monster.js"
 
 var tileMap = []
 
@@ -28,6 +29,9 @@ function createTile(string, x, y) {
       return new StairUp(x, y)
     case "D":
       return new StairDown(x, y)
+    case "X":
+      addMonster({x: x, y: y})
+      return new Floor(x, y)
     default:
       return new Floor(x, y)
   }

@@ -1,4 +1,5 @@
 import { getLevelNumber, setLevelNumber } from "../level/level.js"
+import { isMonsterThere } from "../monster/monster.js"
 
 const PLAYER_MOVEMENT_SPEED = 5
 var playerLocation = { x: 1, y: 1 }
@@ -13,7 +14,7 @@ function updatePlayer(playerDirection, pressed, tileMap) {
       x: playerLocation.x + playerDirection.x,
       y: playerLocation.y + playerDirection.y
     }
-    if ( tileBlocked(possibleNewlocation, tileMap) === false ) {
+    if ( isTileBlocking(possibleNewlocation, tileMap) === false ) {
       playerLocation.x = possibleNewlocation.x
       playerLocation.y = possibleNewlocation.y
       checkForStairs(playerLocation, tileMap)
@@ -34,21 +35,28 @@ function checkForStairs(location, tileMap) {
 }
 
 function checkBlocked(playerDirection, tileMap){
-  const possibleNewlocation = {
+  return isTileBlocking(getPossibleLocation(playerDirection), tileMap)
+}
+
+function checkMonster(playerDirection) {
+  return isMonsterThere(getPossibleLocation(playerDirection))
+}
+
+function getPossibleLocation(playerDirection) {
+  return  {
     x: playerLocation.x + playerDirection.x,
     y: playerLocation.y + playerDirection.y
   }
-  return tileBlocked(possibleNewlocation, tileMap)
 }
 
-function tileBlocked(location, tileMap) {
-  var output
+function isTileBlocking(location, tileMap) {
+  var boolean
   tileMap.forEach(function(tile) {
     if (tile.xPos === location.x && tile.yPos === location.y) {
-      output = tile.blocksPlayer
+      boolean = tile.blocksPlayer
     }
   });
-  return output
+  return boolean
 }
 
 function drawPlayer(playerDirection, step) {
@@ -69,9 +77,10 @@ function drawPlayer(playerDirection, step) {
 
 
 export { drawPlayer, 
-    tileBlocked, 
+    isTileBlocking, 
     updatePlayer, 
     setPlayerLocation,
-    checkBlocked, 
+    checkBlocked,
+    checkMonster,
     playerLocation, 
     PLAYER_MOVEMENT_SPEED }

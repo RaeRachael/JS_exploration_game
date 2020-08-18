@@ -5,6 +5,7 @@ import { levelLoad } from './level/level.js'
 
 let lastStepTime = 0
 let step = 0
+let play = true
 const gameBox = document.getElementById('game-box')
 
 function setUpLevel(levelNumber) {
@@ -13,6 +14,7 @@ function setUpLevel(levelNumber) {
 }
 
 function mainLoop(currentTime) {
+  if (play === false) { return "the game is over" }
   const timePassedSinceStep = (currentTime - lastStepTime)/1000
   keyPress()
   window.requestAnimationFrame(mainLoop)
@@ -30,7 +32,13 @@ function mainLoop(currentTime) {
    }
 }
 
+function displayMonsterEnd() {
+  play = false
+  document.body.style.color = "white"
+  document.body.innerHTML = "EATEN BY A MONSTER"
+}
+
 window.requestAnimationFrame(setUpLevel)
 window.requestAnimationFrame(mainLoop)
 
-export { mainLoop, setUpLevel }
+export { mainLoop, setUpLevel, displayMonsterEnd }

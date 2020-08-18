@@ -1,6 +1,6 @@
 import { update, draw, stepAnimation } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, setUpLevel } from './mainLoop.js'
+import { mainLoop, setUpLevel, displayMonsterEnd } from './mainLoop.js'
 import { keyPress, isKeyPressed } from './input/input.js'
 
 jest.mock('./game.js', () => ({ 
@@ -46,6 +46,15 @@ describe( "function mainLoop()", function() {
     expect(draw.mock.calls.length).toBe(1)
   })
 
+  it ( "returns 'the game is over if play is false, no function are called", function() {
+    displayMonsterEnd()
+    expect(mainLoop(0)).toEqual("the game is over")
+    expect(keyPress.mock.calls.length).toBe(0)
+    expect(stepAnimation.mock.calls.length).toBe(0)
+    expect(update.mock.calls.length).toBe(0)
+    expect(draw.mock.calls.length).toBe(0)
+  })
+
 })
 
 describe( "function setUpLevel(levelNumber)", function() {
@@ -53,6 +62,15 @@ describe( "function setUpLevel(levelNumber)", function() {
   it( "calls draw", function() {
     setUpLevel(0)
     expect(draw.mock.calls.length).toBe(1)
+  })
+
+})
+
+describe( "function displayMonsterEnd", function() {
+
+  it( "replaces the body of the page", function() {
+    displayMonsterEnd()
+    expect(document.body.innerHTML).toEqual("EATEN BY A MONSTER")
   })
 
 })

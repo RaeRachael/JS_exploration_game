@@ -4,18 +4,23 @@
 
 import { updatePlayer, 
   drawPlayer, 
-  tileBlocked,
+  isTileBlocking,
   checkBlocked, 
   playerLocation, 
-  setPlayerLocation } from './player';
+  setPlayerLocation,
+  checkMonster } from './player';
 import { setLevelNumber, getLevelNumber } from '../level/level.js'
+import { isMonsterThere } from '../monster/monster.js'
 
 jest.mock('../level/level.js', () => ({ 
   setLevelNumber: jest.fn(),
   getLevelNumber: jest.fn()
  }) )
+ jest.mock('../monster/monster.js', () => ({
+  isMonsterThere: jest.fn()
+ }) )
 
-describe( "function tileBlocked()", function() {
+describe( "function isTileBlocking()", function() {
 
   it ("returns true when looking at a blocking tile", function() {
     var tileMap = [{
@@ -28,7 +33,7 @@ describe( "function tileBlocked()", function() {
       x: 1,
       y: 1
     }
-    expect(tileBlocked(location, tileMap)).toEqual(true)
+    expect(isTileBlocking(location, tileMap)).toEqual(true)
   })
 
   it ("returns false when looking at a non-blocking tile", function() {
@@ -42,7 +47,7 @@ describe( "function tileBlocked()", function() {
       x: 1,
       y: 1
     }
-    expect(tileBlocked(location, tileMap)).toEqual(false)
+    expect(isTileBlocking(location, tileMap)).toEqual(false)
   })
 
 })
@@ -239,4 +244,11 @@ describe( "function interactionWithTile()", function() {
     expect(setLevelNumber.mock.calls[0]).toEqual([1])
   })
 
+})
+
+describe( "function checkMonster", function() {
+  it( "calls isMonsterThere", function() {
+    checkMonster({ x: 0, y: 1 })
+    expect(isMonsterThere.mock.calls.length).toBe(1)
+  })
 })

@@ -35,18 +35,17 @@ function levelLoad(number) {
 }
 
 function drawLevel(gameBox, tileMap, playerLocation) {
-    tileMap.forEach(tile => {
-        const offsetTileY = tile.yPos - playerLocation.y
-        const offsetTileX = tile.xPos - playerLocation.x
-        if (offsetTileY > -4 && offsetTileY < 4 && offsetTileX > -4 && offsetTileX < 4) {
-            const tileDisplay = document.createElement('div')
-            tileDisplay.style.gridRowStart = tile.yPos - playerLocation.y + 4
-            tileDisplay.style.gridColumnStart = tile.xPos - playerLocation.x + 4
-            tileDisplay.style.backgroundColor = tile.display
-            tileDisplay.innerHTML = tile.text
-            gameBox.appendChild(tileDisplay)
-        }
-    });
+  tileMap.forEach(tile => {
+    const offsetTileY = tile.yPos - playerLocation.y
+    const offsetTileX = tile.xPos - playerLocation.x
+    if (offsetTileY > -4 && offsetTileY < 4 && offsetTileX > -4 && offsetTileX < 4) {
+      const tileDisplay = document.createElement('div')
+      tileDisplay.style.gridRowStart = tile.yPos - playerLocation.y + 4
+      tileDisplay.style.gridColumnStart = tile.xPos - playerLocation.x + 4
+      tileDisplay.style.backgroundColor = tile.display
+      gameBox.appendChild(tileDisplay)
+    }
+  });
 }
 
 function drawGridOffset(direction, step) {
