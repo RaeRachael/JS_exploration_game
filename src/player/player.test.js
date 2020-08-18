@@ -4,7 +4,7 @@
 
 import { updatePlayer, 
   drawPlayer, 
-  tileBlocked,
+  isTileBlocking,
   checkBlocked, 
   playerLocation, 
   setPlayerLocation,
@@ -20,7 +20,7 @@ jest.mock('../level/level.js', () => ({
   isMonsterThere: jest.fn()
  }) )
 
-describe( "function tileBlocked()", function() {
+describe( "function isTileBlocking()", function() {
 
   it ("returns true when looking at a blocking tile", function() {
     var tileMap = [{
@@ -33,7 +33,7 @@ describe( "function tileBlocked()", function() {
       x: 1,
       y: 1
     }
-    expect(tileBlocked(location, tileMap)).toEqual(true)
+    expect(isTileBlocking(location, tileMap)).toEqual(true)
   })
 
   it ("returns false when looking at a non-blocking tile", function() {
@@ -47,7 +47,7 @@ describe( "function tileBlocked()", function() {
       x: 1,
       y: 1
     }
-    expect(tileBlocked(location, tileMap)).toEqual(false)
+    expect(isTileBlocking(location, tileMap)).toEqual(false)
   })
 
 })

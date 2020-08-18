@@ -14,7 +14,7 @@ function updatePlayer(playerDirection, pressed, tileMap) {
       x: playerLocation.x + playerDirection.x,
       y: playerLocation.y + playerDirection.y
     }
-    if ( tileBlocked(possibleNewlocation, tileMap) === false ) {
+    if ( isTileBlocking(possibleNewlocation, tileMap) === false ) {
       playerLocation.x = possibleNewlocation.x
       playerLocation.y = possibleNewlocation.y
       checkForStairs(playerLocation, tileMap)
@@ -35,7 +35,7 @@ function checkForStairs(location, tileMap) {
 }
 
 function checkBlocked(playerDirection, tileMap){
-  return tileBlocked(getPossibleLocation(playerDirection), tileMap)
+  return isTileBlocking(getPossibleLocation(playerDirection), tileMap)
 }
 
 function checkMonster(playerDirection) {
@@ -49,14 +49,14 @@ function getPossibleLocation(playerDirection) {
   }
 }
 
-function tileBlocked(location, tileMap) {
-  var output
+function isTileBlocking(location, tileMap) {
+  var boolean
   tileMap.forEach(function(tile) {
     if (tile.xPos === location.x && tile.yPos === location.y) {
-      output = tile.blocksPlayer
+      boolean = tile.blocksPlayer
     }
   });
-  return output
+  return boolean
 }
 
 function drawPlayer(playerDirection, step) {
@@ -77,7 +77,7 @@ function drawPlayer(playerDirection, step) {
 
 
 export { drawPlayer, 
-    tileBlocked, 
+    isTileBlocking, 
     updatePlayer, 
     setPlayerLocation,
     checkBlocked,

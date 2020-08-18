@@ -28,13 +28,13 @@ function drawMonsters(gameBox, playerLocation) {
 }
 
 function isMonsterThere(location) {
-  var output = false
+  var boolean = false
   monsterList.forEach(monster => { 
     if ( monster.location.x === location.x && monster.location.y === location.y ) {
-      output = true
+      boolean = true
     }
   })
-  return output
+  return boolean
 }
 
 export { getMonsters, addMonster, clearMonsterList, drawMonsters, isMonsterThere }
