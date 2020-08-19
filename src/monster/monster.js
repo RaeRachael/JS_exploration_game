@@ -34,12 +34,12 @@ function moveMonsters(tileMap) {
 function move(monster, tileMap) {
   var direction = randomDirection()
   var possibleLocation = { x: monster.location.x + direction.x, y: monster.location.y + direction.y }
-  if (isblockingToMonster(possibleLocation, tileMap) === false && isMonsterThere(possibleLocation) === false) {
+  if (isBlockingToMonster(possibleLocation, tileMap) === false && isMonsterThere(possibleLocation) === false) {
     monster.location = possibleLocation 
   }
 }
 
-function isblockingToMonster(location, tileMap) {
+function isBlockingToMonster(location, tileMap) {
   var boolean
   tileMap.forEach(function(tile) {
     if (tile.xPos === location.x && tile.yPos === location.y) {

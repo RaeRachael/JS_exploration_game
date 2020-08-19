@@ -31,15 +31,19 @@ function mainLoop(currentTime) {
     updateCount()
     lastStepTime = currentTime
     if (isKeyPressed() === true) {
-      step ++
-      if (step === 3) { 
-        step = 0
-        update()
-        draw(gameBox)
-      }
+      updateStep()
     }
     stepAnimation(step)
    }
+}
+
+function updateStep() {
+  step ++
+  if (step === 3) { 
+    step = 0
+    update()
+    draw(gameBox)
+  }
 }
 
 function displayMonsterEnd() {
