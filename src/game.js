@@ -2,12 +2,17 @@ import { getPlayerDirection, resetInput, isKeyPressed } from './input/input.js'
 import { updatePlayer, drawPlayer, playerLocation, checkBlocked, checkMonster } from './player/player.js'
 import { drawLevel, drawGridOffset } from './level/level.js'
 import { getTileMap } from './tiles/tile.js'
-import { drawMonsters } from './monster/monster.js'
+import { moveMonsters, drawMonsters } from './monster/monster.js'
 import { displayMonsterEnd } from './mainLoop.js'
 
 function update() {
+  updateMonsters(getTileMap())
   updatePlayer(getPlayerDirection(), isKeyPressed(), getTileMap())
   resetInput()
+}
+
+function updateMonsters() {
+  moveMonsters(getTileMap())
 }
 
 function draw(gameBox) {
@@ -24,4 +29,4 @@ function stepAnimation(step) {
   drawPlayer(direction, step)
 }
 
-export { draw, update, stepAnimation }
+export { draw, update, stepAnimation, updateMonsters }

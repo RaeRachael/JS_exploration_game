@@ -2,17 +2,20 @@
  * @jest-environment jsdom
  */
 
-import { update, draw, stepAnimation } from './game.js'
+import { update, draw, stepAnimation, updateMonsters } from './game.js'
 import { drawLevel, drawGridOffset } from './level/level.js'
 import { drawPlayer, updatePlayer, checkBlocked, checkMonster } from './player/player.js'
 import { resetInput, getPlayerDirection, isKeyPressed } from './input/input.js'
-import { drawMonsters } from './monster/monster.js'
+import { drawMonsters, moveMonsters } from './monster/monster.js'
 import { displayMonsterEnd } from './mainLoop.js'
 
 jest.mock('./level/level.js', () => ({ 
   drawLevel: jest.fn(),
   drawGridOffset: jest.fn() }) )
-jest.mock('./monster/monster.js', () => ({ drawMonsters: jest.fn() }) )
+jest.mock('./monster/monster.js', () => ({ 
+  drawMonsters: jest.fn(),
+  moveMonsters: jest.fn()
+}) )
 jest.mock('./mainLoop.js', () => ({ displayMonsterEnd: jest.fn() }) )
 jest.mock('./player/player.js', () => ({ 
   drawPlayer: jest.fn(), 
@@ -87,4 +90,14 @@ describe( "function stepAnimation(step)", function() {
   })
 
 })
+
+describe( "function updateMonsters", function() {
+
+  it( "calls moveMonsters and draw", function() {
+    updateMonsters()
+    expect(moveMonsters.mock.calls.length).toBe(1)
+  })
+
+})
+
 

@@ -27,6 +27,33 @@ function drawMonsters(gameBox, playerLocation) {
   });
 }
 
+function moveMonsters(tileMap) {
+  monsterList.forEach(monster => { move(monster, tileMap) } )
+}
+
+function move(monster, tileMap) {
+  var direction = randomDirection()
+  var possibleLocation = { x: monster.location.x + direction.x, y: monster.location.y + direction.y }
+  if (isBlockingToMonster(possibleLocation, tileMap) === false && isMonsterThere(possibleLocation) === false) {
+    monster.location = possibleLocation 
+  }
+}
+
+function isBlockingToMonster(location, tileMap) {
+  var boolean
+  tileMap.forEach(function(tile) {
+    if (tile.xPos === location.x && tile.yPos === location.y) {
+      boolean = tile.blocksPlayer
+    }
+  });
+  return boolean
+}
+
+function randomDirection() {
+  var moves = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }, { x: 0, y: -1 }]
+  return moves[Math.floor(Math.random() * 6)]
+}
+
 function isMonsterThere(location) {
   var boolean = false
   monsterList.forEach(monster => { 
@@ -37,4 +64,4 @@ function isMonsterThere(location) {
   return boolean
 }
 
-export { getMonsters, addMonster, clearMonsterList, drawMonsters, isMonsterThere }
+export { getMonsters, addMonster, clearMonsterList, drawMonsters, isMonsterThere, moveMonsters }
