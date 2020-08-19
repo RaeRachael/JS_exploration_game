@@ -10,10 +10,7 @@ function setPlayerLocation(location) {
 
 function updatePlayer(playerDirection, pressed, tileMap) {
   if (pressed === true) {
-    const possibleNewlocation = {
-      x: playerLocation.x + playerDirection.x,
-      y: playerLocation.y + playerDirection.y
-    }
+    const possibleNewlocation = getPossibleLocation(playerDirection)
     if ( isTileBlocking(possibleNewlocation, tileMap) === false ) {
       playerLocation.x = possibleNewlocation.x
       playerLocation.y = possibleNewlocation.y

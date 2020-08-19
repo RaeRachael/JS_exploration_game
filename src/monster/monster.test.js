@@ -1,4 +1,12 @@
-import { clearMonsterList, addMonster, getMonsters, drawMonsters, isMonsterThere } from './monster.js';
+import { clearMonsterList, addMonster, getMonsters, drawMonsters, isMonsterThere, moveMonsters } from './monster.js'
+
+beforeEach(() => {
+  jest.spyOn(global.Math, 'random').mockReturnValue(0.99)
+});
+
+afterEach(() => {
+  jest.spyOn(global.Math, 'random').mockRestore()
+})
 
 describe("mosters are saved in an array", function() {
   it("getMosters returns the array", function() {
@@ -75,6 +83,40 @@ describe("isMonsterThere", function() {
     var diffLocation = { x: 1, y: 2 }
     addMonster(location)
     expect(isMonsterThere(diffLocation)).toEqual(false)
+  })
+  
+})
+
+describe("moveMonsters", function() {
+
+  it( "doesn't move onto a blocking tile", function() {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.99) // { x: 0, y: -1 }
+    clearMonsterList()
+    var location = { x: 1, y: 2 }
+    addMonster(location)
+    var tileMap = [{
+      xPos: 1,
+      yPos: 1,
+      blocksPlayer: true,
+      display: "black"
+    }]
+    moveMonsters(tileMap)
+    expect(getMonsters()[0].location).toEqual(location)
+  })
+
+  it( "moves onto a non-blocking tile", function() {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.99) // { x: 0, y: -1 }
+    clearMonsterList()
+    var location = { x: 1, y: 2 }
+    addMonster(location)
+    var tileMap = [{
+      xPos: 1,
+      yPos: 1,
+      blocksPlayer: false,
+      display: "white"
+    }]
+    moveMonsters(tileMap)
+    expect(getMonsters()[0].location).toEqual({ x: 1, y: 1 })
   })
   
 })

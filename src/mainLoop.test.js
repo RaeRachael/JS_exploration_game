@@ -1,12 +1,13 @@
-import { update, draw, stepAnimation } from './game.js'
+import { update, draw, stepAnimation, updateMonsters } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, setUpLevel, displayMonsterEnd } from './mainLoop.js'
+import { mainLoop, setUpLevel, displayMonsterEnd, updateCount } from './mainLoop.js'
 import { keyPress, isKeyPressed } from './input/input.js'
 
 jest.mock('./game.js', () => ({ 
   update: jest.fn(), 
   draw: jest.fn(),
-  stepAnimation: jest.fn()
+  stepAnimation: jest.fn(),
+  updateMonsters: jest.fn()
 }) )
 jest.mock('./input/input.js', () => ({ 
   keyPress: jest.fn(),
@@ -71,6 +72,18 @@ describe( "function displayMonsterEnd", function() {
   it( "replaces the body of the page", function() {
     displayMonsterEnd()
     expect(document.body.innerHTML).toEqual("EATEN BY A MONSTER")
+  })
+
+})
+
+describe( "function updateCount", function() {
+
+  it( "calls updateMonster and draw every five calls", function() {
+    for (var i = 0; i < 5; i++) {
+      updateCount()
+    }
+    expect(updateMonsters.mock.calls.length).toBe(1)
+    expect(draw.mock.calls.length).toBe(1)
   })
 
 })

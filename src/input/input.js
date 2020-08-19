@@ -15,16 +15,16 @@ function keyPress() {
 
 function useKeyPress(e) {
   if (e.key === "w") {
-    processKeyPress(0, -1, getPlayerDirection())
+    processKeyPress(0, -1)
   }
   if (e.key === "a") {
-    processKeyPress(-1, 0, getPlayerDirection())
+    processKeyPress(-1, 0)
   }
   if (e.key === "s") {
-    processKeyPress(0, 1, getPlayerDirection()) 
+    processKeyPress(0, 1) 
   }
   if (e.key === "d") {
-    processKeyPress(1, 0, getPlayerDirection()) 
+    processKeyPress(1, 0) 
   }
 }
 
