@@ -14,14 +14,6 @@ function setUpLevel(levelNumber) {
   draw(gameBox)
 }
 
-function updateCount() {
-  if (count === 5 ) { 
-    updateMonsters()
-    draw(gameBox)
-  }
-  count < 5 ? count++ : count = 0
-}
-
 function mainLoop(currentTime) {
   if (play === false) { return "the game is over" }
   const timePassedSinceStep = (currentTime - lastStepTime)/1000
@@ -35,6 +27,15 @@ function mainLoop(currentTime) {
     }
     stepAnimation(step)
    }
+}
+
+function updateCount() {
+  if (count === 5 ) { 
+    count = 0
+    updateMonsters()
+    draw(gameBox)
+  }
+  count++
 }
 
 function updateStep() {

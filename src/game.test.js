@@ -7,7 +7,7 @@ import { drawLevel, drawGridOffset } from './level/level.js'
 import { drawPlayer, updatePlayer, checkBlocked, checkMonster } from './player/player.js'
 import { resetInput, getPlayerDirection, isKeyPressed } from './input/input.js'
 import { drawMonsters, moveMonsters } from './monster/monster.js'
-import { displayMonsterEnd } from './mainLoop.js'
+import { displayMonsterEnd } from './main.js'
 
 jest.mock('./level/level.js', () => ({ 
   drawLevel: jest.fn(),
@@ -16,7 +16,7 @@ jest.mock('./monster/monster.js', () => ({
   drawMonsters: jest.fn(),
   moveMonsters: jest.fn()
 }) )
-jest.mock('./mainLoop.js', () => ({ displayMonsterEnd: jest.fn() }) )
+jest.mock('./main.js', () => ({ displayMonsterEnd: jest.fn() }) )
 jest.mock('./player/player.js', () => ({ 
   drawPlayer: jest.fn(), 
   updatePlayer: jest.fn(),

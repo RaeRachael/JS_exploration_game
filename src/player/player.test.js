@@ -9,12 +9,13 @@ import { updatePlayer,
   playerLocation, 
   setPlayerLocation,
   checkMonster } from './player';
-import { setLevelNumber, getLevelNumber } from '../level/level.js'
+import { setLevelNumber, getLevelNumber, findTile } from '../level/level.js'
 import { isMonsterThere } from '../monster/monster.js'
 
 jest.mock('../level/level.js', () => ({ 
   setLevelNumber: jest.fn(),
-  getLevelNumber: jest.fn()
+  getLevelNumber: jest.fn(),
+  findTile: jest.fn()
  }) )
  jest.mock('../monster/monster.js', () => ({
   isMonsterThere: jest.fn()
@@ -23,31 +24,31 @@ jest.mock('../level/level.js', () => ({
 describe( "function isTileBlocking()", function() {
 
   it ("returns true when looking at a blocking tile", function() {
-    var tileMap = [{
+    findTile.mockReturnValueOnce( {
       xPos: 1,
       yPos: 1,
       blocksPlayer: true,
       display: "black"
-    }]
+    } )
     var location = {
       x: 1,
       y: 1
     }
-    expect(isTileBlocking(location, tileMap)).toEqual(true)
+    expect(isTileBlocking(location)).toEqual(true)
   })
 
   it ("returns false when looking at a non-blocking tile", function() {
-    var tileMap = [{
+    findTile.mockReturnValueOnce( {
       xPos: 1,
       yPos: 1,
       blocksPlayer: false,
       display: "white"
-    }]
+    } )
     var location = {
       x: 1,
       y: 1
     }
-    expect(isTileBlocking(location, tileMap)).toEqual(false)
+    expect(isTileBlocking(location)).toEqual(false)
   })
 
 })
@@ -56,26 +57,26 @@ describe( "function checkBlocked()", function() {
 
   it ("returns true when looking at a blocking tile", function() {
     setPlayerLocation({ x: 1, y: 1 })
-    var tileMap = [{
+    findTile.mockReturnValueOnce( {
       xPos: 1,
       yPos: 0,
       blocksPlayer: true,
-      display: "white"
-    }]
+      display: "black"
+    } )
     var direction = { x:0, y:-1 }
-    expect(checkBlocked(direction, tileMap)).toEqual(true)
+    expect(checkBlocked(direction)).toEqual(true)
   })
 
   it ("returns false when looking at a non-blocking tile", function() {
     setPlayerLocation({ x: 1, y: 1 })
-    var tileMap = [{
+    findTile.mockReturnValueOnce( {
       xPos: 1,
       yPos: 0,
       blocksPlayer: false,
       display: "white"
-    }]
+    } )
     var direction = { x:0, y:-1 }
-    expect(checkBlocked(direction, tileMap)).toEqual(false)
+    expect(checkBlocked(direction)).toEqual(false)
   })
 
 })
@@ -86,53 +87,53 @@ describe( "function updatePlayer()", function() {
  
     it ("moves left if 'direction was up'", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      var tileMap = [{
+      findTile.mockReturnValue( {
         xPos: 1,
         yPos: 0,
         blocksPlayer: false,
         display: "white"
-      }]
+      } )
       var direction = {x:0, y:-1}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 1, y: 0 })
     })
 
     it ("moves up if 'direction was left'", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      var tileMap = [{
+      findTile.mockReturnValue( {
         xPos: 0,
         yPos: 1,
         blocksPlayer: false,
         display: "white"
-      }]
+      } )
       var direction = {x:-1, y:0}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 0, y: 1 })
     })
 
     it ("moves down if 'direction was down'", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      var tileMap = [{
+      findTile.mockReturnValue( {
         xPos: 1,
         yPos: 2,
         blocksPlayer: false,
         display: "white"
-      }]
+      } )
       var direction = {x:0, y:1}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 1, y: 2 })
     })
     
     it ("moves right if 'direction was right'", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      var tileMap = [{
+      findTile.mockReturnValue( {
         xPos: 2,
         yPos: 1,
         blocksPlayer: false,
         display: "white"
-      }]
+      } )
       var direction = {x:1, y:0}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 2, y: 1 })
     })
   })
@@ -141,14 +142,14 @@ describe( "function updatePlayer()", function() {
 
     it ("location doesn't change", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      var tileMap = [{
+      findTile.mockReturnValueOnce( {
         xPos: 2,
         yPos: 1,
         blocksPlayer: true,
         display: "black"
-      }]
+      } )
       var direction = {x:1, y:0}
-      updatePlayer(direction, true, tileMap)
+      updatePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 1, y: 1 })
     })
 
@@ -158,14 +159,14 @@ describe( "function updatePlayer()", function() {
 
     it ("location doesn't change", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      var tileMap = [{
+      findTile.mockReturnValueOnce( {
         xPos: 2,
         yPos: 1,
         blocksPlayer: false,
         display: "white"
-      }]
+      } )
       var direction = {x:1, y:0}
-      updatePlayer(direction, false, tileMap)
+      updatePlayer(direction, false)
       expect(playerLocation).toEqual({ x: 1, y: 1 })
     })
 
@@ -231,16 +232,16 @@ describe( "function interactionWithTile()", function() {
 
   it ("stepping onto stairs make up incease levelNumber", function() {
     setPlayerLocation({ x: 1, y: 1 })
-    var tileMap = [{
+    findTile.mockReturnValueOnce( {
       xPos: 2,
       yPos: 1,
       blocksPlayer: false,
       display: "yellow",
       levelChange: 1
-    }]
+    } )
     var direction = {x:1, y:0}
     getLevelNumber.mockReturnValueOnce(0)
-    updatePlayer(direction, true, tileMap)
+    updatePlayer(direction, true)
     expect(setLevelNumber.mock.calls[0]).toEqual([1])
   })
 

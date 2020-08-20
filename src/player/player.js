@@ -1,4 +1,4 @@
-import { getLevelNumber, setLevelNumber } from "../level/level.js"
+import { getLevelNumber, setLevelNumber, findTile } from "../level/level.js"
 import { isMonsterThere } from "../monster/monster.js"
 
 const PLAYER_MOVEMENT_SPEED = 5
@@ -8,31 +8,27 @@ function setPlayerLocation(location) {
     playerLocation = location
 }
 
-function updatePlayer(playerDirection, pressed, tileMap) {
+function updatePlayer(playerDirection, pressed) {
   if (pressed === true) {
     const possibleNewlocation = getPossibleLocation(playerDirection)
-    if ( isTileBlocking(possibleNewlocation, tileMap) === false ) {
+    if ( isTileBlocking(possibleNewlocation) === false ) {
       playerLocation.x = possibleNewlocation.x
       playerLocation.y = possibleNewlocation.y
-      checkForStairs(playerLocation, tileMap)
+      checkForStairs(findTile(playerLocation))
     }
   }
 }
 
-function checkForStairs(location, tileMap) {
+function checkForStairs(tile) {
   var levelNumber = getLevelNumber()
-  tileMap.forEach(function(tile) {
-    if (tile.xPos === location.x && tile.yPos === location.y) {
-      if( tile.levelChange ) {
-        levelNumber += tile.levelChange
-        setLevelNumber(levelNumber)
-      }
-    }
-  });
+  if( tile.levelChange ) {
+    levelNumber += tile.levelChange
+    setLevelNumber(levelNumber)
+  }
 }
 
-function checkBlocked(playerDirection, tileMap){
-  return isTileBlocking(getPossibleLocation(playerDirection), tileMap)
+function checkBlocked(playerDirection){
+  return isTileBlocking(getPossibleLocation(playerDirection))
 }
 
 function checkMonster(playerDirection) {
@@ -46,14 +42,8 @@ function getPossibleLocation(playerDirection) {
   }
 }
 
-function isTileBlocking(location, tileMap) {
-  var boolean
-  tileMap.forEach(function(tile) {
-    if (tile.xPos === location.x && tile.yPos === location.y) {
-      boolean = tile.blocksPlayer
-    }
-  });
-  return boolean
+function isTileBlocking(location) {
+ return findTile(location).blocksPlayer
 }
 
 function drawPlayer(playerDirection, step) {

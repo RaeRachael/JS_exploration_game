@@ -1,5 +1,5 @@
-import { turnIntoTiles, clearTileMap } from '../tiles/tile.js'
-import { setUpLevel } from "../mainLoop.js"
+import { turnIntoTiles, clearTileMap, getTileMap } from '../tiles/tile.js'
+import { setUpLevel } from "../main.js"
 import { playerLocation } from '../player/player.js'
 
 var levelNumber = 0
@@ -65,4 +65,14 @@ function drawGridOffset(direction, step) {
   }
 }
 
-export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad }
+function findTile(location) {
+  var correctTile
+  getTileMap().forEach(function(tile) {
+    if (tile.xPos === location.x && tile.yPos === location.y) {
+      correctTile = tile
+    }
+  })
+  return correctTile
+}
+
+export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad, findTile }
