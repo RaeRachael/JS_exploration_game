@@ -1,14 +1,6 @@
 let playerDirection = { x: 0, y: 1}
 let pressed = false
 
-function getPlayerDirection() {
-  return playerDirection
-}
-
-function isKeyPressed() {
-  return pressed
-}
-
 function keyPress() {
   window.addEventListener('keydown', useKeyPress)
 }
@@ -28,11 +20,18 @@ function useKeyPress(e) {
   }
 }
 
+function getPlayerDirection() {
+  return playerDirection
+}
+
+function isKeyPressed() {
+  return pressed
+}
+
 function processKeyPress(x, y) {
   if ( pressed === false ) { playerDirection = { x: x, y: y } }
   pressed = true
 }
-
 
 function resetInput() {
   pressed = false

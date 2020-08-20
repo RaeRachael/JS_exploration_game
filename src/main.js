@@ -9,8 +9,8 @@ let count = 0
 let play = true
 const gameBox = document.getElementById('game-box')
 
-function setUpLevel(levelNumber) {
-  levelLoad(0)
+function setUpLevel() {
+  levelLoad()
   draw(gameBox)
 }
 

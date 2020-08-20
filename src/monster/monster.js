@@ -1,3 +1,5 @@
+import { findTile } from "../level/level.js"
+
 var monsterList = []
 
 function getMonsters() {
@@ -17,36 +19,35 @@ function drawMonsters(gameBox, playerLocation) {
     const offsetTileY = monster.location.y - playerLocation.y
     const offsetTileX = monster.location.x - playerLocation.x
     if (offsetTileY > -4 && offsetTileY < 4 && offsetTileX > -4 && offsetTileX < 4) {
-      const monsterDisplay = document.createElement('div')
-      monsterDisplay.style.gridRowStart = monster.location.y - playerLocation.y + 4
-      monsterDisplay.style.gridColumnStart = monster.location.x - playerLocation.x + 4
-      monsterDisplay.style.backgroundColor = "red"
-      monsterDisplay.innerHTML = "mntr"
-      gameBox.appendChild(monsterDisplay)
+      displayOneMonster(gameBox, { x: offsetTileX + 4, y: offsetTileY + 4 })
     }
   });
 }
 
-function moveMonsters(tileMap) {
-  monsterList.forEach(monster => { move(monster, tileMap) } )
+function displayOneMonster(gameBox, position) {
+  const monsterDisplay = document.createElement('div')
+  monsterDisplay.style.gridRowStart = position.y
+  monsterDisplay.style.gridColumnStart = position.x
+  monsterDisplay.style.backgroundColor = "red"
+  monsterDisplay.innerHTML = "mntr"
+  gameBox.appendChild(monsterDisplay)
 }
 
-function move(monster, tileMap) {
+function moveMonsters() {
+  monsterList.forEach(monster => { move(monster) } )
+}
+
+function move(monster) {
   var direction = randomDirection()
   var possibleLocation = { x: monster.location.x + direction.x, y: monster.location.y + direction.y }
-  if (isBlockingToMonster(possibleLocation, tileMap) === false && isMonsterThere(possibleLocation) === false) {
+  if (isBlockingToMonster(possibleLocation) === false && isMonsterThere(possibleLocation) === false) {
     monster.location = possibleLocation 
   }
 }
 
-function isBlockingToMonster(location, tileMap) {
-  var boolean
-  tileMap.forEach(function(tile) {
-    if (tile.xPos === location.x && tile.yPos === location.y) {
-      boolean = tile.blocksPlayer
-    }
-  });
-  return boolean
+function isBlockingToMonster(location) {
+  return findTile(location).blocksPlayer
+
 }
 
 function randomDirection() {

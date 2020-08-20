@@ -8,18 +8,35 @@ function setPlayerLocation(location) {
     playerLocation = location
 }
 
+function drawPlayer(playerDirection, step) {
+  const playerSpace = document.getElementById('player')
+  if (playerDirection.x === -1 && playerDirection.y === 0) {
+    playerSpace.className = `left step-${step}`
+  }
+  if  (playerDirection.x === 0 && playerDirection.y === -1) {
+    playerSpace.className = `up step-${step}`
+  }
+  if (playerDirection.x === 1 && playerDirection.y === 0) {
+    playerSpace.className = `right step-${step}`
+  }
+  if  (playerDirection.x === 0 && playerDirection.y === 1) {
+    playerSpace.className = `down step-${step}`
+  }
+}
+
 function updatePlayer(playerDirection, pressed) {
   if (pressed === true) {
     const possibleNewlocation = getPossibleLocation(playerDirection)
     if ( isTileBlocking(possibleNewlocation) === false ) {
       playerLocation.x = possibleNewlocation.x
       playerLocation.y = possibleNewlocation.y
-      checkForStairs(findTile(playerLocation))
+      checkForStairs(playerLocation)
     }
   }
 }
 
-function checkForStairs(tile) {
+function checkForStairs(location) {
+  var tile = findTile(location)
   var levelNumber = getLevelNumber()
   if( tile.levelChange ) {
     levelNumber += tile.levelChange
@@ -45,23 +62,6 @@ function getPossibleLocation(playerDirection) {
 function isTileBlocking(location) {
  return findTile(location).blocksPlayer
 }
-
-function drawPlayer(playerDirection, step) {
-  const playerSpace = document.getElementById('player')
-  if (playerDirection.x === -1 && playerDirection.y === 0) {
-    playerSpace.className = `left step-${step}`
-  }
-  if  (playerDirection.x === 0 && playerDirection.y === -1) {
-    playerSpace.className = `up step-${step}`
-  }
-  if (playerDirection.x === 1 && playerDirection.y === 0) {
-    playerSpace.className = `right step-${step}`
-  }
-  if  (playerDirection.x === 0 && playerDirection.y === 1) {
-    playerSpace.className = `down step-${step}`
-  }
-}
-
 
 export { drawPlayer, 
     isTileBlocking, 
