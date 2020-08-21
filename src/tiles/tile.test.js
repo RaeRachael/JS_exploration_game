@@ -49,6 +49,26 @@ describe( 'function createTile()', function() {
       })
     })
 
+    it( "creates a locked door when '|' entered", function() {
+      expect( createTile("|", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: true,
+        display: "brown",
+        text: "locked"
+      })
+    })
+
+    it( "creates a Floor plus key when 'k' entered", function() {
+      expect( createTile("k", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "white",
+        text: "key"
+      })
+    })
+
     it( "creates a Floor by defualt", function() {
       expect( createTile("wrefegrgsre", 1, 1) ).toEqual({
         xPos: 1,

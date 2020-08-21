@@ -32,6 +32,10 @@ function createTile(string, x, y) {
     case "X":
       addMonster({x: x, y: y})
       return new Floor(x, y)
+    case "|":
+      return new DoorLocked(x, y)
+    case "k":
+      return new Key(x, y)
     default:
       return new Floor(x, y)
   }
@@ -78,6 +82,22 @@ class StairDown extends Tile {
     this.display = "yellow"
     this.levelChange = -1
     this.text = "down"
+  }
+}
+
+class DoorLocked extends Tile {
+  constructor(x, y) {
+    super(x, y)
+    this.blocksPlayer = true
+    this.display = "brown"
+    this.text = "locked"
+  }
+}
+
+class Key extends Floor {
+  constructor(x, y) {
+    super(x, y)
+    this.text = "key"
   }
 }
 
