@@ -1,5 +1,5 @@
-import { turnIntoTiles, clearTileMap } from '../tiles/tile.js'
-import { setUpLevel } from "../mainLoop.js"
+import { turnIntoTiles, clearTileMap, getTileMap } from '../tiles/tile.js'
+import { setUpLevel } from "../main.js"
 import { playerLocation } from '../player/player.js'
 
 var levelNumber = 0
@@ -22,16 +22,26 @@ const level = [
 
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
-  setUpLevel(levelNumber)
+  setUpLevel()
 }
 
 function getLevelNumber() {
   return levelNumber
 }
 
-function levelLoad(number) {
+function levelLoad() {
   clearTileMap()
   turnIntoTiles(level[levelNumber])
+}
+
+function findTile(location) {
+  var correctTile
+  getTileMap().forEach(function(tile) {
+    if (tile.xPos === location.x && tile.yPos === location.y) {
+      correctTile = tile
+    }
+  })
+  return correctTile
 }
 
 function drawLevel(gameBox, tileMap, playerLocation) {
@@ -39,14 +49,18 @@ function drawLevel(gameBox, tileMap, playerLocation) {
     const offsetTileY = tile.yPos - playerLocation.y
     const offsetTileX = tile.xPos - playerLocation.x
     if (offsetTileY > -4 && offsetTileY < 4 && offsetTileX > -4 && offsetTileX < 4) {
-      const tileDisplay = document.createElement('div')
-      tileDisplay.style.gridRowStart = tile.yPos - playerLocation.y + 4
-      tileDisplay.style.gridColumnStart = tile.xPos - playerLocation.x + 4
-      tileDisplay.style.backgroundColor = tile.display
-      tileDisplay.innerHTML = tile.text
-      gameBox.appendChild(tileDisplay)
+      displayOneTile(gameBox, tile, { x: offsetTileX + 4, y: offsetTileY + 4 })
     }
   });
+}
+
+function displayOneTile(gameBox, tile, position) {
+  const tileDisplay = document.createElement('div')
+  tileDisplay.style.gridRowStart = position.y
+  tileDisplay.style.gridColumnStart = position.x
+  tileDisplay.style.backgroundColor = tile.display
+  tileDisplay.innerHTML = tile.text
+  gameBox.appendChild(tileDisplay)
 }
 
 function drawGridOffset(direction, step) {
@@ -65,4 +79,4 @@ function drawGridOffset(direction, step) {
   }
 }
 
-export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad }
+export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad, findTile }

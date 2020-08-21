@@ -2,10 +2,12 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber } from './level';
-import { setUpLevel } from "../mainLoop.js"
+import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile } from './level';
+import { setUpLevel } from "../main.js"
+import { getTileMap } from "../tiles/tile.js"
 
-jest.mock( "../mainLoop.js", () => ({ setUpLevel: jest.fn() }) )
+jest.mock( "../main.js", () => ({ setUpLevel: jest.fn() }) )
+jest.mock( "../tiles/tile.js", () => ({ getTileMap: jest.fn() }) )
 
 describe( "function drawLevel()", function() {
 
@@ -92,6 +94,21 @@ describe("function setLevelNumber(newNumber)", function() {
   it("sets changes current level toargument", function() {
     setLevelNumber(10)
     expect(getLevelNumber()).toEqual(10)
+  })
+
+})
+
+describe("function findTile(location", function() {
+
+  it("returns the tile at te location specified", function() {
+    var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0 }, 
+    { blocksPlayer: false, display: "white", xPos: 1, yPos: 0 }, 
+    { blocksPlayer: true, display: "black", xPos: 50, yPos: 0 }]
+
+    getTileMap.mockReturnValue(tileMap)
+
+    expect(findTile({x: 0, y: 0})).toEqual( { blocksPlayer: true, display: "black", xPos: 0, yPos: 0 } )
+    expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0 } )
   })
 
 })

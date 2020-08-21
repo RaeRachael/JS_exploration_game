@@ -3,7 +3,7 @@ import { updatePlayer, drawPlayer, playerLocation, checkBlocked, checkMonster } 
 import { drawLevel, drawGridOffset } from './level/level.js'
 import { getTileMap } from './tiles/tile.js'
 import { moveMonsters, drawMonsters } from './monster/monster.js'
-import { displayMonsterEnd } from './mainLoop.js'
+import { displayMonsterEnd } from './main.js'
 
 function update() {
   updateMonsters(getTileMap())

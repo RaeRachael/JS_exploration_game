@@ -9,17 +9,9 @@ let count = 0
 let play = true
 const gameBox = document.getElementById('game-box')
 
-function setUpLevel(levelNumber) {
-  levelLoad(0)
+function setUpLevel() {
+  levelLoad()
   draw(gameBox)
-}
-
-function updateCount() {
-  if (count === 5 ) { 
-    updateMonsters()
-    draw(gameBox)
-  }
-  count < 5 ? count++ : count = 0
 }
 
 function mainLoop(currentTime) {
@@ -35,6 +27,15 @@ function mainLoop(currentTime) {
     }
     stepAnimation(step)
    }
+}
+
+function updateCount() {
+  if (count === 5 ) { 
+    count = 0
+    updateMonsters()
+    draw(gameBox)
+  }
+  count++
 }
 
 function updateStep() {

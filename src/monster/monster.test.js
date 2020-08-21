@@ -1,4 +1,7 @@
 import { clearMonsterList, addMonster, getMonsters, drawMonsters, isMonsterThere, moveMonsters } from './monster.js'
+import { findTile } from '../level/level.js'
+
+jest.mock('../level/level.js', () => ({ findTile: jest.fn() }) )
 
 beforeEach(() => {
   jest.spyOn(global.Math, 'random').mockReturnValue(0.99)
@@ -91,31 +94,31 @@ describe("moveMonsters", function() {
 
   it( "doesn't move onto a blocking tile", function() {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.99) // { x: 0, y: -1 }
-    clearMonsterList()
-    var location = { x: 1, y: 2 }
-    addMonster(location)
-    var tileMap = [{
+    findTile.mockReturnValue({
       xPos: 1,
       yPos: 1,
       blocksPlayer: true,
       display: "black"
-    }]
-    moveMonsters(tileMap)
+    })
+    clearMonsterList()
+    var location = { x: 1, y: 2 }
+    addMonster(location)
+    moveMonsters()
     expect(getMonsters()[0].location).toEqual(location)
   })
 
   it( "moves onto a non-blocking tile", function() {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.99) // { x: 0, y: -1 }
-    clearMonsterList()
-    var location = { x: 1, y: 2 }
-    addMonster(location)
-    var tileMap = [{
+    findTile.mockReturnValue({
       xPos: 1,
       yPos: 1,
       blocksPlayer: false,
       display: "white"
-    }]
-    moveMonsters(tileMap)
+    })
+    clearMonsterList()
+    var location = { x: 1, y: 2 }
+    addMonster(location)
+    moveMonsters()
     expect(getMonsters()[0].location).toEqual({ x: 1, y: 1 })
   })
   

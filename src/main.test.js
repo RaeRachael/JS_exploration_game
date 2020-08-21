@@ -1,7 +1,8 @@
 import { update, draw, stepAnimation, updateMonsters } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, setUpLevel, displayMonsterEnd, updateCount } from './mainLoop.js'
+import { mainLoop, setUpLevel, displayMonsterEnd, updateCount } from './main.js'
 import { keyPress, isKeyPressed } from './input/input.js'
+import { findTile } from "./level/level.js"
 
 jest.mock('./game.js', () => ({ 
   update: jest.fn(), 
