@@ -8,7 +8,8 @@ import { updatePlayer,
   checkBlocked, 
   playerLocation, 
   setPlayerLocation,
-  checkMonster } from './player';
+  checkMonster,
+  numberOfKeys } from './player';
 import { setLevelNumber, getLevelNumber, findTile } from '../level/level.js'
 import { isMonsterThere } from '../monster/monster.js'
 
@@ -228,7 +229,7 @@ describe( "function drawPlayer()", function() {
 
 })
 
-describe( "function interactionWithTile()", function() {
+describe( "interaction with tiles", function() {
 
   it ("stepping onto stairs make up incease levelNumber", function() {
     setPlayerLocation({ x: 1, y: 1 })
@@ -243,6 +244,21 @@ describe( "function interactionWithTile()", function() {
     getLevelNumber.mockReturnValueOnce(0)
     updatePlayer(direction, true)
     expect(setLevelNumber.mock.calls[0]).toEqual([1])
+  })
+
+  it ("stepping onto a key inceases numberOfKeys", function() {
+    let numberOfKeysTest = numberOfKeys
+    setPlayerLocation({ x: 1, y: 1 })
+    findTile.mockReturnValue( {
+      xPos: 2,
+      yPos: 1,
+      blocksPlayer: false,
+      display: "white",
+      text: "key"
+    } )
+    var direction = {x:1, y:0}
+    updatePlayer(direction, true)
+    expect(numberOfKeys).toEqual(numberOfKeysTest + 1)
   })
 
 })
