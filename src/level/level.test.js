@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile } from './level';
+import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey } from './level';
 import { setUpLevel } from "../main.js"
 import { getTileMap } from "../tiles/tile.js"
 
@@ -98,7 +98,7 @@ describe("function setLevelNumber(newNumber)", function() {
 
 })
 
-describe("function findTile(location", function() {
+describe("function findTile(location)", function() {
 
   it("returns the tile at te location specified", function() {
     var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0 }, 
@@ -111,4 +111,15 @@ describe("function findTile(location", function() {
     expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0 } )
   })
 
+})
+
+describe("function removeKey(location)", function() {
+  var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0 }, 
+  { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: "key" }, 
+  { blocksPlayer: true, display: "black", xPos: 50, yPos: 0 }]
+
+  getTileMap.mockReturnValue(tileMap)
+
+  removeKey( {x: 1, y: 0})
+  expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: " " } )
 })

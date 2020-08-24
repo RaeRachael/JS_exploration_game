@@ -10,16 +10,18 @@ import { updatePlayer,
   setPlayerLocation,
   checkMonster,
   numberOfKeys } from './player';
-import { setLevelNumber, getLevelNumber, findTile } from '../level/level.js'
-import { isMonsterThere } from '../monster/monster.js'
+import { setLevelNumber, getLevelNumber, findTile, removeKey } from '../level/level.js'
+import { isMonsterThere, clearMonsterList} from '../monster/monster.js'
 
 jest.mock('../level/level.js', () => ({ 
   setLevelNumber: jest.fn(),
   getLevelNumber: jest.fn(),
-  findTile: jest.fn()
+  findTile: jest.fn(),
+  removeKey: jest.fn()
  }) )
  jest.mock('../monster/monster.js', () => ({
-  isMonsterThere: jest.fn()
+  isMonsterThere: jest.fn(),
+  clearMonsterList: jest.fn()
  }) )
 
 describe( "function isTileBlocking()", function() {
@@ -231,7 +233,7 @@ describe( "function drawPlayer()", function() {
 
 describe( "interaction with tiles", function() {
 
-  it ("stepping onto stairs make up incease levelNumber", function() {
+  it ("stepping onto stairs make up incease levelNumber, clears monsters", function() {
     setPlayerLocation({ x: 1, y: 1 })
     findTile.mockReturnValueOnce( {
       xPos: 2,
@@ -244,9 +246,10 @@ describe( "interaction with tiles", function() {
     getLevelNumber.mockReturnValueOnce(0)
     updatePlayer(direction, true)
     expect(setLevelNumber.mock.calls[0]).toEqual([1])
+    expect(clearMonsterList.mock.calls.length).toEqual(1)
   })
 
-  it ("stepping onto a key inceases numberOfKeys", function() {
+  it ("stepping onto a key inceases numberOfKeys, and calls function to remove key", function() {
     let numberOfKeysTest = numberOfKeys
     setPlayerLocation({ x: 1, y: 1 })
     findTile.mockReturnValue( {
@@ -259,6 +262,7 @@ describe( "interaction with tiles", function() {
     var direction = {x:1, y:0}
     updatePlayer(direction, true)
     expect(numberOfKeys).toEqual(numberOfKeysTest + 1)
+    expect(removeKey.mock.calls[0]).toEqual([{ x: 2, y: 1}])
   })
 
 })

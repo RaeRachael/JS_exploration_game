@@ -1,5 +1,5 @@
-import { getLevelNumber, setLevelNumber, findTile } from "../level/level.js"
-import { isMonsterThere } from "../monster/monster.js"
+import { getLevelNumber, setLevelNumber, findTile, removeKey } from "../level/level.js"
+import { isMonsterThere, clearMonsterList } from "../monster/monster.js"
 
 const PLAYER_MOVEMENT_SPEED = 5
 var playerLocation = { x: 1, y: 1 }
@@ -41,6 +41,7 @@ function checkForStairs(location) {
   var tile = findTile(location)
   var levelNumber = getLevelNumber()
   if( tile.levelChange ) {
+    clearMonsterList()
     levelNumber += tile.levelChange
     setLevelNumber(levelNumber)
   }
@@ -48,10 +49,9 @@ function checkForStairs(location) {
 
 function checkForKey(location) {
   var tile = findTile(location)
-  console.log(tile)
   if( tile.text === "key" ) {
     numberOfKeys++
-    console.log(numberOfKeys)
+    removeKey(location)
   }
 }
 

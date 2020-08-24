@@ -18,7 +18,14 @@ const level = [
 "-         -",
 "- --- -----",
 "-  S-    D-",
-"-----------"]]
+"-----------"],
+["-----------",
+ "-   |     -",
+ "- - ----- -",
+ "- - -     -",
+ "- - - -----",
+ "-k-D-    S-",
+ "-----------"]]
 
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
@@ -42,6 +49,11 @@ function findTile(location) {
     }
   })
   return correctTile
+}
+
+function removeKey(location) {
+  var tile = findTile(location)
+  tile.text = " "
 }
 
 function drawLevel(gameBox, tileMap, playerLocation) {
@@ -79,4 +91,4 @@ function drawGridOffset(direction, step) {
   }
 }
 
-export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad, findTile }
+export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad, findTile, removeKey }
