@@ -27,6 +27,23 @@ To come once the graphics are more complete
 
 ## Comments About the Code Plan, Struggles and Aims
 
+### Wednesday 26th August
+
+#### Coding Aims Completed
+* Added in Monster on level 2
+* Added in the lost condition if the player is on the same tile as a Monster
+* (Not yet merged into master) Added tiles for doors and keys
+* (Not yet merged into master) Keys are removed from the level after being picked up (currently reappear if level reloads)
+* (Not yet merged into master) Monster list is cleared out after a level change
+
+#### Challenges
+Finding the easiest way to turn a key into a floor tile, as for this branch my aim is to be very focused on following TDD (unit tests instead for BDD by starting with feature tests) not sure if this coding style will continue after this branch but experimenting on TDD when creating the objective as well. 
+
+#### Future Aims
+* Making it so Door unlock when attempting to be moved through, if the player has a key (using up the key)
+* Make it so the the level has a rememory of the keys that have been picked up
+* Look into the best way to test an event listener (the only part of the code base that is not being tested yet)
+
 ### Monday 17th August
 
 #### Coding Aims Completed
