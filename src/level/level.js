@@ -1,5 +1,4 @@
-import { turnIntoTiles, clearTileMap, getTileMap, selectTileMap } from '../tiles/tile.js'
-import { setUpLevels } from "../main.js"
+import { turnIntoTiles, getTileMap, selectTileMap } from '../tiles/tile.js'
 import { playerLocation } from '../player/player.js'
 import { addMonster } from '../monster/monster.js'
 
@@ -31,7 +30,6 @@ const level = [
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
   selectTileMap(levelNumber)
-  // setUpLevels()
 }
 
 function getLevelNumber() {
@@ -40,10 +38,6 @@ function getLevelNumber() {
 
 function loadLevelsAsTiles() {
   turnIntoTiles(level)
-}
-
-function levelLoad() {
-  selectTileMap(levelNumber)
 }
 
 function includeMonsters() {
@@ -110,8 +104,7 @@ export { drawLevel,
    drawGridOffset, 
    setLevelNumber, 
    getLevelNumber, 
-   loadLevelsAsTiles, 
-   levelLoad, 
+   loadLevelsAsTiles,  
    findTile, 
    removeKey, 
    includeMonsters }

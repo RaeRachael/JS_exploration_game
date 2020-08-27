@@ -1,7 +1,7 @@
-import { turnIntoTiles, createTile } from './tile.js';
-import { addMonster } from '../monster/monster.js';
+import { turnIntoTiles, createTile, selectTileMap } from './tile.js';
+import { includeMonsters } from '../level/level.js';
 
-jest.mock('../monster/monster.js', () => ({ addMonster: jest.fn() }) )
+jest.mock('../level/level.js', () => ({ includeMonsters: jest.fn() }) )
 
 describe( 'function createTile()', function() {
 
@@ -109,8 +109,8 @@ describe( 'function createTile()', function() {
 
 describe( 'function turnIntoTiles()', function() {
 
-  var levelData = [[" -","DS"]]
-  var expectedOutput = [[{
+  var levelData = [[" -","DS"],[" -","DS"]]
+  var expectedOutputOneLevel = [{
     xPos: 0,
     yPos: 0,
     blocksPlayer: false,
@@ -136,10 +136,16 @@ describe( 'function turnIntoTiles()', function() {
     display: "yellow",
     levelChange: 1,
     text: "up"
-  }]]
+  }]
 
   it( 'returns an array of tiles on the first level', function() {
-    expect( turnIntoTiles(levelData)).toEqual(expectedOutput)
+    expect(turnIntoTiles(levelData)).toEqual([expectedOutputOneLevel, expectedOutputOneLevel])
   })
+
+  it( "selectTileMap(levelNumber), gets the tiles for that level and calls for monsters to be added", function() {
+    expect(selectTileMap(1)).toEqual(expectedOutputOneLevel)
+    expect(includeMonsters.mock.calls.length).toEqual(1)
+  })
+
 })
 

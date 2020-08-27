@@ -2,13 +2,15 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey } from './level';
-import { getTileMap, selectTileMap } from "../tiles/tile.js"
+import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey, includeMonsters, loadLevelsAsTiles } from './level';
+import { getTileMap, selectTileMap, turnIntoTiles } from "../tiles/tile.js"
+import { addMonster } from '../monster/monster';
 
-jest.mock( "../main.js", () => ({ setUpLevel: jest.fn() }) )
+jest.mock( "../monster/monster.js", () => ({ addMonster: jest.fn() }) )
 jest.mock( "../tiles/tile.js", () => ({ 
   getTileMap: jest.fn(),
-  selectTileMap: jest.fn()
+  selectTileMap: jest.fn(),
+  turnIntoTiles: jest.fn()
  }) )
 
 describe( "function drawLevel()", function() {
@@ -124,4 +126,23 @@ describe("function removeKey(location)", function() {
 
   removeKey( {x: 1, y: 0})
   expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: " " } )
+})
+
+describe("function includeMonster()", function() {
+
+  it("calls add moster with the moster location on the current level", function() {
+    setLevelNumber(2)
+    includeMonsters()
+    expect(addMonster.mock.calls[0]).toEqual([{x: 4, y: 2}])
+  })
+
+})
+
+describe("function loadLevelAsTiles", function() {
+  
+  it("calls turnIntoTiles for the level data", function() {
+    loadLevelsAsTiles()
+    expect(turnIntoTiles.mock.calls.length).toEqual(1)
+  })
+
 })

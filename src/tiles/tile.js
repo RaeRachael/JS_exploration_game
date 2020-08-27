@@ -1,12 +1,7 @@
-import { addMonster } from "../monster/monster.js"
 import { includeMonsters } from '../level/level.js'
 
 var tileMap = []
 var tileLevel = []
-
-function clearTileMap() {
-  tileMap = []
-}
 
 function turnIntoTiles(levelData) {
   levelData.forEach(level => {
@@ -41,9 +36,6 @@ function createTile(string, x, y) {
       return new StairUp(x, y)
     case "D":
       return new StairDown(x, y)
-    case "X":
-      // addMonster({x: x, y: y})
-      return new Floor(x, y)
     case "|":
       return new DoorLocked(x, y)
     case "k":
@@ -113,4 +105,4 @@ class Key extends Floor {
   }
 }
 
-export { createTile, turnIntoTiles, selectTileMap, getTileMap, clearTileMap }
+export { createTile, turnIntoTiles, selectTileMap, getTileMap }
