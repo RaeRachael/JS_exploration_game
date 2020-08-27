@@ -2,12 +2,16 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile } from './level';
-import { setUpLevel } from "../main.js"
-import { getTileMap } from "../tiles/tile.js"
+import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey, includeMonsters, loadLevelsAsTiles } from './level';
+import { getTileMap, selectTileMap, turnIntoTiles } from "../tiles/tile.js"
+import { addMonster } from '../monster/monster';
 
-jest.mock( "../main.js", () => ({ setUpLevel: jest.fn() }) )
-jest.mock( "../tiles/tile.js", () => ({ getTileMap: jest.fn() }) )
+jest.mock( "../monster/monster.js", () => ({ addMonster: jest.fn() }) )
+jest.mock( "../tiles/tile.js", () => ({ 
+  getTileMap: jest.fn(),
+  selectTileMap: jest.fn(),
+  turnIntoTiles: jest.fn()
+ }) )
 
 describe( "function drawLevel()", function() {
 
@@ -86,9 +90,9 @@ describe( "function drawGridOffset()", function() {
 
 describe("function setLevelNumber(newNumber)", function() {
 
-  it("calls setUpLevel()", function() {
+  it("calls selectTileMap()", function() {
     setLevelNumber(1)
-    expect(setUpLevel.mock.calls.length).toEqual(1)
+    expect(selectTileMap.mock.calls.length).toEqual(1)
   })
 
   it("sets changes current level toargument", function() {
@@ -98,7 +102,7 @@ describe("function setLevelNumber(newNumber)", function() {
 
 })
 
-describe("function findTile(location", function() {
+describe("function findTile(location)", function() {
 
   it("returns the tile at te location specified", function() {
     var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0 }, 
@@ -109,6 +113,36 @@ describe("function findTile(location", function() {
 
     expect(findTile({x: 0, y: 0})).toEqual( { blocksPlayer: true, display: "black", xPos: 0, yPos: 0 } )
     expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0 } )
+  })
+
+})
+
+describe("function removeKey(location)", function() {
+  var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0 }, 
+  { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: "key" }, 
+  { blocksPlayer: true, display: "black", xPos: 50, yPos: 0 }]
+
+  getTileMap.mockReturnValue(tileMap)
+
+  removeKey( {x: 1, y: 0})
+  expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: " " } )
+})
+
+describe("function includeMonster()", function() {
+
+  it("calls add moster with the moster location on the current level", function() {
+    setLevelNumber(2)
+    includeMonsters()
+    expect(addMonster.mock.calls[0]).toEqual([{x: 4, y: 2}])
+  })
+
+})
+
+describe("function loadLevelAsTiles", function() {
+  
+  it("calls turnIntoTiles for the level data", function() {
+    loadLevelsAsTiles()
+    expect(turnIntoTiles.mock.calls.length).toEqual(1)
   })
 
 })

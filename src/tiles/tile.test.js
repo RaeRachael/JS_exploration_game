@@ -1,7 +1,7 @@
-import { turnIntoTiles, createTile } from './tile.js';
-import { addMonster } from '../monster/monster.js';
+import { turnIntoTiles, createTile, selectTileMap } from './tile.js';
+import { includeMonsters } from '../level/level.js';
 
-jest.mock('../monster/monster.js', () => ({ addMonster: jest.fn() }) )
+jest.mock('../level/level.js', () => ({ includeMonsters: jest.fn() }) )
 
 describe( 'function createTile()', function() {
 
@@ -49,6 +49,26 @@ describe( 'function createTile()', function() {
       })
     })
 
+    it( "creates a locked door when '|' entered", function() {
+      expect( createTile("|", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: true,
+        display: "brown",
+        text: "locked"
+      })
+    })
+
+    it( "creates a Floor plus key when 'k' entered", function() {
+      expect( createTile("k", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "white",
+        text: "key"
+      })
+    })
+
     it( "creates a Floor by defualt", function() {
       expect( createTile("wrefegrgsre", 1, 1) ).toEqual({
         xPos: 1,
@@ -59,7 +79,7 @@ describe( 'function createTile()', function() {
       })
     })
 
-    it( "calls addMonster for a monster tile, and returns a Floor", function() {
+    it( "creates a Flor under a monster", function() {
       expect( createTile("X", 1, 1) ).toEqual({
         xPos: 1,
         yPos: 1,
@@ -67,7 +87,6 @@ describe( 'function createTile()', function() {
         display: "white",
         text: ""
       })
-      expect(addMonster.mock.calls.length).toBe(1)
     })
 
   })
@@ -90,8 +109,8 @@ describe( 'function createTile()', function() {
 
 describe( 'function turnIntoTiles()', function() {
 
-  var levelData = [" -","DS"]
-  var expectedOutput = [{
+  var levelData = [[" -","DS"],[" -","DS"]]
+  var expectedOutputOneLevel = [{
     xPos: 0,
     yPos: 0,
     blocksPlayer: false,
@@ -119,8 +138,14 @@ describe( 'function turnIntoTiles()', function() {
     text: "up"
   }]
 
-  it( 'returns an array of tile on the level', function() {
-    expect( turnIntoTiles(levelData)).toEqual(expectedOutput)
+  it( 'returns an array of tiles on the first level', function() {
+    expect(turnIntoTiles(levelData)).toEqual([expectedOutputOneLevel, expectedOutputOneLevel])
   })
+
+  it( "selectTileMap(levelNumber), gets the tiles for that level and calls for monsters to be added", function() {
+    expect(selectTileMap(1)).toEqual(expectedOutputOneLevel)
+    expect(includeMonsters.mock.calls.length).toEqual(1)
+  })
+
 })
 

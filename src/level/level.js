@@ -1,6 +1,5 @@
-import { turnIntoTiles, clearTileMap, getTileMap } from '../tiles/tile.js'
-import { setUpLevel } from "../main.js"
-import { playerLocation } from '../player/player.js'
+import { turnIntoTiles, getTileMap, selectTileMap } from '../tiles/tile.js'
+import { addMonster } from '../monster/monster.js'
 
 var levelNumber = 0
 
@@ -18,20 +17,36 @@ const level = [
 "-         -",
 "- --- -----",
 "-  S-    D-",
-"-----------"]]
+"-----------"],
+["-----------",
+ "-   |     -",
+ "- - ----- -",
+ "- - -     -",
+ "- - - -----",
+ "-k-D-    S-",
+ "-----------"]]
 
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
-  setUpLevel()
+  selectTileMap(levelNumber)
 }
 
 function getLevelNumber() {
   return levelNumber
 }
 
-function levelLoad() {
-  clearTileMap()
-  turnIntoTiles(level[levelNumber])
+function loadLevelsAsTiles() {
+  turnIntoTiles(level)
+}
+
+function includeMonsters() {
+  var currentLevel = level[levelNumber-1]
+  for (var y = 0; y < currentLevel.length; y ++) {
+    for ( var x = 0; x <currentLevel[0].length; x ++) {
+      if (currentLevel[y][x] === "X" )
+      addMonster({x: x, y: y})
+    }
+  }
 }
 
 function findTile(location) {
@@ -42,6 +57,11 @@ function findTile(location) {
     }
   })
   return correctTile
+}
+
+function removeKey(location) {
+  var tile = findTile(location)
+  tile.text = " "
 }
 
 function drawLevel(gameBox, tileMap, playerLocation) {
@@ -79,4 +99,11 @@ function drawGridOffset(direction, step) {
   }
 }
 
-export { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, levelLoad, findTile }
+export { drawLevel,
+   drawGridOffset, 
+   setLevelNumber, 
+   getLevelNumber, 
+   loadLevelsAsTiles,  
+   findTile, 
+   removeKey, 
+   includeMonsters }

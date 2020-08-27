@@ -1,8 +1,9 @@
 import { update, draw, stepAnimation, updateMonsters } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, setUpLevel, displayMonsterEnd, updateCount } from './main.js'
+import { mainLoop, setUpLevels, displayMonsterEnd, updateCount } from './main.js'
 import { keyPress, isKeyPressed } from './input/input.js'
-import { findTile } from "./level/level.js"
+import { findTile, loadLevelsAsTiles } from "./level/level.js"
+import { selectTileMap } from './tiles/tile.js'
 
 jest.mock('./game.js', () => ({ 
   update: jest.fn(), 
@@ -14,6 +15,8 @@ jest.mock('./input/input.js', () => ({
   keyPress: jest.fn(),
   isKeyPressed: jest.fn()
  }) )
+jest.mock('./level/level.js', () => ({ loadLevelsAsTiles: jest.fn() }) )
+jest.mock('./tiles/tile.js', () => ({ selectTileMap: jest.fn() }) )
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -59,11 +62,12 @@ describe( "function mainLoop()", function() {
 
 })
 
-describe( "function setUpLevel(levelNumber)", function() {
+describe( "function setUpLevels()", function() {
 
-  it( "calls draw", function() {
-    setUpLevel(0)
-    expect(draw.mock.calls.length).toBe(1)
+  it( "calls loadLevelsAsTiles and selectTileMap", function() {
+    setUpLevels()
+    expect(loadLevelsAsTiles.mock.calls.length).toBe(1)
+    expect(selectTileMap.mock.calls[0]).toEqual([1])
   })
 
 })

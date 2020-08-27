@@ -8,23 +8,26 @@ import { updatePlayer,
   checkBlocked, 
   playerLocation, 
   setPlayerLocation,
-  checkMonster } from './player';
-import { setLevelNumber, getLevelNumber, findTile } from '../level/level.js'
-import { isMonsterThere } from '../monster/monster.js'
+  checkMonster,
+  numberOfKeys } from './player';
+import { setLevelNumber, getLevelNumber, findTile, removeKey } from '../level/level.js'
+import { isMonsterThere, clearMonsterList} from '../monster/monster.js'
 
 jest.mock('../level/level.js', () => ({ 
   setLevelNumber: jest.fn(),
   getLevelNumber: jest.fn(),
-  findTile: jest.fn()
+  findTile: jest.fn(),
+  removeKey: jest.fn()
  }) )
  jest.mock('../monster/monster.js', () => ({
-  isMonsterThere: jest.fn()
+  isMonsterThere: jest.fn(),
+  clearMonsterList: jest.fn()
  }) )
 
 describe( "function isTileBlocking()", function() {
 
   it ("returns true when looking at a blocking tile", function() {
-    findTile.mockReturnValueOnce( {
+    findTile.mockReturnValue( {
       xPos: 1,
       yPos: 1,
       blocksPlayer: true,
@@ -38,7 +41,7 @@ describe( "function isTileBlocking()", function() {
   })
 
   it ("returns false when looking at a non-blocking tile", function() {
-    findTile.mockReturnValueOnce( {
+    findTile.mockReturnValue( {
       xPos: 1,
       yPos: 1,
       blocksPlayer: false,
@@ -57,7 +60,7 @@ describe( "function checkBlocked()", function() {
 
   it ("returns true when looking at a blocking tile", function() {
     setPlayerLocation({ x: 1, y: 1 })
-    findTile.mockReturnValueOnce( {
+    findTile.mockReturnValue( {
       xPos: 1,
       yPos: 0,
       blocksPlayer: true,
@@ -69,7 +72,7 @@ describe( "function checkBlocked()", function() {
 
   it ("returns false when looking at a non-blocking tile", function() {
     setPlayerLocation({ x: 1, y: 1 })
-    findTile.mockReturnValueOnce( {
+    findTile.mockReturnValue( {
       xPos: 1,
       yPos: 0,
       blocksPlayer: false,
@@ -142,7 +145,7 @@ describe( "function updatePlayer()", function() {
 
     it ("location doesn't change", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      findTile.mockReturnValueOnce( {
+      findTile.mockReturnValue( {
         xPos: 2,
         yPos: 1,
         blocksPlayer: true,
@@ -159,7 +162,7 @@ describe( "function updatePlayer()", function() {
 
     it ("location doesn't change", function() {
       setPlayerLocation({ x: 1, y: 1 })
-      findTile.mockReturnValueOnce( {
+      findTile.mockReturnValue( {
         xPos: 2,
         yPos: 1,
         blocksPlayer: false,
@@ -228,11 +231,11 @@ describe( "function drawPlayer()", function() {
 
 })
 
-describe( "function interactionWithTile()", function() {
+describe( "interaction with tiles", function() {
 
-  it ("stepping onto stairs make up incease levelNumber", function() {
+  it ("stepping onto stairs make up incease levelNumber, clears monsters", function() {
     setPlayerLocation({ x: 1, y: 1 })
-    findTile.mockReturnValueOnce( {
+    findTile.mockReturnValue( {
       xPos: 2,
       yPos: 1,
       blocksPlayer: false,
@@ -243,13 +246,56 @@ describe( "function interactionWithTile()", function() {
     getLevelNumber.mockReturnValueOnce(0)
     updatePlayer(direction, true)
     expect(setLevelNumber.mock.calls[0]).toEqual([1])
+    expect(clearMonsterList.mock.calls.length).toEqual(1)
+  })
+
+  it ("stepping onto a key inceases numberOfKeys, and calls function to remove key", function() {
+    let numberOfKeysTest = numberOfKeys
+    setPlayerLocation({ x: 1, y: 1 })
+    findTile.mockReturnValue( {
+      xPos: 2,
+      yPos: 1,
+      blocksPlayer: false,
+      display: "white",
+      text: "key"
+    } )
+    var direction = {x:1, y:0}
+    updatePlayer(direction, true)
+    expect(numberOfKeys).toEqual(numberOfKeysTest + 1)
+    expect(removeKey.mock.calls[0]).toEqual([{ x: 2, y: 1}])
+  })
+
+  it ("doors can be unlocked by a key, reducing key number by one", function() {
+    let numberOfKeysTest = numberOfKeys
+    setPlayerLocation({ x: 1, y: 1 })
+    findTile.mockReturnValue( {
+      xPos: 2,
+      yPos: 1,
+      blocksPlayer: false,
+      display: "white",
+      text: "key"
+    } )
+    var direction = {x:1, y:0}
+    updatePlayer(direction, true)
+    findTile.mockReturnValue( {
+      xPos: 3,
+      yPos: 1,
+      blocksPlayer: true,
+      display: "brown",
+      text: "locked"
+    } )
+    updatePlayer(direction, true)
+    expect(numberOfKeys).toEqual(numberOfKeysTest)
+    expect(playerLocation).toEqual({ x: 3, y: 1})
   })
 
 })
 
 describe( "function checkMonster", function() {
+
   it( "calls isMonsterThere", function() {
     checkMonster({ x: 0, y: 1 })
     expect(isMonsterThere.mock.calls.length).toBe(1)
   })
+
 })
