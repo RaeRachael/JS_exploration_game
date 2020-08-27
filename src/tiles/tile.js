@@ -1,22 +1,34 @@
 import { addMonster } from "../monster/monster.js"
+import { includeMonsters } from '../level/level.js'
 
 var tileMap = []
+var tileLevel = []
 
 function clearTileMap() {
   tileMap = []
 }
 
 function turnIntoTiles(levelData) {
-  for (var y = 0; y < levelData.length; y ++) {
-    for ( var x = 0; x <levelData[0].length; x ++) {
-      tileMap.push(createTile(levelData[y][x], x, y))
+  levelData.forEach(level => {
+    var tileLevel = []
+    for (var y = 0; y < level.length; y ++) {
+      for ( var x = 0; x <level[0].length; x ++) {
+        tileLevel.push(createTile(level[y][x], x, y))
+      }
     }
-  }
+    tileMap.push(tileLevel)
+  })
   return tileMap
 }
 
+function selectTileMap(levelNumber) {
+  tileLevel = tileMap[levelNumber - 1]
+  includeMonsters(tileLevel)
+  return tileLevel
+}
+
 function getTileMap() {
-  return tileMap
+  return tileLevel
 }
 
 function createTile(string, x, y) {
@@ -30,7 +42,7 @@ function createTile(string, x, y) {
     case "D":
       return new StairDown(x, y)
     case "X":
-      addMonster({x: x, y: y})
+      // addMonster({x: x, y: y})
       return new Floor(x, y)
     case "|":
       return new DoorLocked(x, y)
@@ -101,4 +113,4 @@ class Key extends Floor {
   }
 }
 
-export { createTile, turnIntoTiles, getTileMap, clearTileMap }
+export { createTile, turnIntoTiles, selectTileMap, getTileMap, clearTileMap }

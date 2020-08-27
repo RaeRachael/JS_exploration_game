@@ -79,7 +79,7 @@ describe( 'function createTile()', function() {
       })
     })
 
-    it( "calls addMonster for a monster tile, and returns a Floor", function() {
+    it( "creates a Flor under a monster", function() {
       expect( createTile("X", 1, 1) ).toEqual({
         xPos: 1,
         yPos: 1,
@@ -87,7 +87,6 @@ describe( 'function createTile()', function() {
         display: "white",
         text: ""
       })
-      expect(addMonster.mock.calls.length).toBe(1)
     })
 
   })
@@ -110,8 +109,8 @@ describe( 'function createTile()', function() {
 
 describe( 'function turnIntoTiles()', function() {
 
-  var levelData = [" -","DS"]
-  var expectedOutput = [{
+  var levelData = [[" -","DS"]]
+  var expectedOutput = [[{
     xPos: 0,
     yPos: 0,
     blocksPlayer: false,
@@ -137,9 +136,9 @@ describe( 'function turnIntoTiles()', function() {
     display: "yellow",
     levelChange: 1,
     text: "up"
-  }]
+  }]]
 
-  it( 'returns an array of tile on the level', function() {
+  it( 'returns an array of tiles on the first level', function() {
     expect( turnIntoTiles(levelData)).toEqual(expectedOutput)
   })
 })

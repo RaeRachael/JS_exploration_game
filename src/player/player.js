@@ -71,7 +71,7 @@ function getPossibleLocation(playerDirection) {
 }
 
 function isTileBlocking(location) {
-  openLockedDoor()
+  openLockedDoor(location)
   return findTile(location).blocksPlayer
 }
 
@@ -79,6 +79,7 @@ function openLockedDoor(location) {
   var tile = findTile(location)
   if( tile.text === "locked" && numberOfKeys > 0 ) { 
     tile.blocksPlayer = false
+    tile.text = "open"
     numberOfKeys--
   }
 }

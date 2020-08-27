@@ -1,7 +1,8 @@
 import { draw, update, stepAnimation, updateMonsters } from './game.js'
 import { keyPress, isKeyPressed } from './input/input.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { levelLoad } from './level/level.js'
+import { loadLevelsAsTiles } from './level/level.js'
+import { selectTileMap } from './tiles/tile.js'
 
 let lastStepTime = 0
 let step = 0
@@ -9,10 +10,11 @@ let count = 0
 let play = true
 const gameBox = document.getElementById('game-box')
 
-function setUpLevel() {
-  levelLoad()
-  draw(gameBox)
+function setUpLevels() {
+  loadLevelsAsTiles()
+  selectTileMap(1)
 }
+
 
 function mainLoop(currentTime) {
   if (play === false) { return "the game is over" }
@@ -53,7 +55,7 @@ function displayMonsterEnd() {
   document.body.innerHTML = "EATEN BY A MONSTER"
 }
 
-window.requestAnimationFrame(setUpLevel)
+window.requestAnimationFrame(setUpLevels)
 window.requestAnimationFrame(mainLoop)
 
-export { mainLoop, setUpLevel, displayMonsterEnd, updateCount }
+export { mainLoop, setUpLevels, displayMonsterEnd, updateCount }

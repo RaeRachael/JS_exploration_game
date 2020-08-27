@@ -3,11 +3,13 @@
  */
 
 import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey } from './level';
-import { setUpLevel } from "../main.js"
-import { getTileMap } from "../tiles/tile.js"
+import { getTileMap, selectTileMap } from "../tiles/tile.js"
 
 jest.mock( "../main.js", () => ({ setUpLevel: jest.fn() }) )
-jest.mock( "../tiles/tile.js", () => ({ getTileMap: jest.fn() }) )
+jest.mock( "../tiles/tile.js", () => ({ 
+  getTileMap: jest.fn(),
+  selectTileMap: jest.fn()
+ }) )
 
 describe( "function drawLevel()", function() {
 
@@ -86,9 +88,9 @@ describe( "function drawGridOffset()", function() {
 
 describe("function setLevelNumber(newNumber)", function() {
 
-  it("calls setUpLevel()", function() {
+  it("calls selectTileMap()", function() {
     setLevelNumber(1)
-    expect(setUpLevel.mock.calls.length).toEqual(1)
+    expect(selectTileMap.mock.calls.length).toEqual(1)
   })
 
   it("sets changes current level toargument", function() {
