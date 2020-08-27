@@ -1,5 +1,5 @@
 import { getPlayerDirection, resetInput, isKeyPressed } from './input/input.js'
-import { updatePlayer, drawPlayer, playerLocation, checkBlocked, checkMonster } from './player/player.js'
+import { updatePlayer, drawPlayer, playerLocation, checkBlocked } from './player/player.js'
 import { drawLevel, drawGridOffset } from './level/level.js'
 import { getTileMap } from './tiles/tile.js'
 import { moveMonsters, drawMonsters, isMonsterThere } from './monster/monster.js'
