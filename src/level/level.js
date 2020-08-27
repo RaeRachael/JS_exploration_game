@@ -1,5 +1,4 @@
 import { turnIntoTiles, getTileMap, selectTileMap } from '../tiles/tile.js'
-import { playerLocation } from '../player/player.js'
 import { addMonster } from '../monster/monster.js'
 
 var levelNumber = 0

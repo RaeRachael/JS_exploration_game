@@ -47,7 +47,6 @@ function move(monster) {
 
 function isBlockingToMonster(location) {
   return findTile(location).blocksPlayer
-
 }
 
 function randomDirection() {

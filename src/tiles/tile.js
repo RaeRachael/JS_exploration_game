@@ -5,13 +5,13 @@ var tileLevel = []
 
 function turnIntoTiles(levelData) {
   levelData.forEach(level => {
-    var tileLevel = []
+    var tiles = []
     for (var y = 0; y < level.length; y ++) {
       for ( var x = 0; x <level[0].length; x ++) {
-        tileLevel.push(createTile(level[y][x], x, y))
+        tiles.push(createTile(level[y][x], x, y))
       }
     }
-    tileMap.push(tileLevel)
+    tileMap.push(tiles)
   })
   return tileMap
 }
