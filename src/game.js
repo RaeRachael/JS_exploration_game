@@ -1,8 +1,8 @@
 import { getPlayerDirection, resetInput, isKeyPressed } from './input/input.js'
-import { updatePlayer, drawPlayer, playerLocation, checkBlocked, checkMonster } from './player/player.js'
+import { updatePlayer, drawPlayer, playerLocation, checkBlocked } from './player/player.js'
 import { drawLevel, drawGridOffset } from './level/level.js'
 import { getTileMap } from './tiles/tile.js'
-import { moveMonsters, drawMonsters } from './monster/monster.js'
+import { moveMonsters, drawMonsters, isMonsterThere } from './monster/monster.js'
 import { displayMonsterEnd } from './main.js'
 
 function update() {
@@ -24,7 +24,7 @@ function draw(gameBox) {
 
 function stepAnimation(step) {
   let direction = getPlayerDirection()
-  if ( checkMonster(direction) ) { return displayMonsterEnd() }
+  if ( isMonsterThere(playerLocation) ) { return displayMonsterEnd() }
   if ( checkBlocked(direction, getTileMap()) === false || step === 0 ) { drawGridOffset(direction, step) }
   drawPlayer(direction, step)
 }
