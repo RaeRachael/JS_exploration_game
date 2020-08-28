@@ -49,8 +49,9 @@ function includeMonsters() {
   }
 }
 
-function isTileTreasure() {
-
+function isTileTreasure(location) {
+  var tile = findTile(location)
+  return tile.text === "gold"
 }
 
 function findTile(location) {
