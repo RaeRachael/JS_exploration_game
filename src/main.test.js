@@ -1,6 +1,6 @@
 import { update, draw, stepAnimation, updateMonsters } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, setUpLevels, displayMonsterEnd, updateCount } from './main.js'
+import { mainLoop, setUpLevels, displayMonsterEnd, displayTreasureEnd, updateCount } from './main.js'
 import { keyPress, isKeyPressed } from './input/input.js'
 import { findTile, loadLevelsAsTiles } from "./level/level.js"
 import { selectTileMap } from './tiles/tile.js'
@@ -77,6 +77,15 @@ describe( "function displayMonsterEnd", function() {
   it( "replaces the body of the page", function() {
     displayMonsterEnd()
     expect(document.body.innerHTML).toEqual("EATEN BY A MONSTER")
+  })
+
+})
+
+describe( "function displayTreasureEnd", function() {
+
+  it( "replaces the body of the page", function() {
+    displayTreasureEnd()
+    expect(document.body.innerHTML).toEqual("YOU GOT THE TREASURE")
   })
 
 })

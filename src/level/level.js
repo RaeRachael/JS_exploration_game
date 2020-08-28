@@ -19,12 +19,37 @@ const level = [
 "-  S-    D-",
 "-----------"],
 ["-----------",
- "-   |     -",
- "- - ----- -",
- "- - -     -",
- "- - - -----",
- "-k-D-    S-",
- "-----------"]]
+"-   |     -",
+"- - ----- -",
+"- - -     -",
+"- - - -----",
+"-k-D-    S-",
+"-----------"],
+["-----------",
+"-SX  -k  X-",
+"-    -    -",
+"-    -    -",
+"-    -    -",
+"-    |   D-",
+"-----------"],
+["----------",
+"-D       -",
+"-        -",
+"-        -",
+"-        -",
+"-      X -",
+"-     X  -",
+"-       S-",
+"----------"],
+["----------",
+"-      X -",
+"-       t-",
+"- -    X -",
+"- --------",
+"- -      -",
+"- --------",
+"-       D-",
+"----------"]]
 
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
@@ -47,6 +72,11 @@ function includeMonsters() {
       addMonster({x: x, y: y})
     }
   }
+}
+
+function isTileTreasure(location) {
+  var tile = findTile(location)
+  return tile.text === "gold"
 }
 
 function findTile(location) {
@@ -105,5 +135,6 @@ export { drawLevel,
    getLevelNumber, 
    loadLevelsAsTiles,  
    findTile, 
-   removeKey, 
+   removeKey,
+   isTileTreasure, 
    includeMonsters }

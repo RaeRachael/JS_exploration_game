@@ -3,21 +3,26 @@
  */
 
 import { update, draw, stepAnimation, updateMonsters } from './game.js'
-import { drawLevel, drawGridOffset } from './level/level.js'
+import { drawLevel, drawGridOffset, isTileTreasure } from './level/level.js'
 import { drawPlayer, updatePlayer, checkBlocked, checkMonster } from './player/player.js'
 import { resetInput, getPlayerDirection, isKeyPressed } from './input/input.js'
 import { drawMonsters, moveMonsters, isMonsterThere } from './monster/monster.js'
-import { displayMonsterEnd } from './main.js'
+import { displayMonsterEnd, displayTreasureEnd } from './main.js'
 
 jest.mock('./level/level.js', () => ({ 
   drawLevel: jest.fn(),
-  drawGridOffset: jest.fn() }) )
+  drawGridOffset: jest.fn(),
+  isTileTreasure: jest.fn()
+ }) )
 jest.mock('./monster/monster.js', () => ({ 
   drawMonsters: jest.fn(),
   moveMonsters: jest.fn(),
   isMonsterThere: jest.fn()
 }) )
-jest.mock('./main.js', () => ({ displayMonsterEnd: jest.fn() }) )
+jest.mock('./main.js', () => ({ 
+  displayMonsterEnd: jest.fn(),
+  displayTreasureEnd: jest.fn()
+ }) )
 jest.mock('./player/player.js', () => ({ 
   drawPlayer: jest.fn(), 
   updatePlayer: jest.fn(),
@@ -86,6 +91,14 @@ describe( "function stepAnimation(step)", function() {
     isMonsterThere.mockReturnValueOnce(true)
     stepAnimation(1)
     expect(displayMonsterEnd.mock.calls.length).toBe(1)
+    expect(drawPlayer.mock.calls.length).toBe(0)
+    expect(drawGridOffset.mock.calls.length).toBe(0)
+  })
+
+  it( "calls displayTreasureEnd, if isMonsterThere is true", function() {
+    isTileTreasure.mockReturnValueOnce(true)
+    stepAnimation(1)
+    expect(displayTreasureEnd.mock.calls.length).toBe(1)
     expect(drawPlayer.mock.calls.length).toBe(0)
     expect(drawGridOffset.mock.calls.length).toBe(0)
   })

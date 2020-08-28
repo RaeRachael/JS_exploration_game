@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey, includeMonsters, loadLevelsAsTiles } from './level';
+import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey, includeMonsters, loadLevelsAsTiles, isTileTreasure } from './level';
 import { getTileMap, selectTileMap, turnIntoTiles } from "../tiles/tile.js"
 import { addMonster } from '../monster/monster';
 
@@ -143,6 +143,20 @@ describe("function loadLevelAsTiles", function() {
   it("calls turnIntoTiles for the level data", function() {
     loadLevelsAsTiles()
     expect(turnIntoTiles.mock.calls.length).toEqual(1)
+  })
+
+})
+
+describe("function isTileTreasure", function() {
+
+  it("returns true if the tile is treasure", function() {
+    var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0, text: "gold" }, 
+    { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: "key" }, 
+    { blocksPlayer: true, display: "black", xPos: 50, yPos: 0 }]
+
+    getTileMap.mockReturnValue(tileMap)
+    expect(isTileTreasure({x: 0, y: 0})).toEqual(true)
+    expect(isTileTreasure({x: 1, y: 0})).toEqual(false)
   })
 
 })
