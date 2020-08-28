@@ -1,7 +1,7 @@
 import { getLevelNumber, setLevelNumber, findTile, removeKey } from "../level/level.js"
 import { isMonsterThere, clearMonsterList } from "../monster/monster.js"
 
-const PLAYER_MOVEMENT_SPEED = 5
+const PLAYER_MOVEMENT_SPEED = 8
 var playerLocation = { x: 1, y: 1 }
 var numberOfKeys = 0
 

@@ -32,7 +32,7 @@ function mainLoop(currentTime) {
 }
 
 function updateCount() {
-  if (count === 5 ) { 
+  if (count === 10 ) { 
     count = 0
     updateMonsters()
     draw(gameBox)

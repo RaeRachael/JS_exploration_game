@@ -92,8 +92,8 @@ describe( "function displayTreasureEnd", function() {
 
 describe( "function updateCount", function() {
 
-  it( "calls updateMonster and draw every five calls", function() {
-    for (var i = 0; i < 5; i++) {
+  it( "calls updateMonster and draw every ten calls", function() {
+    for (var i = 0; i < 10; i++) {
       updateCount()
     }
     expect(updateMonsters.mock.calls.length).toBe(1)
