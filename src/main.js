@@ -55,7 +55,13 @@ function displayMonsterEnd() {
   document.body.innerHTML = "EATEN BY A MONSTER"
 }
 
+function displayTreasureEnd() {
+  play = false
+  document.body.style.color = "white"
+  document.body.innerHTML = "YOU GOT THE TREASURE"
+}
+
 window.requestAnimationFrame(setUpLevels)
 window.requestAnimationFrame(mainLoop)
 
-export { mainLoop, setUpLevels, displayMonsterEnd, updateCount }
+export { mainLoop, setUpLevels, displayMonsterEnd, displayTreasureEnd, updateCount }
