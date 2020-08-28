@@ -1,7 +1,7 @@
 import { turnIntoTiles, getTileMap, selectTileMap } from '../tiles/tile.js'
 import { addMonster } from '../monster/monster.js'
 
-var levelNumber = 0
+var levelNumber = 1
 
 const level = [
 ["-----------",

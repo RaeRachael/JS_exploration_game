@@ -97,7 +97,7 @@ describe( "function updateCount", function() {
       updateCount()
     }
     expect(updateMonsters.mock.calls.length).toBe(1)
-    expect(draw.mock.calls.length).toBe(1)
+    expect(draw.mock.calls.length).toBe(1)  
   })
 
 })
