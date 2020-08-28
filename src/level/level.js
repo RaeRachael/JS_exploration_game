@@ -49,6 +49,10 @@ function includeMonsters() {
   }
 }
 
+function isTileTreasure() {
+
+}
+
 function findTile(location) {
   var correctTile
   getTileMap().forEach(function(tile) {
@@ -105,5 +109,6 @@ export { drawLevel,
    getLevelNumber, 
    loadLevelsAsTiles,  
    findTile, 
-   removeKey, 
+   removeKey,
+   isTileTreasure, 
    includeMonsters }
