@@ -69,6 +69,16 @@ describe( 'function createTile()', function() {
       })
     })
 
+    it( "creates a Floor plus Treasure when 't' entered", function() {
+      expect( createTile("t", 1, 1) ).toEqual({
+        xPos: 1,
+        yPos: 1,
+        blocksPlayer: false,
+        display: "silver",
+        text: "gold"
+      })
+    })
+
     it( "creates a Floor by defualt", function() {
       expect( createTile("wrefegrgsre", 1, 1) ).toEqual({
         xPos: 1,

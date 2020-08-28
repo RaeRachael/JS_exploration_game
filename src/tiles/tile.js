@@ -40,6 +40,8 @@ function createTile(string, x, y) {
       return new DoorLocked(x, y)
     case "k":
       return new Key(x, y)
+    case "t":
+      return new Treasure(x, y)
     default:
       return new Floor(x, y)
   }
@@ -102,6 +104,14 @@ class Key extends Floor {
   constructor(x, y) {
     super(x, y)
     this.text = "key"
+  }
+}
+
+class Treasure extends Floor {
+  constructor(x, y) {
+    super(x, y)
+    this.display = "silver"
+    this.text = "gold"
   }
 }
 
