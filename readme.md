@@ -27,6 +27,30 @@ To come once the graphics are more complete
 
 ## Comments About the Code Plan, Struggles and Aims
 
+### Wednesday 2nd September
+
+#### Coding Aims Completed
+* Added in tile and door to master
+* Created correct interaction between the number of keys and doors being opened
+* Key pickups and unlocking of doors are retained when moving between levels
+* Added in Treasure tile, and the treasure ending display.
+* Added in touch screeen compatability
+
+### Past code improvements 
+* Fixed the check of being on the same tile as a monster
+* Fixed the problem of the first stairs up, used to reload the first level not the second one
+* Changed variables related to player movement speed and how often monsters to make the game easier
+
+#### Challenges
+Maintaining a history of other levels after changing a level meant that all levels are now turned into tiles at the start of the game, (possible if multiple stages are used in the future the load can be of individual stages). This meant that all the monsters were being loaded at the start, so monster loading in had to be seperately done on each level change. This wasn't too difficult to code, but did mean that a few tests had to have slight changes to inputs and the code needs to be tidied up a little bit.
+
+Adding in touch screen interactions wasn't too bad, there is simply a check on the location of a touch and if it is in a region corresponding to a direction, the useKeyPress code is used the right key being used as the input.
+
+#### Future Aims
+* Look into the best way to test an event listener, and also simulate a touch event on a screen
+* Add in a start screen with variable difficulty.
+* Create a second stage (?)
+
 ### Wednesday 26th August
 
 #### Coding Aims Completed
