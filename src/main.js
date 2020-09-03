@@ -60,7 +60,6 @@ function updateCount() {
   if (count === 10 ) { 
     count = 0
     updateMonsters()
-    // draw(gameBox)
   }
   count++
 }
@@ -70,7 +69,6 @@ function updateStep() {
   if (step === 3) { 
     step = 0
     update()
-    // draw(gameBox)
   }
 }
 
