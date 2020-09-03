@@ -12,7 +12,7 @@
     "jest": "^26.1.0"
   },
   "scripts": {
-    "start": "http-server -p 4009",
+    "start": "http-server -p 4000",
     "test": "jest --coverage"
   },
   "type": "module",
