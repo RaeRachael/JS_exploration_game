@@ -1,4 +1,4 @@
-import { draw, update, stepAnimation, updateMonsters } from './game.js'
+import { draw, update, checkAndDrawPlayer, updateMonsters } from './game.js'
 import { keyPress, useKeyPress, isKeyPressed } from './input/input.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
 import { loadLevelsAsTiles } from './level/level.js'
@@ -51,7 +51,8 @@ function mainLoop(currentTime) {
     if (isKeyPressed() === true) {
       updateStep()
     }
-    stepAnimation(step)
+    draw(gameBox)
+    checkAndDrawPlayer(step)
    }
 }
 
@@ -59,7 +60,7 @@ function updateCount() {
   if (count === 10 ) { 
     count = 0
     updateMonsters()
-    draw(gameBox)
+    // draw(gameBox)
   }
   count++
 }
@@ -69,7 +70,7 @@ function updateStep() {
   if (step === 3) { 
     step = 0
     update()
-    draw(gameBox)
+    // draw(gameBox)
   }
 }
 

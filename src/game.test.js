@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { update, draw, stepAnimation, updateMonsters } from './game.js'
+import { update, draw, checkAndDrawPlayer, updateMonsters } from './game.js'
 import { drawLevel, drawGridOffset, isTileTreasure } from './level/level.js'
 import { drawPlayer, updatePlayer, checkBlocked, checkMonster } from './player/player.js'
 import { resetInput, getPlayerDirection, isKeyPressed } from './input/input.js'
@@ -44,18 +44,17 @@ describe( "function draw()", function() {
   document.body.innerHTML = '<div id="game-box" />';
   var gameBox = document.getElementById("game-box")
 
-  it( "calls drawPlayer, drawMonsters and drawLevel", function() {
+  it( "calls drawMonsters and drawLevel", function() {
     draw(gameBox)
     expect(drawLevel.mock.calls.length).toBe(1)
     expect(drawMonsters.mock.calls.length).toBe(1)
-    expect(drawPlayer.mock.calls.length).toBe(1)
   })
 
 })
 
 describe( "function update()", function() {
 
-  it( "calls drawPlayer and drawLevel", function() {
+  it( "calls updatePlayer and resetInput", function() {
     update()
     expect(updatePlayer.mock.calls.length).toBe(1)
     expect(resetInput.mock.calls.length).toBe(1)
@@ -63,9 +62,9 @@ describe( "function update()", function() {
 
 })
 
-describe( "function stepAnimation(step)", function() {
+describe( "function checkAndDrawPlayer(step)", function() {
   it( "calls drawPlayer, isMonsterThere and drawGridOffset, on step 0", function() {
-    stepAnimation(0)
+    checkAndDrawPlayer(0)
     expect(isMonsterThere.mock.calls.length).toBe(1)
     expect(drawPlayer.mock.calls.length).toBe(1)
     expect(drawGridOffset.mock.calls.length).toBe(1)
@@ -73,31 +72,32 @@ describe( "function stepAnimation(step)", function() {
 
   it( "calls drawPlayer, isMonsterThere and drawGridOffset, if unblocked", function() {
     checkBlocked.mockReturnValueOnce(false)
-    stepAnimation(1)
+    checkAndDrawPlayer(1)
     expect(isMonsterThere.mock.calls.length).toBe(1)
     expect(drawPlayer.mock.calls.length).toBe(1)
     expect(drawGridOffset.mock.calls.length).toBe(1)
   })
 
-  it( "calls drawPlayer, isMonsterThere and not drawGridOffset, if blocked", function() {
+  it( "calls isTileTreasure and isMonsterThere and not drawGridOffset or draw Player, if blocked", function() {
     checkBlocked.mockReturnValueOnce(true)
-    stepAnimation(1)
+    checkAndDrawPlayer(1)
     expect(isMonsterThere.mock.calls.length).toBe(1)
-    expect(drawPlayer.mock.calls.length).toBe(1)
+    expect(isTileTreasure.mock.calls.length).toBe(1)
+    expect(drawPlayer.mock.calls.length).toBe(0)
     expect(drawGridOffset.mock.calls.length).toBe(0)
   })
 
   it( "calls displayMonsterEnd, if isMonsterThere is true", function() {
     isMonsterThere.mockReturnValueOnce(true)
-    stepAnimation(1)
+    checkAndDrawPlayer(1)
     expect(displayMonsterEnd.mock.calls.length).toBe(1)
     expect(drawPlayer.mock.calls.length).toBe(0)
     expect(drawGridOffset.mock.calls.length).toBe(0)
   })
 
-  it( "calls displayTreasureEnd, if isMonsterThere is true", function() {
+  it( "calls displayTreasureEnd, if isTileTreasure is true", function() {
     isTileTreasure.mockReturnValueOnce(true)
-    stepAnimation(1)
+    checkAndDrawPlayer(1)
     expect(displayTreasureEnd.mock.calls.length).toBe(1)
     expect(drawPlayer.mock.calls.length).toBe(0)
     expect(drawGridOffset.mock.calls.length).toBe(0)
