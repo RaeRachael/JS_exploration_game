@@ -47,6 +47,15 @@ function createTile(string, x, y) {
   }
 }
 
+function openLockedDoor(tile) {
+  tile.blocksPlayer = false
+  tile.text = "open"
+}
+
+function removeKey(tile) {
+  tile.text = " "
+}
+
 class Tile {
   constructor(x, y) {
     this.xPos = x
@@ -115,4 +124,4 @@ class Treasure extends Floor {
   }
 }
 
-export { createTile, turnIntoTiles, selectTileMap, getTileMap }
+export { createTile, turnIntoTiles, selectTileMap, getTileMap, openLockedDoor, removeKey }

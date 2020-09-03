@@ -10,19 +10,23 @@ import { updatePlayer,
   setPlayerLocation,
   checkMonster,
   numberOfKeys } from './player';
-import { setLevelNumber, getLevelNumber, findTile, removeKey } from '../level/level.js'
+import { setLevelNumber, getLevelNumber, findTile } from '../level/level.js'
 import { isMonsterThere, clearMonsterList} from '../monster/monster.js'
+import { removeKey, openLockedDoor } from "../tiles/tile.js"
 
 jest.mock('../level/level.js', () => ({ 
   setLevelNumber: jest.fn(),
   getLevelNumber: jest.fn(),
   findTile: jest.fn(),
-  removeKey: jest.fn()
  }) )
  jest.mock('../monster/monster.js', () => ({
   isMonsterThere: jest.fn(),
   clearMonsterList: jest.fn()
  }) )
+ jest.mock("../tiles/tile.js", () => ({ 
+   removeKey: jest.fn(),
+  openLockedDoor: jest.fn()
+}) )
 
 describe( "function isTileBlocking()", function() {
 
@@ -262,7 +266,7 @@ describe( "interaction with tiles", function() {
     var direction = {x:1, y:0}
     updatePlayer(direction, true)
     expect(numberOfKeys).toEqual(numberOfKeysTest + 1)
-    expect(removeKey.mock.calls[0]).toEqual([{ x: 2, y: 1}])
+    expect(removeKey.mock.calls[0]).toEqual([{ xPos: 2, yPos: 1, blocksPlayer: false, display: "white", text: "key" }])
   })
 
   it ("doors can be unlocked by a key, reducing key number by one", function() {
@@ -286,7 +290,7 @@ describe( "interaction with tiles", function() {
     } )
     updatePlayer(direction, true)
     expect(numberOfKeys).toEqual(numberOfKeysTest)
-    expect(playerLocation).toEqual({ x: 3, y: 1})
+    expect(openLockedDoor.mock.calls.length).toEqual(1)
   })
 
 })

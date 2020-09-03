@@ -27,15 +27,15 @@ function checkAndDrawPlayer(step) {
   if ( checkBlocked(direction, getTileMap()) === false || step === 0 ) { drawPlayerWalk(direction, step) }
 }
 
-function drawPlayerWalk(direction, step) {
-  drawGridOffset(direction, step)
-  drawPlayer(direction, step)
-}
-
 function checkCurrentTile() {
   if ( isMonsterThere(playerLocation) ) { return displayMonsterEnd() }
   if ( isTileTreasure(playerLocation) ) { return displayTreasureEnd() }
   return "normal"
+}
+
+function drawPlayerWalk(direction, step) {
+  drawGridOffset(direction, step)
+  drawPlayer(direction, step)
 }
 
 export { draw, update, checkAndDrawPlayer, updateMonsters }
