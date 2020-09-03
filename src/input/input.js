@@ -1,8 +1,23 @@
 let playerDirection = { x: 0, y: 1}
 let pressed = false
 
-function keyPress() {
+function setupInput(){
+  document.body.addEventListener("touchstart", touchScreenPress, false);
   window.addEventListener('keydown', useKeyPress)
+}
+
+function touchScreenPress(evt) {
+  var touch = evt.changedTouches[0]; 
+  var relativeX = touch.pageX / window.screen.availWidth
+  var relativeY = touch.pageY / window.screen.availHeight
+  if ( relativeY < 0.15 && relativeX > 0.15 && relativeX < 0.85)
+    processKeyPress(0, -1)
+  if ( relativeX < 0.15 && relativeY > 0.15 && relativeY < 0.85)
+    processKeyPress(-1, 0)
+  if ( relativeY > 0.85 && relativeX > 0.15 && relativeX < 0.85)
+    processKeyPress(0, 1) 
+  if ( relativeX > 0.85 && relativeY > 0.15 && relativeY < 0.85)
+    processKeyPress(1, 0) 
 }
 
 function useKeyPress(e) {
@@ -37,4 +52,4 @@ function resetInput() {
   pressed = false
 }
 
-export { getPlayerDirection, keyPress, resetInput, useKeyPress, isKeyPressed}
+export { getPlayerDirection, setupInput, resetInput, useKeyPress, touchScreenPress, isKeyPressed}

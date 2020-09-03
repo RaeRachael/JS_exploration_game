@@ -1,7 +1,7 @@
 import { update, draw, checkAndDrawPlayer, updateMonsters } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
 import { mainLoop, setUpLevels, displayMonsterEnd, displayTreasureEnd, updateCount } from './main.js'
-import { keyPress, isKeyPressed } from './input/input.js'
+import { setupInput, isKeyPressed } from './input/input.js'
 import { findTile, loadLevelsAsTiles } from "./level/level.js"
 import { selectTileMap } from './tiles/tile.js'
 
@@ -12,7 +12,7 @@ jest.mock('./game.js', () => ({
   updateMonsters: jest.fn()
 }) )
 jest.mock('./input/input.js', () => ({ 
-  keyPress: jest.fn(),
+  setupInput: jest.fn(),
   isKeyPressed: jest.fn()
  }) )
 jest.mock('./level/level.js', () => ({ loadLevelsAsTiles: jest.fn() }) )
@@ -24,9 +24,8 @@ afterEach(() => {
 
 describe( "function mainLoop()", function() {
 
-  it( "calls only keyPress for first pass", function() {
+  it( "doesn't call function on the first pass", function() {
     mainLoop(0)
-    expect(keyPress.mock.calls.length).toBe(1)
     expect(update.mock.calls.length).toBe(0)
     expect(draw.mock.calls.length).toBe(0)
     expect(checkAndDrawPlayer.mock.calls.length).toBe(0)
@@ -35,7 +34,6 @@ describe( "function mainLoop()", function() {
   it( "calls checkAndDrawPlayer enough time has passed", function() {
     mainLoop(0)
     mainLoop(1001 /(PLAYER_MOVEMENT_SPEED * 3))
-    expect(keyPress.mock.calls.length).toBe(2)
     expect(checkAndDrawPlayer.mock.calls.length).toBe(1)
   })
 
@@ -45,7 +43,6 @@ describe( "function mainLoop()", function() {
     mainLoop(1001 /(PLAYER_MOVEMENT_SPEED * 3) + 10000)
     mainLoop(2* 1001 /(PLAYER_MOVEMENT_SPEED * 3) + 10000)
     mainLoop(3* 1001 /(PLAYER_MOVEMENT_SPEED * 3) + 10000)
-    expect(keyPress.mock.calls.length).toBe(4)
     expect(checkAndDrawPlayer.mock.calls.length).toBe(4)
     expect(update.mock.calls.length).toBe(1)
     expect(draw.mock.calls.length).toBe(4)
@@ -54,7 +51,6 @@ describe( "function mainLoop()", function() {
   it ( "returns 'the game is over if play is false, no function are called", function() {
     displayMonsterEnd()
     expect(mainLoop(0)).toEqual("the game is over")
-    expect(keyPress.mock.calls.length).toBe(0)
     expect(checkAndDrawPlayer.mock.calls.length).toBe(0)
     expect(update.mock.calls.length).toBe(0)
     expect(draw.mock.calls.length).toBe(0)

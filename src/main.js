@@ -1,29 +1,12 @@
 import { draw, update, checkAndDrawPlayer, updateMonsters } from './game.js'
-import { keyPress, useKeyPress, isKeyPressed } from './input/input.js'
+import { isKeyPressed, setupInput } from './input/input.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
 import { loadLevelsAsTiles } from './level/level.js'
 import { selectTileMap } from './tiles/tile.js'
 
 function startup() {
-  var body = document.body;
-  body.addEventListener("touchstart", handleStart, false);
-  // body.addEventListener("touchend", handleEnd, false);
-  // body.addEventListener("touchcancel", handleCancel, false);
-  // body.addEventListener("touchmove", handleMove, false);
-}
-
-function handleStart(evt) {
-  var touch = evt.changedTouches[0]; 
-  var relativeX = touch.pageX / window.screen.availWidth
-  var relativeY = touch.pageY / window.screen.availHeight
-  if ( relativeX < 0.15 && relativeY > 0.15 && relativeY < 0.85)
-    useKeyPress({key: "a"})
-  if ( relativeY < 0.15 && relativeX > 0.15 && relativeX < 0.85)
-    useKeyPress({key: "w"})
-  if ( relativeX > 0.85 && relativeY > 0.15 && relativeY < 0.85)
-    useKeyPress({key: "d"})
-  if ( relativeY > 0.85 && relativeX > 0.15 && relativeX < 0.85)
-    useKeyPress({key: "s"})
+  setupInput()
+  setUpLevels()
 }
 
 document.addEventListener("DOMContentLoaded", startup);
@@ -43,7 +26,7 @@ function setUpLevels() {
 function mainLoop(currentTime) {
   if (play === false) { return "the game is over" }
   const timePassedSinceStep = (currentTime - lastStepTime)/1000
-  keyPress()
+  // keyPress()
   window.requestAnimationFrame(mainLoop)
   if (timePassedSinceStep > (1 / (PLAYER_MOVEMENT_SPEED * 3))) {
     updateCount()
@@ -84,7 +67,7 @@ function displayTreasureEnd() {
   document.body.innerHTML = "YOU GOT THE TREASURE"
 }
 
-window.requestAnimationFrame(setUpLevels)
+// window.requestAnimationFrame(setUpLevels)
 window.requestAnimationFrame(mainLoop)
 
 export { mainLoop, setUpLevels, displayMonsterEnd, displayTreasureEnd, updateCount }
