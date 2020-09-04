@@ -20,13 +20,18 @@ npm start
 ```
 then visit ```localhost:3000``` in a browser
 
-
 ### Example Screenshot of the Game
 
 ![alt text](https://github.com/RaeRachael/JS_exploration_game/blob/master/screenshot.png)
 
 ## Domain Diagram
 ![alt text](https://github.com/RaeRachael/JS_exploration_game/blob/master/domainDiagram.png)
+
+## To run tests
+```shell
+npm install
+npm test
+```
 
 ## Comments About the Code Plan, Struggles and Aims
 
