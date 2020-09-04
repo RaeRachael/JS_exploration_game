@@ -95,9 +95,9 @@ describe("function setLevelNumber(newNumber)", function() {
     expect(selectTileMap.mock.calls.length).toEqual(1)
   })
 
-  it("sets changes current level toargument", function() {
-    setLevelNumber(10)
-    expect(getLevelNumber()).toEqual(10)
+  it("sets changes current level to argument", function() {
+    setLevelNumber(5)
+    expect(getLevelNumber()).toEqual(5)
   })
 
 })
@@ -120,8 +120,8 @@ describe("function findTile(location)", function() {
 describe("function includeMonster()", function() {
 
   it("calls add moster with the moster location on the current level", function() {
+    addMonster.mock.calls = []
     setLevelNumber(2)
-    includeMonsters()
     expect(addMonster.mock.calls[0]).toEqual([{x: 4, y: 2}])
   })
 

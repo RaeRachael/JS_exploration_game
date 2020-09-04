@@ -1,5 +1,3 @@
-import { includeMonsters } from '../level/level.js'
-
 var tileMap = []
 var tileLevel = []
 
@@ -18,7 +16,6 @@ function turnIntoTiles(levelData) {
 
 function selectTileMap(levelNumber) {
   tileLevel = tileMap[levelNumber - 1]
-  includeMonsters(tileLevel)
   return tileLevel
 }
 

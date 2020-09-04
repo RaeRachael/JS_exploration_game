@@ -9,6 +9,7 @@ const level = getLevelData()
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
   selectTileMap(levelNumber)
+  includeMonsters()
 }
 
 function getLevelNumber() {
@@ -85,6 +86,5 @@ export { drawLevel,
    getLevelNumber, 
    loadLevelsAsTiles,  
    findTile, 
-  //  removeKey,
    isTileTreasure, 
    includeMonsters }
