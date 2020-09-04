@@ -23,7 +23,7 @@ then visit ```localhost:8080``` in a browser
 
 ### Example Screenshot of the Game
 
-To come once the graphics are more complete
+![alt text](https://github.com/RaeRachael/JS_exploration_game/blob/master/screenshot.png)
 
 ## Domain Diagram
 ![alt text](https://github.com/RaeRachael/JS_exploration_game/blob/master/domainDiagram.png)
