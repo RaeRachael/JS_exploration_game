@@ -1,5 +1,6 @@
-import { getLevelNumber, setLevelNumber, findTile, removeKey } from "../level/level.js"
+import { getLevelNumber, setLevelNumber, findTile } from "../level/level.js"
 import { isMonsterThere, clearMonsterList } from "../monster/monster.js"
+import { openLockedDoor, removeKey} from "../tiles/tile.js"
 
 const PLAYER_MOVEMENT_SPEED = 8
 var playerLocation = { x: 1, y: 1 }
@@ -51,7 +52,7 @@ function checkForKey(location) {
   var tile = findTile(location)
   if( tile.text === "key" ) {
     numberOfKeys++
-    removeKey(location)
+    removeKey(tile)
   }
 }
 
@@ -71,16 +72,15 @@ function getPossibleLocation(playerDirection) {
 }
 
 function isTileBlocking(location) {
-  openLockedDoor(location)
+  checkForLockedDoor(location)
   return findTile(location).blocksPlayer
 }
 
-function openLockedDoor(location) {
+function checkForLockedDoor(location) {
   var tile = findTile(location)
   if( tile.text === "locked" && numberOfKeys > 0 ) { 
-    tile.blocksPlayer = false
-    tile.text = "open"
     numberOfKeys--
+    openLockedDoor(tile)
   }
 }
 

@@ -1,7 +1,4 @@
 import { turnIntoTiles, createTile, selectTileMap } from './tile.js';
-import { includeMonsters } from '../level/level.js';
-
-jest.mock('../level/level.js', () => ({ includeMonsters: jest.fn() }) )
 
 describe( 'function createTile()', function() {
 
@@ -152,9 +149,8 @@ describe( 'function turnIntoTiles()', function() {
     expect(turnIntoTiles(levelData)).toEqual([expectedOutputOneLevel, expectedOutputOneLevel])
   })
 
-  it( "selectTileMap(levelNumber), gets the tiles for that level and calls for monsters to be added", function() {
+  it( "selectTileMap(levelNumber), gets the tiles for that level", function() {
     expect(selectTileMap(1)).toEqual(expectedOutputOneLevel)
-    expect(includeMonsters.mock.calls.length).toEqual(1)
   })
 
 })

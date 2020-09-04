@@ -1,59 +1,15 @@
 import { turnIntoTiles, getTileMap, selectTileMap } from '../tiles/tile.js'
 import { addMonster } from '../monster/monster.js'
+import { getLevelData} from './levelData.js'
 
 var levelNumber = 1
 
-const level = [
-["-----------",
-"- -       -",
-"- - ----- -",
-"- - -     -",
-"- - - -----",
-"-   -    S-",
-"-----------"],
-["-----------",
-"-         -",
-"-   X     -",
-"-         -",
-"- --- -----",
-"-  S-    D-",
-"-----------"],
-["-----------",
-"-   |     -",
-"- - ----- -",
-"- - -     -",
-"- - - -----",
-"-k-D-    S-",
-"-----------"],
-["-----------",
-"-SX  -k  X-",
-"-    -    -",
-"-    -    -",
-"-    -    -",
-"-    |   D-",
-"-----------"],
-["----------",
-"-D       -",
-"-        -",
-"-        -",
-"-        -",
-"-      X -",
-"-     X  -",
-"-       S-",
-"----------"],
-["----------",
-"-      X -",
-"-       t-",
-"- -    X -",
-"- --------",
-"- -      -",
-"- --------",
-"-       D-",
-"----------"]]
+const level = getLevelData()
 
 function setLevelNumber(newNumber) {
   levelNumber = newNumber
   selectTileMap(levelNumber)
+  includeMonsters()
 }
 
 function getLevelNumber() {
@@ -87,11 +43,6 @@ function findTile(location) {
     }
   })
   return correctTile
-}
-
-function removeKey(location) {
-  var tile = findTile(location)
-  tile.text = " "
 }
 
 function drawLevel(gameBox, tileMap, playerLocation) {
@@ -135,6 +86,5 @@ export { drawLevel,
    getLevelNumber, 
    loadLevelsAsTiles,  
    findTile, 
-   removeKey,
    isTileTreasure, 
    includeMonsters }

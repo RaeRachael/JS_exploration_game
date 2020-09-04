@@ -19,15 +19,23 @@ function draw(gameBox) {
   gameBox.innerHTML = ""
   drawLevel(gameBox, getTileMap(), playerLocation)
   drawMonsters(gameBox, playerLocation)
-  stepAnimation(0)
 }
 
-function stepAnimation(step) {
+function checkAndDrawPlayer(step) {
   let direction = getPlayerDirection()
+  if ( checkCurrentTile() !== "normal" ) return
+  if ( checkBlocked(direction, getTileMap()) === false || step === 0 ) { drawPlayerWalk(direction, step) }
+}
+
+function checkCurrentTile() {
   if ( isMonsterThere(playerLocation) ) { return displayMonsterEnd() }
-  if ( isTileTreasure(playerLocation) ) { return displayTreasureEnd() } 
-  if ( checkBlocked(direction, getTileMap()) === false || step === 0 ) { drawGridOffset(direction, step) }
+  if ( isTileTreasure(playerLocation) ) { return displayTreasureEnd() }
+  return "normal"
+}
+
+function drawPlayerWalk(direction, step) {
+  drawGridOffset(direction, step)
   drawPlayer(direction, step)
 }
 
-export { draw, update, stepAnimation, updateMonsters }
+export { draw, update, checkAndDrawPlayer, updateMonsters }

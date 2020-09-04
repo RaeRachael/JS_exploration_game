@@ -1,5 +1,3 @@
-import { includeMonsters } from '../level/level.js'
-
 var tileMap = []
 var tileLevel = []
 
@@ -18,7 +16,6 @@ function turnIntoTiles(levelData) {
 
 function selectTileMap(levelNumber) {
   tileLevel = tileMap[levelNumber - 1]
-  includeMonsters(tileLevel)
   return tileLevel
 }
 
@@ -45,6 +42,15 @@ function createTile(string, x, y) {
     default:
       return new Floor(x, y)
   }
+}
+
+function openLockedDoor(tile) {
+  tile.blocksPlayer = false
+  tile.text = "open"
+}
+
+function removeKey(tile) {
+  tile.text = " "
 }
 
 class Tile {
@@ -115,4 +121,4 @@ class Treasure extends Floor {
   }
 }
 
-export { createTile, turnIntoTiles, selectTileMap, getTileMap }
+export { createTile, turnIntoTiles, selectTileMap, getTileMap, openLockedDoor, removeKey }
