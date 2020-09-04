@@ -44,11 +44,6 @@ function findTile(location) {
   return correctTile
 }
 
-function removeKey(location) {
-  var tile = findTile(location)
-  tile.text = " "
-}
-
 function drawLevel(gameBox, tileMap, playerLocation) {
   tileMap.forEach(tile => {
     const offsetTileY = tile.yPos - playerLocation.y
@@ -90,6 +85,6 @@ export { drawLevel,
    getLevelNumber, 
    loadLevelsAsTiles,  
    findTile, 
-   removeKey,
+  //  removeKey,
    isTileTreasure, 
    includeMonsters }

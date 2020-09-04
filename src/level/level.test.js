@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, removeKey, includeMonsters, loadLevelsAsTiles, isTileTreasure } from './level';
+import { drawLevel, drawGridOffset, setLevelNumber, getLevelNumber, findTile, includeMonsters, loadLevelsAsTiles, isTileTreasure } from './level';
 import { getTileMap, selectTileMap, turnIntoTiles } from "../tiles/tile.js"
 import { addMonster } from '../monster/monster';
 
@@ -115,17 +115,6 @@ describe("function findTile(location)", function() {
     expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0 } )
   })
 
-})
-
-describe("function removeKey(location)", function() {
-  var tileMap = [{ blocksPlayer: true, display: "black", xPos: 0, yPos: 0 }, 
-  { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: "key" }, 
-  { blocksPlayer: true, display: "black", xPos: 50, yPos: 0 }]
-
-  getTileMap.mockReturnValue(tileMap)
-
-  removeKey( {x: 1, y: 0})
-  expect(findTile({x: 1, y: 0})).toEqual( { blocksPlayer: false, display: "white", xPos: 1, yPos: 0, text: " " } )
 })
 
 describe("function includeMonster()", function() {
