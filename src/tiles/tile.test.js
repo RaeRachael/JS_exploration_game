@@ -1,4 +1,5 @@
-import { turnIntoTiles, createTile, selectTileMap } from './tile.js';
+import { turnIntoTiles, createTile, selectTileMap, removeKey, openLockedDoor } from './tile.js';
+import { findTile } from '../level/level.js';
 
 describe( 'function createTile()', function() {
 
@@ -151,6 +152,20 @@ describe( 'function turnIntoTiles()', function() {
 
   it( "selectTileMap(levelNumber), gets the tiles for that level", function() {
     expect(selectTileMap(1)).toEqual(expectedOutputOneLevel)
+  })
+
+})
+
+describe("editing of tile data", function() {
+
+  it("removeKey, sets the text as ' ' ", function() {
+    var input = { xPos: 1, yPos: 1, blocksPlayer: false, display: "white", text: "key" }
+    expect(removeKey(input)).toEqual({ xPos: 1, yPos: 1, blocksPlayer: false, display: "white", text: " " })
+  })
+
+  it("openLockedDoor, sets the text as 'open' and doesn'tblock ", function() {
+    var input = { xPos: 1, yPos: 1, blocksPlayer: true, display: "brown", text: "locked" }
+    expect(openLockedDoor(input)).toEqual({ xPos: 1, yPos: 1, blocksPlayer: false, display: "brown", text: "open" })
   })
 
 })

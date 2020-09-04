@@ -47,10 +47,12 @@ function createTile(string, x, y) {
 function openLockedDoor(tile) {
   tile.blocksPlayer = false
   tile.text = "open"
+  return tile
 }
 
 function removeKey(tile) {
   tile.text = " "
+  return tile
 }
 
 class Tile {

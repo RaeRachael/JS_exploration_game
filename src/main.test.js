@@ -1,6 +1,6 @@
 import { update, draw, checkAndDrawPlayer, updateMonsters } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, setUpLevels, displayMonsterEnd, displayTreasureEnd, updateCount } from './main.js'
+import { mainLoop, startup, displayMonsterEnd, displayTreasureEnd, updateCount } from './main.js'
 import { setupInput, isKeyPressed } from './input/input.js'
 import { findTile, loadLevelsAsTiles } from "./level/level.js"
 import { selectTileMap } from './tiles/tile.js'
@@ -58,10 +58,11 @@ describe( "function mainLoop()", function() {
 
 })
 
-describe( "function setUpLevels()", function() {
+describe( "function startup()", function() {
 
-  it( "calls loadLevelsAsTiles and selectTileMap", function() {
-    setUpLevels()
+  it( "calls setupInput, loadLevelsAsTiles and selectTileMap", function() {
+    startup()
+    expect(setupInput.mock.calls.length).toBe(1)
     expect(loadLevelsAsTiles.mock.calls.length).toBe(1)
     expect(selectTileMap.mock.calls[0]).toEqual([1])
   })
