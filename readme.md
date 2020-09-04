@@ -16,9 +16,9 @@ Move yourself with WASD keys, currently there is only one level and no indicatio
 #### Locally
 ```shell
 npm install
-http-server
+npm start
 ```
-then visit ```localhost:8080``` in a browser
+then visit ```localhost:3000``` in a browser
 
 
 ### Example Screenshot of the Game
