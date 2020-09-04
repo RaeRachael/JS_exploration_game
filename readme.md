@@ -25,6 +25,9 @@ then visit ```localhost:8080``` in a browser
 
 To come once the graphics are more complete
 
+## Domain Diagram
+![alt text](https://github.com/RaeRachael/JS_exploration_game/blob/master/domainDiagram.png)
+
 ## Comments About the Code Plan, Struggles and Aims
 
 ### Wednesday 2nd September
