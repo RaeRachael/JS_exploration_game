@@ -2,11 +2,11 @@
 
 ### [Link to the Ruby, terminal version](https://github.com/RaeRachael/exploration_game)
 
-The ruby version of this game currently has more features, but is only able to be played in the terminal ans suffers from limited graphics associated with that display. But as this is an extenstion of the same project details found in the readme there will be applicable here. 
+The ruby version of this game has similar features, but is only able to be played in the terminal and suffers from limited graphics associated with that display. But as this is an extenstion of the same project details found in the readme there will be applicable here. 
 
 ### How the Game Works
 
-Move yourself with WASD keys, currently there is only one level and no indication of which tile the user should aim to get to, will be coming after the display of the game is improved and tested more fully.
+Move yourself with WASD keys, or touching the edges of a touchscreen. The target is to collect the gold tresure on the highest level of the game, with stairs to navigate up and down the level. If you end up on the same space as a monster you will get eaten. 
 
 ### To Play
 
