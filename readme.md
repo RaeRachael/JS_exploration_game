@@ -35,6 +35,21 @@ npm test
 
 ## Comments About the Code Plan, Struggles and Aims
 
+### Friday 11h September
+
+#### Coding Aims Completed
+* Restructuring the code to be more clear, with functions sitting in appropriate files.
+* Making unit tests fit the change in the structure
+* Added in explaination to the code structure to the readme
+
+#### Challenges
+Reorganising the code structure took a bit of time, but now it is better laid out and with the domain diagram, I think the code now makes a lot more sense. Future features should be easier to fit into the code now, am particularly happy to have seperated the text that is needed to generate the levels out into its own file.
+
+#### Future Aims
+* Look into the best way to test an event listener, and also simulate a touch event on a screen
+* Add in a start screen with variable difficulty.
+* Create a second stage (?)
+
 ### Wednesday 2nd September
 
 #### Coding Aims Completed
