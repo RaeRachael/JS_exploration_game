@@ -21,16 +21,16 @@ function touchScreenPress(evt) {
 }
 
 function useKeyPress(e) {
-  if (e.key === "w") {
+  if (e.key === "w" || e.key === "ArrowUp") {
     processKeyPress(0, -1)
   }
-  if (e.key === "a") {
+  if (e.key === "a" || e.key === "ArrowLeft") {
     processKeyPress(-1, 0)
   }
-  if (e.key === "s") {
+  if (e.key === "s" || e.key === "ArrowDown") {
     processKeyPress(0, 1) 
   }
-  if (e.key === "d") {
+  if (e.key === "d" || e.key === "ArrowRight") {
     processKeyPress(1, 0) 
   }
 }
