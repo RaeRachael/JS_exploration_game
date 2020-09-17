@@ -1,11 +1,12 @@
 import { step } from "../main.js";
 
 let playerDirection = { x: 0, y: 1}
-let keyPressedData = { key: "", time: 0 }
+let keyPressed = ""
 let pressed = false
 
 function setupInput(){
-  document.body.addEventListener("touchstart", touchScreenPress, false);
+  document.body.addEventListener("touchstart", touchScreenPress, false)
+  document.body.addEventListener("touchend", touchScreenPressEnd, false)
   window.addEventListener('keydown', useKeyPress)
   window.addEventListener('keyup', keyUp)
 }
@@ -15,19 +16,34 @@ function touchScreenPress(evt) {
   var relativeX = touch.pageX / window.screen.availWidth
   var relativeY = touch.pageY / window.screen.availHeight
   if ( relativeY < 0.15 && relativeX > 0.15 && relativeX < 0.85)
-    processKeyPress(0, -1)
+    useKeyPress({ key: "w" })
   if ( relativeX < 0.15 && relativeY > 0.15 && relativeY < 0.85)
-    processKeyPress(-1, 0)
+    useKeyPress({ key: "a" })
   if ( relativeY > 0.85 && relativeX > 0.15 && relativeX < 0.85)
-    processKeyPress(0, 1) 
+    useKeyPress({ key: "s" })
   if ( relativeX > 0.85 && relativeY > 0.15 && relativeY < 0.85)
-    processKeyPress(1, 0) 
+    useKeyPress({ key: "d" }) 
+}
+
+function touchScreenPressEnd(evt){
+  var touch = evt.changedTouches[0]; 
+  var relativeX = touch.pageX / window.screen.availWidth
+  var relativeY = touch.pageY / window.screen.availHeight
+  if ( relativeY < 0.15 && relativeX > 0.15 && relativeX < 0.85)
+    keyUp({ key: "w" })
+  if ( relativeX < 0.15 && relativeY > 0.15 && relativeY < 0.85)
+    keyUp({ key: "a" })
+  if ( relativeY > 0.85 && relativeX > 0.15 && relativeX < 0.85)
+    keyUp({ key: "s" })
+  if ( relativeX > 0.85 && relativeY > 0.15 && relativeY < 0.85)
+    keyUp({ key: "d" })
 }
 
 function useKeyPress(e) {
-  if ( pressed === false || (keyPressedData.key !== e.key && step === 0 ) ) {
-    if ( keyPressedData.key !== e.key ){
-      keyPressedData = { key: e.key, time: e.timeStamp } 
+  console.log(e, "key")
+  if ( pressed === false || (keyPressed !== e.key && step === 0) ) {
+    if ( keyPressed !== e.key ){
+      keyPressed =  e.key
     }
     if (e.key === "w" || e.key === "ArrowUp") {
       processKeyPress(0, -1)
@@ -58,13 +74,13 @@ function processKeyPress(x, y) {
 }
 
 function keyUp(e) {
-  if (keyPressedData.key === e.key) {
-    keyPressedData = { key: "", time: e.timeStamp }
+  if (keyPressed === e.key) {
+    keyPressed = ""
   }
 }
 
 function resetInput() {
-  if (keyPressedData.key === "")
+  if (keyPressed === "")
     pressed = false
 }
 
