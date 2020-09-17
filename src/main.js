@@ -68,4 +68,4 @@ function displayTreasureEnd() {
 
 window.requestAnimationFrame(mainLoop)
 
-export { mainLoop, displayMonsterEnd, displayTreasureEnd, updateCount, startup }
+export { mainLoop, displayMonsterEnd, displayTreasureEnd, updateCount, startup, step }

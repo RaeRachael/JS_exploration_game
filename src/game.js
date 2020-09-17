@@ -24,7 +24,7 @@ function draw(gameBox) {
 function checkAndDrawPlayer(step) {
   let direction = getPlayerDirection()
   if ( checkCurrentTile() !== "normal" ) return
-  if ( checkBlocked(direction, getTileMap()) === false || step === 0 ) { drawPlayerWalk(direction, step) }
+  drawPlayerWalk(direction, step, checkBlocked(direction, getTileMap()))
 }
 
 function checkCurrentTile() {
@@ -33,8 +33,8 @@ function checkCurrentTile() {
   return "normal"
 }
 
-function drawPlayerWalk(direction, step) {
-  drawGridOffset(direction, step)
+function drawPlayerWalk(direction, step, blocked) {
+  blocked ? drawGridOffset("blocked") : drawGridOffset(direction, step)
   drawPlayer(direction, step)
 }
 

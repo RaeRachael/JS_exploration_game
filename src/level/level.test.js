@@ -79,10 +79,18 @@ describe( "function drawGridOffset()", function() {
     })
     it( "class is 'right-2'", function() {
       var direction = { x: 1, y: 0 }
+      var step = 0
+      drawGridOffset(direction, step)
+
+      expect(gameBoxOffset.classList[0]).toEqual( "right-0")
+    })
+
+    it( "class is 'blocked', if direction = 'blocked'", function() {
+      var direction = "blocked"
       var step = 2
       drawGridOffset(direction, step)
 
-      expect(gameBoxOffset.classList[0]).toEqual( "right-2")
+      expect(gameBoxOffset.classList[0]).toEqual( "blocked")
     })
 
   })
