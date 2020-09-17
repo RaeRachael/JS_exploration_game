@@ -1,9 +1,13 @@
+import { step } from "../main.js";
+
 let playerDirection = { x: 0, y: 1}
+let keyPressedData = { key: "", time: 0 }
 let pressed = false
 
 function setupInput(){
   document.body.addEventListener("touchstart", touchScreenPress, false);
   window.addEventListener('keydown', useKeyPress)
+  window.addEventListener('keyup', keyUp)
 }
 
 function touchScreenPress(evt) {
@@ -21,17 +25,22 @@ function touchScreenPress(evt) {
 }
 
 function useKeyPress(e) {
-  if (e.key === "w" || e.key === "ArrowUp") {
-    processKeyPress(0, -1)
-  }
-  if (e.key === "a" || e.key === "ArrowLeft") {
-    processKeyPress(-1, 0)
-  }
-  if (e.key === "s" || e.key === "ArrowDown") {
-    processKeyPress(0, 1) 
-  }
-  if (e.key === "d" || e.key === "ArrowRight") {
-    processKeyPress(1, 0) 
+  if ( pressed === false || (keyPressedData.key !== e.key && step === 0 ) ) {
+    if ( keyPressedData.key !== e.key ){
+      keyPressedData = { key: e.key, time: e.timeStamp } 
+    }
+    if (e.key === "w" || e.key === "ArrowUp") {
+      processKeyPress(0, -1)
+    }
+    if (e.key === "a" || e.key === "ArrowLeft") {
+      processKeyPress(-1, 0)
+    }
+    if (e.key === "s" || e.key === "ArrowDown") {
+      processKeyPress(0, 1) 
+    }
+    if (e.key === "d" || e.key === "ArrowRight") {
+      processKeyPress(1, 0) 
+    }
   }
 }
 
@@ -44,12 +53,19 @@ function isKeyPressed() {
 }
 
 function processKeyPress(x, y) {
-  if ( pressed === false ) { playerDirection = { x: x, y: y } }
+  playerDirection = { x: x, y: y } 
   pressed = true
 }
 
-function resetInput() {
-  pressed = false
+function keyUp(e) {
+  if (keyPressedData.key === e.key) {
+    keyPressedData = { key: "", time: e.timeStamp }
+  }
 }
 
-export { getPlayerDirection, setupInput, resetInput, useKeyPress, touchScreenPress, isKeyPressed}
+function resetInput() {
+  if (keyPressedData.key === "")
+    pressed = false
+}
+
+export { getPlayerDirection, setupInput, resetInput, useKeyPress, touchScreenPress, isKeyPressed, keyUp}
