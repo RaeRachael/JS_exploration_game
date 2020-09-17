@@ -35,6 +35,21 @@ npm test
 
 ## Comments About the Code Plan, Struggles and Aims
 
+### Thursday 17h September
+
+#### Coding Aims Completed
+* Stopping movement 'stutter' on held key presses
+* Supported held touch touch events via the key press code
+* Added in animation to show attempts to walk into blocking tiles
+
+#### Challenges
+The 'stutter' of movement on a held key press is due to the in build delay of a keydown event after the first key press, (this is what allows you to only enter one key press then lots after a little while while typing). So to manage the calling of the code a keyup event needed to be added to the code to realise that the key was still down and to treat the walking action as desired. Also in doning this fix adding in a similiar touchend event allowed held touches on a screeen to be used to navigate as well
+
+#### Future Aims
+* Look into the best way to test an event listener, and also simulate a touch event on a screen
+* Add in a start screen with variable difficulty.
+* Create a second stage (?)
+
 ### Friday 11h September
 
 #### Coding Aims Completed
