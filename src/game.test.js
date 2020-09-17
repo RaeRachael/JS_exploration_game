@@ -63,28 +63,13 @@ describe( "function update()", function() {
 })
 
 describe( "function checkAndDrawPlayer(step)", function() {
-  it( "calls drawPlayer, isMonsterThere and drawGridOffset, on step 0", function() {
-    checkAndDrawPlayer(0)
-    expect(isMonsterThere.mock.calls.length).toBe(1)
-    expect(drawPlayer.mock.calls.length).toBe(1)
-    expect(drawGridOffset.mock.calls.length).toBe(1)
-  })
 
-  it( "calls drawPlayer, isMonsterThere and drawGridOffset, if unblocked", function() {
+  it( "calls drawPlayer, isMonsterThere and drawGridOffset", function() {
     checkBlocked.mockReturnValueOnce(false)
     checkAndDrawPlayer(1)
     expect(isMonsterThere.mock.calls.length).toBe(1)
     expect(drawPlayer.mock.calls.length).toBe(1)
     expect(drawGridOffset.mock.calls.length).toBe(1)
-  })
-
-  it( "calls isTileTreasure and isMonsterThere and not drawGridOffset or draw Player, if blocked", function() {
-    checkBlocked.mockReturnValueOnce(true)
-    checkAndDrawPlayer(1)
-    expect(isMonsterThere.mock.calls.length).toBe(1)
-    expect(isTileTreasure.mock.calls.length).toBe(1)
-    expect(drawPlayer.mock.calls.length).toBe(0)
-    expect(drawGridOffset.mock.calls.length).toBe(0)
   })
 
   it( "calls displayMonsterEnd, if isMonsterThere is true", function() {

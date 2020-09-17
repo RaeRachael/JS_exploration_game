@@ -1,6 +1,6 @@
 import { getLevelNumber, setLevelNumber, findTile } from "../level/level.js"
 import { isMonsterThere, clearMonsterList } from "../monster/monster.js"
-import { openLockedDoor, removeKey} from "../tiles/tile.js"
+import { getTileMap, openLockedDoor, removeKey} from "../tiles/tile.js"
 
 const PLAYER_MOVEMENT_SPEED = 8
 var playerLocation = { x: 1, y: 1 }

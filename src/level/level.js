@@ -66,6 +66,9 @@ function displayOneTile(gameBox, tile, position) {
 
 function drawGridOffset(direction, step) {
   let levelShift = document.getElementById('gamebox-offset')
+  if (direction === "blocked") {
+    levelShift.className = 'blocked'
+  }
   if (direction.x === -1 && direction.y === 0) {
     levelShift.className = `left-${step}`
   }
