@@ -8,6 +8,8 @@ let lastStepTime = 0
 let step = 0
 let count = 0
 let play = true
+let pause = false
+let pauseTime = 0
 const gameBox = document.getElementById('game-box')
 
 document.addEventListener("DOMContentLoaded", startup);
@@ -27,15 +29,24 @@ function mainLoop(currentTime) {
   if (play === false) { return "the game is over" }
   const timePassedSinceStep = (currentTime - lastStepTime)/1000
   window.requestAnimationFrame(mainLoop)
-  if (timePassedSinceStep > (1 / (PLAYER_MOVEMENT_SPEED * 3))) {
-    updateCount()
-    lastStepTime = currentTime
-    if (isKeyPressed()) {
-      updateStep()
+  if (pause) {
+    gameBox.innerHTML = "paused"
+    if (pauseTime === 0) { pauseTime = currentTime }
+    if (currentTime - pauseTime > 500) { 
+      pause = false
+      pauseTime = 0
     }
-    draw(gameBox)
-    checkAndDrawPlayer(step)
-   }
+  } else {
+    if (timePassedSinceStep > (1 / (PLAYER_MOVEMENT_SPEED * 3))) {
+      updateCount()
+      lastStepTime = currentTime
+      if (isKeyPressed()) {
+        updateStep()
+      }
+      draw(gameBox)
+      checkAndDrawPlayer(step)
+    }
+  }
 }
 
 function updateCount() {
@@ -54,6 +65,10 @@ function updateStep() {
   }
 }
 
+function displayTransition() {
+  pause = true
+}
+
 function displayMonsterEnd() {
   play = false
   document.body.style.color = "white"
@@ -68,4 +83,4 @@ function displayTreasureEnd() {
 
 window.requestAnimationFrame(mainLoop)
 
-export { mainLoop, displayMonsterEnd, displayTreasureEnd, updateCount, startup, step }
+export { mainLoop, displayMonsterEnd, displayTreasureEnd, updateCount, startup, step, displayTransition }
