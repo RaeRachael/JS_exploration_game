@@ -40,7 +40,6 @@ function touchScreenPressEnd(evt){
 }
 
 function useKeyPress(e) {
-  console.log(e, "key")
   if ( pressed === false || (keyPressed !== e.key && step === 0) ) {
     if ( keyPressed !== e.key ){
       keyPressed =  e.key
