@@ -1,6 +1,7 @@
 import { turnIntoTiles, getTileMap, selectTileMap } from '../tiles/tile.js'
 import { addMonster } from '../monster/monster.js'
 import { getLevelData} from './levelData.js'
+import { displayTransition } from '../main.js'
 
 var levelNumber = 1
 
@@ -10,6 +11,7 @@ function setLevelNumber(newNumber) {
   levelNumber = newNumber
   selectTileMap(levelNumber)
   includeMonsters()
+  displayTransition()
 }
 
 function getLevelNumber() {
