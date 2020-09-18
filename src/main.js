@@ -30,7 +30,7 @@ function mainLoop(currentTime) {
   if (timePassedSinceStep > (1 / (PLAYER_MOVEMENT_SPEED * 3))) {
     updateCount()
     lastStepTime = currentTime
-    if (isKeyPressed() === true) {
+    if (isKeyPressed()) {
       updateStep()
     }
     draw(gameBox)
