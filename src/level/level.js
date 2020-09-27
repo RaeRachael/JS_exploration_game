@@ -3,7 +3,7 @@ import { addMonster } from '../monster/monster.js'
 import { getLevelData} from './levelData.js'
 import { displayTransition } from '../main.js'
 
-var levelNumber = 1
+let levelNumber = 1
 
 const level = getLevelData()
 
@@ -23,7 +23,7 @@ function loadLevelsAsTiles() {
 }
 
 function includeMonsters() {
-  var currentLevel = level[levelNumber-1]
+  let currentLevel = level[levelNumber-1]
   for (var y = 0; y < currentLevel.length; y ++) {
     for ( var x = 0; x <currentLevel[0].length; x ++) {
       if (currentLevel[y][x] === "X" )
@@ -33,12 +33,12 @@ function includeMonsters() {
 }
 
 function isTileTreasure(location) {
-  var tile = findTile(location)
+  let tile = findTile(location)
   return tile.text === "gold"
 }
 
 function findTile(location) {
-  var correctTile
+  let correctTile
   getTileMap().forEach(function(tile) {
     if (tile.xPos === location.x && tile.yPos === location.y) {
       correctTile = tile

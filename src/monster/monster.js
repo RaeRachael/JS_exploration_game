@@ -1,6 +1,6 @@
 import { findTile } from "../level/level.js"
 
-var monsterList = []
+let monsterList = []
 
 function getMonsters() {
   return monsterList
@@ -50,18 +50,18 @@ function isBlockingToMonster(location) {
 }
 
 function randomDirection() {
-  var moves = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }, { x: 0, y: -1 }]
+  const moves = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }, { x: 0, y: -1 }]
   return moves[Math.floor(Math.random() * 6)]
 }
 
 function isMonsterThere(location) {
-  var boolean = false
+  let isMonster = false
   monsterList.forEach(monster => { 
     if ( monster.location.x === location.x && monster.location.y === location.y ) {
-      boolean = true
+      isMonster = true
     }
   })
-  return boolean
+  return isMonster
 }
 
 export { getMonsters, addMonster, clearMonsterList, drawMonsters, isMonsterThere, moveMonsters }

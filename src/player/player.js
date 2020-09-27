@@ -3,8 +3,8 @@ import { isMonsterThere, clearMonsterList } from "../monster/monster.js"
 import { openLockedDoor, removeKey} from "../tiles/tile.js"
 
 const PLAYER_MOVEMENT_SPEED = 8
-var playerLocation = { x: 1, y: 1 }
-var numberOfKeys = 0
+let playerLocation = { x: 1, y: 1 }
+let numberOfKeys = 0
 
 function setPlayerLocation(location) {
     playerLocation = location
@@ -39,8 +39,8 @@ function updatePlayer(playerDirection, pressed) {
 }
 
 function checkForStairs(location) {
-  var tile = findTile(location)
-  var levelNumber = getLevelNumber()
+  let tile = findTile(location)
+  let levelNumber = getLevelNumber()
   if( tile.levelChange ) {
     clearMonsterList()
     levelNumber += tile.levelChange
@@ -49,7 +49,7 @@ function checkForStairs(location) {
 }
 
 function checkForKey(location) {
-  var tile = findTile(location)
+  let tile = findTile(location)
   if( tile.text === "key" ) {
     numberOfKeys++
     removeKey(tile)
@@ -77,7 +77,7 @@ function isTileBlocking(location) {
 }
 
 function checkForLockedDoor(location) {
-  var tile = findTile(location)
+  let tile = findTile(location)
   if( tile.text === "locked" && numberOfKeys > 0 ) { 
     numberOfKeys--
     openLockedDoor(tile)

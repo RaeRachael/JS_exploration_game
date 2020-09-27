@@ -12,9 +12,9 @@ function setupInput(){
 }
 
 function touchScreenPress(evt) {
-  var touch = evt.changedTouches[0]; 
-  var relativeX = touch.pageX / window.screen.availWidth
-  var relativeY = touch.pageY / window.screen.availHeight
+  let touch = evt.changedTouches[0]; 
+  let relativeX = touch.pageX / window.screen.availWidth
+  let relativeY = touch.pageY / window.screen.availHeight
   if ( relativeY < 0.15 && relativeX > 0.15 && relativeX < 0.85)
     useKeyPress({ key: "w" })
   if ( relativeX < 0.15 && relativeY > 0.15 && relativeY < 0.85)
@@ -26,9 +26,9 @@ function touchScreenPress(evt) {
 }
 
 function touchScreenPressEnd(evt){
-  var touch = evt.changedTouches[0]; 
-  var relativeX = touch.pageX / window.screen.availWidth
-  var relativeY = touch.pageY / window.screen.availHeight
+  let touch = evt.changedTouches[0]; 
+  let relativeX = touch.pageX / window.screen.availWidth
+  let relativeY = touch.pageY / window.screen.availHeight
   if ( relativeY < 0.15 && relativeX > 0.15 && relativeX < 0.85)
     keyUp({ key: "w" })
   if ( relativeX < 0.15 && relativeY > 0.15 && relativeY < 0.85)
