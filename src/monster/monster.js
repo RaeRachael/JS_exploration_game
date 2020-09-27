@@ -38,8 +38,8 @@ function moveMonsters() {
 }
 
 function move(monster) {
-  var direction = randomDirection()
-  var possibleLocation = { x: monster.location.x + direction.x, y: monster.location.y + direction.y }
+  let direction = randomDirection()
+  let possibleLocation = { x: monster.location.x + direction.x, y: monster.location.y + direction.y }
   if (isBlockingToMonster(possibleLocation) === false && isMonsterThere(possibleLocation) === false) {
     monster.location = possibleLocation 
   }
