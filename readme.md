@@ -2,7 +2,9 @@
 
 ### [Link to the Ruby, terminal version](https://github.com/RaeRachael/exploration_game)
 
-The ruby version of this game has similar features, but is only able to be played in the terminal and suffers from limited graphics associated with that display. But as this is an extenstion of the same project details found in the readme there will be applicable here. 
+The ruby version of this game has similar features, but is only able to be played in the terminal and suffers from limited graphics associated with that display. But as this is an extenstion of the same project details found in the readme there will be applicable here.
+
+Pausing work on this game for the time being.
 
 ### How the Game Works
 
@@ -35,7 +37,15 @@ npm test
 
 ## Comments About the Code Plan, Struggles and Aims
 
-### Thursday 17h September
+### Monday 28th September
+
+#### Coding Aims Completed
+* Tidying up the code by;
+  * Consistent declaration of variable style
+  * Renaming functions to make it clearer
+  * slight restructure of increaseCount function
+
+### Thursday 17th September
 
 #### Coding Aims Completed
 * Stopping movement 'stutter' on held key presses
@@ -50,7 +60,7 @@ The 'stutter' of movement on a held key press is due to the in build delay of a 
 * Add in a start screen with variable difficulty.
 * Create a second stage (?)
 
-### Friday 11h September
+### Friday 11th September
 
 #### Coding Aims Completed
 * Restructuring the code to be more clear, with functions sitting in appropriate files.
