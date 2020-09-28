@@ -50,11 +50,11 @@ function mainLoop(currentTime) {
 }
 
 function updateCount() {
-  if (count === 10 ) { 
+  count++
+  if (count === 11 ) { 
     count = 0
     updateMonsters()
   }
-  count++
 }
 
 function updateStep() {
