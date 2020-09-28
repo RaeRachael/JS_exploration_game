@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 
-import { update, draw, checkAndDrawPlayer, updateMonsters } from './game.js'
+import { updatePlayer, draw, checkAndDrawPlayer, updateMonsters } from './game.js'
 import { drawLevel, drawGridOffset, isTileTreasure } from './level/level.js'
-import { drawPlayer, updatePlayer, checkBlocked, checkMonster } from './player/player.js'
+import { drawPlayer, movePlayer, checkBlocked, checkMonster } from './player/player.js'
 import { resetInput, getPlayerDirection, isKeyPressed } from './input/input.js'
 import { drawMonsters, moveMonsters, isMonsterThere } from './monster/monster.js'
 import { displayMonsterEnd, displayTreasureEnd } from './main.js'
@@ -25,7 +25,7 @@ jest.mock('./main.js', () => ({
  }) )
 jest.mock('./player/player.js', () => ({ 
   drawPlayer: jest.fn(), 
-  updatePlayer: jest.fn(),
+  movePlayer: jest.fn(),
   checkBlocked: jest.fn(),
   checkMonster: jest.fn()
 }) )
@@ -52,11 +52,11 @@ describe( "function draw()", function() {
 
 })
 
-describe( "function update()", function() {
+describe( "function updatePlayer()", function() {
 
-  it( "calls updatePlayer and resetInput", function() {
-    update()
-    expect(updatePlayer.mock.calls.length).toBe(1)
+  it( "calls movePlayer and resetInput", function() {
+    updatePlayer()
+    expect(movePlayer.mock.calls.length).toBe(1)
     expect(resetInput.mock.calls.length).toBe(1)
   })
 

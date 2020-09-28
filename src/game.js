@@ -1,13 +1,12 @@
 import { getPlayerDirection, resetInput, isKeyPressed } from './input/input.js'
-import { updatePlayer, drawPlayer, playerLocation, checkBlocked } from './player/player.js'
+import { drawPlayer, playerLocation, checkBlocked, movePlayer } from './player/player.js'
 import { drawLevel, drawGridOffset, isTileTreasure } from './level/level.js'
 import { getTileMap } from './tiles/tile.js'
 import { moveMonsters, drawMonsters, isMonsterThere } from './monster/monster.js'
 import { displayMonsterEnd, displayTreasureEnd } from './main.js'
 
-function update() {
-  updateMonsters(getTileMap())
-  updatePlayer(getPlayerDirection(), isKeyPressed(), getTileMap())
+function updatePlayer() {
+  movePlayer(getPlayerDirection(), isKeyPressed(), getTileMap())
   resetInput()
 }
 
@@ -38,4 +37,4 @@ function drawPlayerWalk(direction, step, blocked) {
   drawPlayer(direction, step)
 }
 
-export { draw, update, checkAndDrawPlayer, updateMonsters }
+export { draw, updatePlayer, checkAndDrawPlayer, updateMonsters }

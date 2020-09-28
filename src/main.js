@@ -1,4 +1,4 @@
-import { draw, update, checkAndDrawPlayer, updateMonsters } from './game.js'
+import { draw, updatePlayer, checkAndDrawPlayer, updateMonsters } from './game.js'
 import { isKeyPressed, setupInput } from './input/input.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
 import { loadLevelsAsTiles } from './level/level.js'
@@ -38,10 +38,10 @@ function mainLoop(currentTime) {
     }
   } else {
     if (timePassedSinceStep > (1 / (PLAYER_MOVEMENT_SPEED * 3))) {
-      updateCount()
+      increaseCount()
       lastStepTime = currentTime
       if (isKeyPressed()) {
-        updateStep()
+        increaseStep()
       }
       draw(gameBox)
       checkAndDrawPlayer(step)
@@ -49,7 +49,7 @@ function mainLoop(currentTime) {
   }
 }
 
-function updateCount() {
+function increaseCount() {
   count++
   if (count === 11 ) { 
     count = 0
@@ -57,11 +57,11 @@ function updateCount() {
   }
 }
 
-function updateStep() {
+function increaseStep() {
   step ++
   if (step === 3) { 
     step = 0
-    update()
+    updatePlayer()
   }
 }
 
@@ -83,4 +83,4 @@ function displayTreasureEnd() {
 
 window.requestAnimationFrame(mainLoop)
 
-export { mainLoop, displayMonsterEnd, displayTreasureEnd, updateCount, startup, step, displayTransition }
+export { mainLoop, displayMonsterEnd, displayTreasureEnd, increaseCount, startup, step, displayTransition }

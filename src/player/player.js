@@ -26,7 +26,7 @@ function drawPlayer(playerDirection, step) {
   }
 }
 
-function updatePlayer(playerDirection, pressed) {
+function movePlayer(playerDirection, pressed) {
   if (pressed === true) {
     const possibleNewlocation = getPossibleLocation(playerDirection)
     if ( isTileBlocking(possibleNewlocation) === false ) {
@@ -86,7 +86,7 @@ function checkForLockedDoor(location) {
 
 export { drawPlayer, 
   isTileBlocking, 
-  updatePlayer, 
+  movePlayer, 
   setPlayerLocation,
   checkBlocked,
   checkMonster,

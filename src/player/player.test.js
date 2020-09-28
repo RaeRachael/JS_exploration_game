@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { updatePlayer, 
+import { movePlayer, 
   drawPlayer, 
   isTileBlocking,
   checkBlocked, 
@@ -88,7 +88,7 @@ describe( "function checkBlocked()", function() {
 
 })
 
-describe( "function updatePlayer()", function() {
+describe( "function movePlayer()", function() {
 
   describe( "tiles can be moved onto", function() {
  
@@ -101,7 +101,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       } )
       var direction = {x:0, y:-1}
-      updatePlayer(direction, true)
+      movePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 1, y: 0 })
     })
 
@@ -114,7 +114,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       } )
       var direction = {x:-1, y:0}
-      updatePlayer(direction, true)
+      movePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 0, y: 1 })
     })
 
@@ -127,7 +127,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       } )
       var direction = {x:0, y:1}
-      updatePlayer(direction, true)
+      movePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 1, y: 2 })
     })
     
@@ -140,7 +140,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       } )
       var direction = {x:1, y:0}
-      updatePlayer(direction, true)
+      movePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 2, y: 1 })
     })
   })
@@ -156,7 +156,7 @@ describe( "function updatePlayer()", function() {
         display: "black"
       } )
       var direction = {x:1, y:0}
-      updatePlayer(direction, true)
+      movePlayer(direction, true)
       expect(playerLocation).toEqual({ x: 1, y: 1 })
     })
 
@@ -173,7 +173,7 @@ describe( "function updatePlayer()", function() {
         display: "white"
       } )
       var direction = {x:1, y:0}
-      updatePlayer(direction, false)
+      movePlayer(direction, false)
       expect(playerLocation).toEqual({ x: 1, y: 1 })
     })
 
@@ -248,7 +248,7 @@ describe( "interaction with tiles", function() {
     } )
     var direction = {x:1, y:0}
     getLevelNumber.mockReturnValueOnce(0)
-    updatePlayer(direction, true)
+    movePlayer(direction, true)
     expect(setLevelNumber.mock.calls[0]).toEqual([1])
     expect(clearMonsterList.mock.calls.length).toEqual(1)
   })
@@ -264,7 +264,7 @@ describe( "interaction with tiles", function() {
       text: "key"
     } )
     var direction = {x:1, y:0}
-    updatePlayer(direction, true)
+    movePlayer(direction, true)
     expect(numberOfKeys).toEqual(numberOfKeysTest + 1)
     expect(removeKey.mock.calls[0]).toEqual([{ xPos: 2, yPos: 1, blocksPlayer: false, display: "white", text: "key" }])
   })
@@ -280,7 +280,7 @@ describe( "interaction with tiles", function() {
       text: "key"
     } )
     var direction = {x:1, y:0}
-    updatePlayer(direction, true)
+    movePlayer(direction, true)
     findTile.mockReturnValue( {
       xPos: 3,
       yPos: 1,
@@ -288,7 +288,7 @@ describe( "interaction with tiles", function() {
       display: "brown",
       text: "locked"
     } )
-    updatePlayer(direction, true)
+    movePlayer(direction, true)
     expect(numberOfKeys).toEqual(numberOfKeysTest)
     expect(openLockedDoor.mock.calls.length).toEqual(1)
   })

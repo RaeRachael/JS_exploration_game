@@ -1,12 +1,12 @@
-import { update, draw, checkAndDrawPlayer, updateMonsters } from './game.js'
+import { updatePlayer, draw, checkAndDrawPlayer, updateMonsters } from './game.js'
 import { PLAYER_MOVEMENT_SPEED } from './player/player.js'
-import { mainLoop, startup, displayMonsterEnd, displayTreasureEnd, updateCount } from './main.js'
+import { mainLoop, startup, displayMonsterEnd, displayTreasureEnd, increaseCount } from './main.js'
 import { setupInput, isKeyPressed } from './input/input.js'
 import { findTile, loadLevelsAsTiles } from "./level/level.js"
 import { selectTileMap } from './tiles/tile.js'
 
 jest.mock('./game.js', () => ({ 
-  update: jest.fn(), 
+  updatePlayer: jest.fn(), 
   draw: jest.fn(),
   checkAndDrawPlayer: jest.fn(),
   updateMonsters: jest.fn()
@@ -26,7 +26,7 @@ describe( "function mainLoop()", function() {
 
   it( "doesn't call function on the first pass", function() {
     mainLoop(0)
-    expect(update.mock.calls.length).toBe(0)
+    expect(updatePlayer.mock.calls.length).toBe(0)
     expect(draw.mock.calls.length).toBe(0)
     expect(checkAndDrawPlayer.mock.calls.length).toBe(0)
   })
@@ -44,7 +44,7 @@ describe( "function mainLoop()", function() {
     mainLoop(2* 1001 /(PLAYER_MOVEMENT_SPEED * 3) + 10000)
     mainLoop(3* 1001 /(PLAYER_MOVEMENT_SPEED * 3) + 10000)
     expect(checkAndDrawPlayer.mock.calls.length).toBe(4)
-    expect(update.mock.calls.length).toBe(1)
+    expect(updatePlayer.mock.calls.length).toBe(1)
     expect(draw.mock.calls.length).toBe(4)
   })
 
@@ -52,7 +52,7 @@ describe( "function mainLoop()", function() {
     displayMonsterEnd()
     expect(mainLoop(0)).toEqual("the game is over")
     expect(checkAndDrawPlayer.mock.calls.length).toBe(0)
-    expect(update.mock.calls.length).toBe(0)
+    expect(updatePlayer.mock.calls.length).toBe(0)
     expect(draw.mock.calls.length).toBe(0)
   })
 
@@ -87,11 +87,11 @@ describe( "function displayTreasureEnd", function() {
 
 })
 
-describe( "function updateCount", function() {
+describe( "function increaseCount", function() {
 
   it( "calls updateMonster every ten calls", function() {
     for (var i = 0; i < 10; i++) {
-      updateCount()
+      increaseCount()
     }
     expect(updateMonsters.mock.calls.length).toBe(1) 
   })
